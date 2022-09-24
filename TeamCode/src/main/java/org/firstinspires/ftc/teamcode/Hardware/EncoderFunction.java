@@ -21,17 +21,30 @@ public class EncoderFunction {
 
     public DcMotor motor1;
     public DcMotor motor2;
+
     //private DcMotor LeftVertical ;
     //private DcMotor RightVertical ;
 
-
     public void init(HardwareMap ahwMap) {
-
-
 
     }
 
-    //public void moveByTileUnit(double
+    public void moveByTileUnit(double speed, DcMotor motor1, DcMotor motor2, int encoderValue) {
+
+        //motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        motor1.setPower(speed);
+        motor2.setPower(speed);
+
+        motor1.setTargetPosition(motor1.getCurrentPosition() + encoderValue);
+        motor2.setTargetPosition(motor2.getCurrentPosition() + encoderValue);
+
+    }
+
 
 
 }
