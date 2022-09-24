@@ -1,4 +1,6 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.TeleOp;
+
+import android.text.method.BaseKeyListener;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -18,6 +20,7 @@ public class DpadDrive extends LinearOpMode {
 
     private DcMotor LinearSlide = null;
 
+    @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -25,10 +28,10 @@ public class DpadDrive extends LinearOpMode {
         double motorSpeed = 1.0;
         boolean movingToTarget = false;
 
-        FrontHorizontal  = hardwareMap.get(DcMotor.class, "FrontHorizontal");
+        FrontHorizontal = hardwareMap.get(DcMotor.class, "FrontHorizontal");
         BackHorizontal = hardwareMap.get(DcMotor.class, "BackHorizontal");
-        LeftVertical = hardwareMap.get(DcMotor.class, "back_left_drive");
-        RightVertical = hardwareMap.get(DcMotor.class, "back_right_drive");
+        LeftVertical = hardwareMap.get(DcMotor.class, "LeftVertical");
+        RightVertical = hardwareMap.get(DcMotor.class, "RightVertical");
         //fix this
 
         FrontHorizontal.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -36,10 +39,121 @@ public class DpadDrive extends LinearOpMode {
         LeftVertical.setDirection(DcMotorSimple.Direction.FORWARD);
         RightVertical.setDirection(DcMotorSimple.Direction.REVERSE);
 
+
+
+
         waitForStart();
         runtime.reset();
 
-        int leftPressedValue = 0;
+        while (opModeIsActive()) {
+
+
+            if (gamepad1.dpad_right) {
+
+                FrontHorizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                BackHorizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+                FrontHorizontal.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                BackHorizontal.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+                //FrontHorizontal.setPower(1);
+                //BackHorizontal.setPower(1);
+
+                FrontHorizontal.setTargetPosition(100);
+                BackHorizontal.setTargetPosition(100);
+
+               /* FrontHorizontal.setPower(1);
+                BackHorizontal.setPower(1);
+                LeftVertical.setPower(0);
+                RightVertical.setPower(0);
+
+                */
+            } else if (gamepad1.dpad_left) {
+
+                FrontHorizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                BackHorizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+                FrontHorizontal.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                BackHorizontal.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+                FrontHorizontal.setPower(-1);
+                BackHorizontal.setPower(-1);
+
+                FrontHorizontal.setTargetPosition(-100);
+                BackHorizontal.setTargetPosition(-100);
+
+                /*FrontHorizontal.setPower(-1);
+                BackHorizontal.setPower(-1);
+                LeftVertical.setPower(0);
+                RightVertical.setPower(0);*/
+            }
+            //
+            else if (gamepad1.dpad_up) {
+
+                LeftVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                RightVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+                LeftVertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                RightVertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+                LeftVertical.setPower(1);
+                RightVertical.setPower(1);
+
+                LeftVertical.setTargetPosition(100);
+                RightVertical.setTargetPosition(100);
+
+                /*FrontHorizontal.setPower(0);
+                BackHorizontal.setPower(0);
+                LeftVertical.setPower(1);
+                RightVertical.setPower(1);*/
+
+            } else if (gamepad1.dpad_down) {
+
+                LeftVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                RightVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+                LeftVertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                RightVertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+                LeftVertical.setPower(-1);
+                RightVertical.setPower(-1);
+
+                LeftVertical.setTargetPosition(-100);
+                RightVertical.setTargetPosition(-100);
+
+                /*FrontHorizontal.setPower(0);
+                BackHorizontal.setPower(0);
+                LeftVertical.setPower(-1);
+                RightVertical.setPower(-1);*/
+            } else {
+
+                FrontHorizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                RightVertical.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                FrontHorizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                BackHorizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+                //LeftVertical.setPower(0);
+               // RightVertical.setPower(0);
+              //  FrontHorizontal.setPower(0);
+              //  BackHorizontal.setPower(0);
+
+
+
+
+                /*FrontHorizontal.setPower(0);
+                BackHorizontal.setPower(0);
+                LeftVertical.setPower(0);
+                RightVertical.setPower(0);*/
+            }
+
+
+        }
+
+
+    }
+
+}
+        /*int leftPressedValue = 0;
         int leftMovedValue = 0;
 
         int rightPressedValue =0;
@@ -84,7 +198,7 @@ public class DpadDrive extends LinearOpMode {
         }
 
 
-
+        }
 
 
 
@@ -137,7 +251,7 @@ public class DpadDrive extends LinearOpMode {
                 //set variable back to 0
                 //break
 
-    }
+
 
 
 
@@ -172,4 +286,4 @@ public class DpadDrive extends LinearOpMode {
 
 
 
-}
+
