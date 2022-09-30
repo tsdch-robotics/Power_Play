@@ -21,6 +21,7 @@ public class EncoderFunction {
 
     public DcMotor motor1;
     public DcMotor motor2;
+    public int targetPos;
 
     //private DcMotor LeftVertical ;
     //private DcMotor RightVertical ;
@@ -29,10 +30,12 @@ public class EncoderFunction {
 
     }
 
-    public void moveByTileUnit(double speed, DcMotor motor1, DcMotor motor2, int encoderValue) {
 
-        //motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+    public void EncoderDrive (double speed, DcMotor motor1, DcMotor motor2, int targetPos ) {
+
+        motor1.setTargetPosition(targetPos);
+        motor2.setTargetPosition(targetPos);
 
         motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -40,11 +43,5 @@ public class EncoderFunction {
         motor1.setPower(speed);
         motor2.setPower(speed);
 
-        motor1.setTargetPosition(motor1.getCurrentPosition() + encoderValue);
-        motor2.setTargetPosition(motor2.getCurrentPosition() + encoderValue);
-
     }
-
-
-
 }
