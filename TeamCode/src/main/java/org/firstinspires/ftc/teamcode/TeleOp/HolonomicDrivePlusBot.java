@@ -56,44 +56,49 @@ public class HolonomicDrivePlusBot extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            double max;
+            //double max;
 
-            double verticle   = -gamepad1.left_stick_y;
-            double horizontal =  gamepad1.left_stick_x;
-            double spin     =  gamepad1.right_stick_x;
+            double verticle   = -gamepad1.right_stick_y;
+            double horizontal =  gamepad1.right_stick_x;
+            double spin     =  gamepad1.left_stick_x;
 
             double LeftVerticlePower  = verticle;// + spin;
             double FrontHorizontalPower = horizontal; //- spin;
             double RightVerticlePower   = verticle;// + spin;
             double BackVerticlePower  = horizontal;// - spin;
 
-            //max = Math.max(Math.abs(LeftVerticlePower), Math.abs(RightVerticlePower));
-           // max = Math.max(max, Math.abs(FrontHorizontalPower));
-            //max = Math.max(max, Math.abs(BackVerticlePower));
 
-            //if (max > 1.0) {
-
-               // LeftVerticlePower  /= max;
-               // RightVerticlePower /= max;
-               // FrontHorizontalPower   /= max;
-               // BackVerticlePower  /= max;
-
-           // }
-
-            if (Math.abs(gamepad1.left_stick_y) >= 0.1) {
+            if (Math.abs(gamepad1.right_stick_y) > 0.0) {
 
                 LeftVertical.setPower(LeftVerticlePower);
                 RightVertical.setPower(RightVerticlePower);
+                telemetry.addData("Left Stick Y: ", "%f", gamepad1.right_stick_y);
 
             }
 
-            if (Math.abs(gamepad1.left_stick_x) >= 0.1){
+            else if (Math.abs(gamepad1.right_stick_x) > 0) {
 
                 FrontHorizontal.setPower(FrontHorizontalPower);
                 BackHorizontal.setPower(BackVerticlePower);
+                telemetry.addData("Left Stick X: ", "%f", gamepad1.right_stick_x);
 
             }
 
+
+
+            else {
+
+                FrontHorizontal.setPower(0);
+                BackHorizontal.setPower(0);
+                LeftVertical.setPower(0);
+                RightVertical.setPower(0);
+
+            }
+
+            telemetry.update();
+
+
+          //  else if (gamepad1.left_trigger >= 0.1
         }
 
     }
