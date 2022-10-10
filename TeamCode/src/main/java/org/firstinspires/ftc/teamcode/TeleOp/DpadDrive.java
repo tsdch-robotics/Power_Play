@@ -1,21 +1,31 @@
+
+//IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS
+
 package org.firstinspires.ftc.teamcode.TeleOp;
 
 import android.text.method.BaseKeyListener;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 //import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 //import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
 //import org.firstinspires.ftc.teamcode.R;
-
+import com.qualcomm.robotcore.hardware.Servo;
 import static java.lang.Thread.currentThread;
 import static java.lang.Thread.sleep;
-
 import java.text.Format;
+
+//IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS IMPORTS
+
+
+
+
+
 
 @TeleOp(name="Dpad Driving", group="LinearOpmode")
 public class DpadDrive extends LinearOpMode {
@@ -31,11 +41,23 @@ public class DpadDrive extends LinearOpMode {
     private DcMotor LeftVertical = null;
     private DcMotor RightVertical = null;
     private DcMotor LinearSlide = null;
+
+    private Servo intakeClaw;
     int rightToMove = 0;
     int leftToMove = 0;
     int frontToMove = 0;
     int backToMove = 0;
     boolean movingToPosition = false;
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void runOpMode() {
@@ -46,11 +68,15 @@ public class DpadDrive extends LinearOpMode {
         BackHorizontal = hardwareMap.get(DcMotor.class, "BackHorizontal");
         LeftVertical = hardwareMap.get(DcMotor.class, "LeftVertical");
         RightVertical = hardwareMap.get(DcMotor.class, "RightVertical");
+        LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
+        intakeClaw = hardwareMap.servo.get("leftClimberServo");
+
 
         FrontHorizontal.setDirection(DcMotor.Direction.FORWARD);
         BackHorizontal.setDirection(DcMotor.Direction.REVERSE);
         LeftVertical.setDirection(DcMotor.Direction.FORWARD);
         RightVertical.setDirection(DcMotor.Direction.REVERSE);
+        LinearSlide.setDirection(DcMotorSimple.Direction.FORWARD);
 
         robot.encoderSetUp(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
 
@@ -58,6 +84,17 @@ public class DpadDrive extends LinearOpMode {
         runtime.reset();
 
         //double speed = 0.75;
+
+
+
+
+
+
+
+
+
+
+
 
 
         while (opModeIsActive()) {
@@ -192,6 +229,20 @@ public class DpadDrive extends LinearOpMode {
             }
 
 
+
+
+
+
+
+            //END OF ENCODER DPAD
+
+
+
+
+
+
+
+
             if (gamepad1.a) {
                 robot.spinOneFourth(1, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 340);
                // currentThread(sleep(100););
@@ -213,18 +264,6 @@ public class DpadDrive extends LinearOpMode {
 
 
 
-
-
-
-          /*  if (!movingToPosition){
-                FrontHorizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                BackHorizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                LeftVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                RightVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            }  */
-
-
-
             while (gamepad1.left_bumper){
 
 
@@ -237,44 +276,64 @@ public class DpadDrive extends LinearOpMode {
                 double horizontal =  gamepad1.right_stick_x;
                 //double spin     =  gamepad1.left_stick_x;
 
-                double LeftVerticlePower  = verticle * 0.5;// + spin;
-                double FrontHorizontalPower = horizontal * 0.5; //- spin;
-                double RightVerticlePower   = verticle * 0.5;// + spin;
-                double BackHorizontalPower  = horizontal * 0.5;// - spin;
+                double LeftVerticlePower  = verticle * 0.5;
+                double FrontHorizontalPower = horizontal * 0.5;
+                double RightVerticlePower   = verticle * 0.5;
+                double BackHorizontalPower  = horizontal * 0.5;
 
 
-                if (Math.abs(gamepad1.right_stick_y) > 0) {
+                LeftVertical.setPower(LeftVerticlePower);
+                RightVertical.setPower(RightVerticlePower);
+                telemetry.addData("Left Stick Y: ", "%f", gamepad1.right_stick_y);
 
-                    LeftVertical.setPower(LeftVerticlePower);
-                    RightVertical.setPower(RightVerticlePower);
-                    telemetry.addData("Left Stick Y: ", "%f", gamepad1.right_stick_y);
-
-                }
-
-                else if (Math.abs(gamepad1.right_stick_x) > 0) {
-
-                    FrontHorizontal.setPower(FrontHorizontalPower);
-                    BackHorizontal.setPower(BackHorizontalPower);
-                    telemetry.addData("Left Stick X: ", "%f", gamepad1.right_stick_x);
-
-                }
-
-
-
-                else {
-
-                    FrontHorizontal.setPower(0);
-                    BackHorizontal.setPower(0);
-                    LeftVertical.setPower(0);
-                    RightVertical.setPower(0);
-
-                }
+                FrontHorizontal.setPower(FrontHorizontalPower);
+                BackHorizontal.setPower(BackHorizontalPower);
+                telemetry.addData("Left Stick X: ", "%f", gamepad1.right_stick_x);
 
                 telemetry.update();
+
+            }
+
+            while (gamepad1.right_bumper) {
+                if (gamepad1.left_trigger > 0) {
+                    LinearSlide.setTargetPosition((int) (gamepad1.left_trigger * -3119));
+
+                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    LinearSlide.setPower(0.5);
+
+                }
+
+                else {
+                    LinearSlide.setTargetPosition(-10);
+                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    LinearSlide.setPower(0.25);
+                }
+
+
+                /*    // LinearSlide.setPower(gamepad1.left_stick_x * 0.5);
+
+                if (gamepad1.a) {
+                    intakeClaw.setPosition(30);
+                }
+                    //
+                if (gamepad1.b) {
+                    intakeClaw.setPosition(15);
+
+                }*/
+
+                if (gamepad1.a){
+                    intakeClaw.setPosition(0.75);
+                }
+
+               else {
+                   intakeClaw.setPosition(0.25);
+               }
+                telemetry.addData("Servo Pos", "%f", intakeClaw.getPosition());
             }
 
 
-        }
+        }//-3119
 
 
 

@@ -9,6 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
 
 import static java.lang.Thread.sleep;
@@ -46,6 +48,7 @@ public class TestingEncoderValues extends LinearOpMode {
         BackHorizontal = hardwareMap.get(DcMotor.class, "BackHorizontal");
         LeftVertical = hardwareMap.get(DcMotor.class, "LeftVertical");
         RightVertical = hardwareMap.get(DcMotor.class, "RightVertical");
+        LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
         //fix this
 
         //FrontHorizontal.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -63,8 +66,12 @@ public class TestingEncoderValues extends LinearOpMode {
         LeftVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RightVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+        LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         LeftVertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RightVertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
         runtime.reset();
@@ -78,6 +85,7 @@ public class TestingEncoderValues extends LinearOpMode {
             telemetry.addData("Encoder Value of BackHorizontal:", "%d", BackHorizontal.getCurrentPosition());
             telemetry.addData("Encoder Value of LeftVertical:", "%d", LeftVertical.getCurrentPosition());
             telemetry.addData("Encoder Value of RightVertical:", "%d", RightVertical.getCurrentPosition());
+            telemetry.addData("Encoder Value of LinearSlide:", "%d", LinearSlide.getCurrentPosition());
 
             telemetry.update();
 

@@ -75,6 +75,13 @@ public class EncoderFunction {
 
     }
 
+    public void ScorePoleAuto (double speed, DcMotor linearMotor, int targetPos){
+
+        linearMotor.setTargetPosition(targetPos);
+        linearMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        linearMotor.setPower(speed);
+    }
+
     public void spinOneFourth (double speed, int numberOfRotations, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int spinningDistance ){
 
         if (numberOfRotations == 1){
@@ -151,6 +158,7 @@ public class EncoderFunction {
             motor3.setPower(speed);
             motor4.setPower(speed);
         }
+
 
     }
 
