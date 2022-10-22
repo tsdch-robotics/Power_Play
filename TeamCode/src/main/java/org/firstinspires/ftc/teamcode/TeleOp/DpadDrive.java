@@ -320,6 +320,7 @@ public class DpadDrive extends LinearOpMode {
                 if (gamepad1.b) {
                     intakeClaw.setPosition(15);
 
+
                 }*/
 
                 if (gamepad1.a){
@@ -329,7 +330,8 @@ public class DpadDrive extends LinearOpMode {
                else {
                    intakeClaw.setPosition(0.25);
                }
-                telemetry.addData("Servo Pos", "%f", intakeClaw.getPosition());
+               telemetry.addData("Servo Pos", "%f", intakeClaw.getPosition());
+               telemetry.update();
             }
 
 

@@ -44,12 +44,12 @@ public class EncoderFunction {
         motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+       // motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
+     //   motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+      //  motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//
         motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -64,15 +64,16 @@ public class EncoderFunction {
         motor1.setTargetPosition(targetPos);
         motor2.setTargetPosition(targetPos);
 
+        motor1.setPower(speed);
+        motor2.setPower(speed);
 
         motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-
-        motor1.setPower(speed);
-        motor2.setPower(speed);
-
-
+        if (!motor1.isBusy() || !motor2.isBusy()){
+            motor1.setPower(0);
+            motor2.setPower(0);
+        }
     }
 
     public void ScorePoleAuto (double speed, DcMotor linearMotor, int targetPos){
@@ -143,8 +144,8 @@ public class EncoderFunction {
 
         if (directional == 1){
 
-            motor1.setTargetPosition(motor1.getCurrentPosition() + riseRun);
-            motor2.setTargetPosition(motor2.getCurrentPosition() + riseRun);
+            motor1.setTargetPosition(motor1.getCurrentPosition() - riseRun);
+            motor2.setTargetPosition(motor2.getCurrentPosition() - riseRun);
             motor3.setTargetPosition(motor3.getCurrentPosition() + riseRun);
             motor4.setTargetPosition(motor4.getCurrentPosition() + riseRun);
 
