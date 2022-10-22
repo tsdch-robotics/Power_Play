@@ -78,6 +78,7 @@ public class DpadDrive extends LinearOpMode {
         RightVertical.setDirection(DcMotor.Direction.REVERSE);
         LinearSlide.setDirection(DcMotorSimple.Direction.FORWARD);
 
+
         robot.encoderSetUp(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
 
         waitForStart();
@@ -88,6 +89,22 @@ public class DpadDrive extends LinearOpMode {
 
 
 
+        while (opModeIsActive()){
+
+       /*     if (gamepad1.dpad_up && !movingToPosition){
+                robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                frontToMove = 1;
+            }
+
+            if (!gamepad1.dpad_up && rightToMove >= 1){
+                movingToPosition = true;
+                robot.EncoderDrive(1, 0, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 1010, 0);
+
+                if (robot.hasReachedPosition(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical) == true){
+                    movingToPosition = false;
+                    frontToMove-= 1;
+                }
+            }
 
 
 
@@ -97,7 +114,70 @@ public class DpadDrive extends LinearOpMode {
 
 
 
-        while (opModeIsActive()) {
+            if (gamepad1.dpad_down && !movingToPosition){
+                robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                backToMove = 1;
+            }
+
+            if (!gamepad1.dpad_down && backToMove >= 1){
+                movingToPosition = true;
+                robot.EncoderDrive(1, 0, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -1010, 0);
+
+                if (robot.hasReachedPosition(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical) == true){
+                    movingToPosition = false;
+                    backToMove-= 1;
+                }
+            }
+
+
+
+
+
+
+
+
+            if (gamepad1.dpad_left && !movingToPosition){
+                robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                leftToMove = 1;
+            }
+
+            if (!gamepad1.dpad_left && leftToMove >= 1){
+                movingToPosition = true;
+                robot.EncoderDrive(0, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 1010);
+
+                if (robot.hasReachedPosition(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical) == true){
+                    movingToPosition = false;
+                    leftToMove-= 1;
+                }
+            }
+
+
+
+
+
+
+            if (gamepad1.dpad_right && !movingToPosition){
+                robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                rightToMove = 1;
+            }
+
+            if (!gamepad1.dpad_right && rightToMove >= 1){
+                movingToPosition = true;
+                robot.EncoderDrive(0,   1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, -1010);
+
+                if (robot.hasReachedPosition(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical) == true){
+                    movingToPosition = false;
+                    rightToMove-= 1;
+                }
+            }
+
+
+
+
+*/
+
+
+       /* while (opModeIsActive()) {*/
 
             //MOVING RIGHT           //MOVING RIGHT
 
@@ -110,7 +190,7 @@ public class DpadDrive extends LinearOpMode {
             while (!gamepad1.dpad_right && rightToMove >= 1) {
 
                 movingToPosition = true;
-                robot.EncoderDrive(0.50, FrontHorizontal, BackHorizontal, 1010);
+                robot.EncoderDrive(0.50, 0.0, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 1010, 0);
                 //robot.EncoderDrive(0.50, FrontHorizontal, BackHorizontal, 300);
                // robot.EncoderDrive(0.75, FrontHorizontal, BackHorizontal, 500);
                // robot.EncoderDrive(0.75, FrontHorizontal, BackHorizontal, 1010);
@@ -145,7 +225,7 @@ public class DpadDrive extends LinearOpMode {
             while (!gamepad1.dpad_left && leftToMove >= 1) {
 
                 movingToPosition = true;
-                robot.EncoderDrive(0.50, FrontHorizontal, BackHorizontal, -1010);
+                robot.EncoderDrive(0.50, 0.0, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -1010, 0);
 
                 if (!FrontHorizontal.isBusy() || !BackHorizontal.isBusy()) {
                     telemetry.addData("Robot has", "arrived at target position!");
@@ -176,7 +256,7 @@ public class DpadDrive extends LinearOpMode {
             while (!gamepad1.dpad_up && frontToMove >= 1) {
 
                 movingToPosition = true;
-                robot.EncoderDrive(0.50, LeftVertical, RightVertical, 1010);
+                robot.EncoderDrive(0.0, 0.5, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 1010);
 
                 if (!LeftVertical.isBusy() || !RightVertical.isBusy()) {
                     telemetry.addData("Robot has", "arrived at target position!");
@@ -209,7 +289,7 @@ public class DpadDrive extends LinearOpMode {
             while (!gamepad1.dpad_down && backToMove >= 1) {
 
                 movingToPosition = true;
-                robot.EncoderDrive(0.50, LeftVertical, RightVertical, -1010);
+                robot.EncoderDrive(0.0, 0.5, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, -1010);
 
                 if (!LeftVertical.isBusy() || !RightVertical.isBusy()) {
                     telemetry.addData("Robot has", "arrived at target position!");
@@ -235,6 +315,38 @@ public class DpadDrive extends LinearOpMode {
 
 
             //END OF ENCODER DPAD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -296,7 +408,7 @@ public class DpadDrive extends LinearOpMode {
 
             while (gamepad1.right_bumper) {
                 if (gamepad1.left_trigger > 0) {
-                    LinearSlide.setTargetPosition((int) (gamepad1.left_trigger * -2000));//3119
+                    LinearSlide.setTargetPosition((int) (gamepad1.left_trigger * -3119));//3119
 
                     LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -311,24 +423,12 @@ public class DpadDrive extends LinearOpMode {
                 }
 
 
-                /*    // LinearSlide.setPower(gamepad1.left_stick_x * 0.5);
-
-                if (gamepad1.a) {
-                    intakeClaw.setPosition(30);
-                }
-                    //
-                if (gamepad1.b) {
-                    intakeClaw.setPosition(15);
-
-
-                }*/
-
                 if (gamepad1.a){
-                    intakeClaw.setPosition(0.75);
+                    intakeClaw.setPosition(-1);
                 }
 
                else {
-                   intakeClaw.setPosition(0.25);
+                   intakeClaw.setPosition(0.5);
                }
                telemetry.addData("Servo Pos", "%f", intakeClaw.getPosition());
                telemetry.update();

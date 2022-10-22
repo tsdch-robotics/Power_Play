@@ -173,6 +173,34 @@ public class EncoderFunction {
 
     }
 
+    public void reset (DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
+
+        motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+    }
+
+
+    public boolean hasReachedPosition(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
+
+        if (motor1.getCurrentPosition() == motor1.getTargetPosition() || motor2.getCurrentPosition() == motor2.getTargetPosition()){
+            return (true);
+        }
+        else if (motor3.getCurrentPosition() == motor3.getTargetPosition() || motor4.getCurrentPosition() == motor4.getTargetPosition()){
+            return (true);
+        }
+
+        else{
+            return(false);
+        }
+
+
+
+
+    }
 
 
 
