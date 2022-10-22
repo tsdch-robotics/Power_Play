@@ -62,10 +62,11 @@ public class Auto1 extends LinearOpMode {
 
         if (opModeIsActive()){
 
-            robot.EncoderDrive(1, LeftVertical, RightVertical, 150);
+            robot.EncoderDrive(0, 1,FrontHorizontal, BackHorizontal, LeftVertical, RightVertical,  0, 150);
             sleep(1000);
-            robot.EncoderDrive(1, LeftVertical, RightVertical, -2000);
-            sleep(3000);
+            robot.EncoderDrive(1, 0,FrontHorizontal,BackHorizontal,LeftVertical,RightVertical,1010, 150);
+            sleep(1000);
+            robot.EncoderDrive(1,0,FrontHorizontal,BackHorizontal,LeftVertical,RightVertical,1010,1160);
         }
 
 

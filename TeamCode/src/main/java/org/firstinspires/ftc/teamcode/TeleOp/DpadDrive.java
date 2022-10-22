@@ -276,10 +276,10 @@ public class DpadDrive extends LinearOpMode {
                 double horizontal =  gamepad1.right_stick_x;
                 //double spin     =  gamepad1.left_stick_x;
 
-                double LeftVerticlePower  = verticle * 0.5;
-                double FrontHorizontalPower = horizontal * 0.5;
-                double RightVerticlePower   = verticle * 0.5;
-                double BackHorizontalPower  = horizontal * 0.5;
+                double LeftVerticlePower  = verticle;
+                double FrontHorizontalPower = horizontal;
+                double RightVerticlePower   = verticle;
+                double BackHorizontalPower  = horizontal;
 
 
                 LeftVertical.setPower(LeftVerticlePower);
@@ -296,7 +296,7 @@ public class DpadDrive extends LinearOpMode {
 
             while (gamepad1.right_bumper) {
                 if (gamepad1.left_trigger > 0) {
-                    LinearSlide.setTargetPosition((int) (gamepad1.left_trigger * -3119));
+                    LinearSlide.setTargetPosition((int) (gamepad1.left_trigger * -2000));//3119
 
                     LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 

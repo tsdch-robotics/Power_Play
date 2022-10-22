@@ -59,20 +59,30 @@ public class EncoderFunction {
 
     }
 
-    public void EncoderDrive (double speed, DcMotor motor1, DcMotor motor2, int targetPos ) {
+    public void EncoderDrive (double speed, double speed2, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int targetPos1, int targetPos2 ) {
 
-        motor1.setTargetPosition(targetPos);
-        motor2.setTargetPosition(targetPos);
+        motor1.setTargetPosition(targetPos1);
+        motor2.setTargetPosition(targetPos1);
+        motor3.setTargetPosition(targetPos2);
+        motor4.setTargetPosition(targetPos2);
 
         motor1.setPower(speed);
         motor2.setPower(speed);
+        motor3.setPower(speed2);
+        motor4.setPower(speed2);
 
         motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         if (!motor1.isBusy() || !motor2.isBusy()){
             motor1.setPower(0);
             motor2.setPower(0);
+        }
+        if (!motor3.isBusy() || !motor4.isBusy()){
+            motor4.setPower(0);
+            motor3.setPower(0);
         }
     }
 
