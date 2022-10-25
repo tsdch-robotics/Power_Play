@@ -80,7 +80,7 @@ public class DpadDrive extends LinearOpMode {
 
 
         robot.encoderSetUp(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-
+        LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         waitForStart();
         runtime.reset();
 
@@ -348,7 +348,13 @@ public class DpadDrive extends LinearOpMode {
 
 
 
+            if (gamepad1.right_trigger > 0.1){
+                intakeClaw.setPosition(0.35);
+            }
 
+            else {
+                intakeClaw.setPosition(-0.2);
+            }
 
 
 
@@ -376,62 +382,63 @@ public class DpadDrive extends LinearOpMode {
 
 
 
-            while (gamepad1.left_bumper){
 
 
-                FrontHorizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                BackHorizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                LeftVertical.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                RightVertical.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-                double verticle   = -gamepad1.right_stick_y;
-                double horizontal =  gamepad1.right_stick_x;
-                //double spin     =  gamepad1.left_stick_x;
-
-                double LeftVerticlePower  = verticle;
-                double FrontHorizontalPower = horizontal;
-                double RightVerticlePower   = verticle;
-                double BackHorizontalPower  = horizontal;
 
 
-                LeftVertical.setPower(LeftVerticlePower);
-                RightVertical.setPower(RightVerticlePower);
-                telemetry.addData("Left Stick Y: ", "%f", gamepad1.right_stick_y);
 
-                FrontHorizontal.setPower(FrontHorizontalPower);
-                BackHorizontal.setPower(BackHorizontalPower);
-                telemetry.addData("Left Stick X: ", "%f", gamepad1.right_stick_x);
 
-                telemetry.update();
+            FrontHorizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            BackHorizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            LeftVertical.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            RightVertical.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+            double verticle   = -gamepad1.right_stick_y;
+            double horizontal =  gamepad1.right_stick_x;
+            //double spin     =  gamepad1.left_stick_x;
+
+            double LeftVerticlePower  = 0.5 * verticle;
+            double FrontHorizontalPower = 0.5 *horizontal;
+            double RightVerticlePower   = 0.5 *verticle;
+            double BackHorizontalPower  = 0.5 * horizontal;
+
+
+            LeftVertical.setPower(LeftVerticlePower);
+            RightVertical.setPower(RightVerticlePower);
+            telemetry.addData("Left Stick Y: ", "%f", gamepad1.right_stick_y);
+
+            FrontHorizontal.setPower(FrontHorizontalPower);
+            BackHorizontal.setPower(BackHorizontalPower);
+            telemetry.addData("Left Stick X: ", "%f", gamepad1.right_stick_x);
+
+            telemetry.update();
+
+
+
+            if (gamepad1.left_trigger > 0) {
+                LinearSlide.setTargetPosition((int) (gamepad1.left_trigger * -3000));//3119
+
+                LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                LinearSlide.setPower(0.25);
 
             }
 
-            while (gamepad1.right_bumper) {
-                if (gamepad1.left_trigger > 0) {
-                    LinearSlide.setTargetPosition((int) (gamepad1.left_trigger * -3119));//3119
-
-                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-                    LinearSlide.setPower(0.5);
-
-                }
-
-                else {
-                    LinearSlide.setTargetPosition(-10);
-                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    LinearSlide.setPower(0.25);
-                }
+            if (gamepad1.x) {
+                LinearSlide.setTargetPosition(0);
+                LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                LinearSlide.setPower(1);
+            }
 
 
-                if (gamepad1.a){
-                    intakeClaw.setPosition(-1);
-                }
+               // if (gamepad1.a){
+              //      intakeClaw.setPosition(-0.5);
+              //  }
+//
+             ///  else {
+             //      intakeClaw.setPosition(0.3);
+             //  }
 
-               else {
-                   intakeClaw.setPosition(0.5);
-               }
-               telemetry.addData("Servo Pos", "%f", intakeClaw.getPosition());
-               telemetry.update();
             }
 
 
@@ -439,6 +446,6 @@ public class DpadDrive extends LinearOpMode {
 
 
 
-    }
+
 
 }
