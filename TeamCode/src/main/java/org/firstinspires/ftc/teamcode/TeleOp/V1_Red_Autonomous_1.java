@@ -15,8 +15,8 @@ import static java.lang.Thread.sleep;
 
 import java.lang.*;
 
-@Autonomous(name="V1_Red_Autonomous_2", group="Autonomous")
-public class V1_Red_Autonomous_2 extends LinearOpMode {
+@Autonomous (name = "V1_Red_Autonomous_1", group = "Autonomous")
+public class V1_Red_Autonomous_1 extends LinearOpMode {
 
     EncoderFunction robot = new EncoderFunction();
     private ElapsedTime runtime = new ElapsedTime();
@@ -27,7 +27,6 @@ public class V1_Red_Autonomous_2 extends LinearOpMode {
     private DcMotor LinearSlide = null;
 
     private Servo intakeClaw;
-
 
 
     @Override
@@ -55,17 +54,17 @@ public class V1_Red_Autonomous_2 extends LinearOpMode {
         runtime.reset();
 
 
-        if (opModeIsActive()){
+        if (opModeIsActive()) {
 
             intakeClaw.setPosition(-0.2);
-            robot.EncoderDrive(0, 1,FrontHorizontal, BackHorizontal, LeftVertical, RightVertical,  0, 150);
+            robot.EncoderDrive(0, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 150);
 
             LinearSlide.setTargetPosition(-1000);//need to ajust
             LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             LinearSlide.setPower(1);
 
             sleep(200);
-            robot.diagonalEncoderMove(1,350, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            robot.diagonalEncoderMove(1, 350, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
 
             LinearSlide.setTargetPosition(-900);//need to ajust
             LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -75,18 +74,18 @@ public class V1_Red_Autonomous_2 extends LinearOpMode {
             sleep(850);
 
             robot.diagonalEncoderMove(1, 0, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.spinOneFourth(1,  1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 175);
+            robot.spinOneFourth(1, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 175);
             sleep(500);
             robot.diagonalEncoderMove(0.5, 1, 800, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
             //check
 
             sleep(400);
             intakeClaw.setPosition(-0.2);
-            robot.EncoderDrive(0, 1,FrontHorizontal, BackHorizontal, LeftVertical, RightVertical,  0, 150);
+            robot.EncoderDrive(0, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 150);
 //center
 
             sleep(500);
-            robot.spinOneFourth(1,  1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -175);
+            robot.spinOneFourth(1, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -175);
 
             LinearSlide.setTargetPosition(-2500);//need to ajust
             LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -107,11 +106,15 @@ public class V1_Red_Autonomous_2 extends LinearOpMode {
             sleep(1000);
 
 
-
-
         }
+
+
     }
 
 
 }
+
+
+
+
 

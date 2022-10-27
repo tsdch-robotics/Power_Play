@@ -38,6 +38,8 @@ public class DpadDrive extends LinearOpMode {
     int frontToMove = 0;
     int backToMove = 0;
     //double speed = 0.75;
+    int highestSlider = 0;
+    int triggerTargetPosition = 0;
 
     boolean movingToPosition = false;
 
@@ -201,7 +203,7 @@ public class DpadDrive extends LinearOpMode {
             if (gamepad1.right_bumper) {
                 intakeClaw.setPosition(-0.2); //Close
             }
-
+//Close claw
 
            /* if (gamepad1.a) {
                 robot.spinOneFourth(1, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 340);
@@ -224,8 +226,7 @@ public class DpadDrive extends LinearOpMode {
 
             //?
 
-
-            while (!movingToPosition) {
+            while (Math.abs(gamepad1.right_stick_x) > 0 || Math.abs(gamepad1.right_stick_y) > 0 || Math.abs(gamepad1.left_stick_x) > 0) {
 
                 FrontHorizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 BackHorizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -234,15 +235,15 @@ public class DpadDrive extends LinearOpMode {
 
                 double verticle = -gamepad1.right_stick_y;
                 double horizontal = gamepad1.right_stick_x;
-                double spin = gamepad1.left_stick_x;
+                double spin = 0.5 * gamepad1.left_stick_x;
 
 
-                //Needs to test
-                double LeftVerticlePower = verticle - spin; //(0.5 *)
-                double FrontHorizontalPower = horizontal + spin; //(0.5 *)
-                double RightVerticlePower = verticle + spin;//(0.5 *)
-                double BackHorizontalPower = horizontal - spin;//(0.5 *)
-                //Needs to test
+                    //Needs to test
+                double LeftVerticlePower = 0.80 * (verticle - spin); //(0.5 *)
+                double FrontHorizontalPower =0.80 * (horizontal - spin); //(0.5 *)
+                double RightVerticlePower = 0.80* (verticle + spin);//(0.5 *)
+                double BackHorizontalPower = 0.80 * (horizontal + spin);//(0.5 *)
+                    //Needs to test
 
                 while (Math.abs(LeftVerticlePower) > 1) {
                     LeftVerticlePower = 1;
@@ -269,31 +270,108 @@ public class DpadDrive extends LinearOpMode {
             }
 
 
-            if (gamepad1.left_trigger > 0) {
-                LinearSlide.setTargetPosition((int) (gamepad1.left_trigger * -3000));//3119
+            if (gamepad1.left_trigger > 0 ){
 
-                LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                LinearSlide.setPower(0.25);
+                triggerTargetPosition = ((int) (gamepad1.left_trigger * -3000));
+
+                if (LinearSlide.getCurrentPosition() >= triggerTargetPosition) {
+
+                    LinearSlide.setTargetPosition(triggerTargetPosition);
+                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                    LinearSlide.setPower(0.25);
+                }
 
             }
 
-            if (gamepad1.right_trigger > 0) {
+            if (gamepad1.right_trigger > 0){
 
-                int a = LinearSlide.getCurrentPosition();
-                LinearSlide.setTargetPosition((int) (gamepad1.right_trigger * -a));
-                LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                LinearSlide.setPower(0.25);
+                triggerTargetPosition = ((int) (-3000 - gamepad1.right_trigger * -3000));
+                if (LinearSlide.getCurrentPosition() <= triggerTargetPosition){
+
+                    LinearSlide.setTargetPosition(triggerTargetPosition);
+                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                    LinearSlide.setPower(0.25);
+                }
+
             }
+
+
+
+
+           /* highestSlider = LinearSlide.getCurrentPosition();
+
+            if (gamepad1.left_trigger > 0.1 && LinearSlide.getCurrentPosition() < -3000){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {
+
+
+                triggerTargetPosition = ((int) (gamepad1.left_trigger * -3000));//3119
+                //LinearSlide.setTargetPosition(triggerTargetPosition);
+
+                if (triggerTargetPosition >= highestSlider){
+
+                    LinearSlide.setTargetPosition(triggerTargetPosition);
+                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                    LinearSlide.setPower(0.25);
+                }
+
+                //linearSlidePreviousPos = LinearSlide.getCurrentPosition();
+
+            }
+
+            if (gamepad1.right_trigger > 0.1 && LinearSlide.getCurrentPosition() > 0) {
+
+                triggerTargetPosition = ((int)(-3000 - gamepad1.right_trigger * -3000));
+
+                if (triggerTargetPosition <= highestSlider){
+
+                    LinearSlide.setTargetPosition(triggerTargetPosition);
+                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                    LinearSlide.setPower(0.25);
+
+                }
+
+            }*/
 
 
 
 
             //Insert Auto Score Code HEre:
+/*
+            if (gamepad1.a){
+                int corner = 1;
+                boolean stillHasToMove = true;
+            }
 
+            if (gamepad1.b){
+                int corner = 2;
+                boolean stillHasToMove = true;
+            }
 
+            if (gamepad1.x){
+                int corner = 3;
+                boolean stillHasToMove = true;
+            }
+
+            if (gamepad1.y){
+                int corner = 4;
+                boolean stillHasToMove = true;
+            }
+
+            if (!gamepad1.a && !gamepad1.b && !gamepad1.y && !gamepad1.x){
+                if (LinearSlide.getCurrentPosition() >= 2000){
+                     int height = 3;
+                }
+                else if (LinearSlide.getCurrentPosition() <2000 && LinearSlide.getCurrentPosition() > 800){
+                    int height = 2;
+                }
+                else if (LinearSlide.getCurrentPosition() <= 800){
+                    int height = 1;
+                }
+            }*/
 
 
         }
@@ -301,3 +379,5 @@ public class DpadDrive extends LinearOpMode {
     }//-3119
 
 }
+
+

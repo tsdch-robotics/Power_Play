@@ -93,9 +93,9 @@ public class EncoderFunction {
         linearMotor.setPower(speed);
     }
 
-    public void spinOneFourth (double speed, int numberOfRotations, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int spinningDistance ){
+    public void spinOneFourth (double speed, float numberOfRotations, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int spinningDistance ){
 
-        if (numberOfRotations == 1){
+        if (numberOfRotations == 0.5){
 
             motor1.setTargetPosition(motor1.getCurrentPosition() + spinningDistance);
             motor2.setTargetPosition(motor2.getCurrentPosition() - spinningDistance);
