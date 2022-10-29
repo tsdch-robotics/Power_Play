@@ -197,11 +197,11 @@ public class DpadDrive extends LinearOpMode {
             //Control Claw
 
             if (gamepad1.left_bumper) {
-                intakeClaw.setPosition(0.35); //Open
+                intakeClaw.setPosition(0.15); //Open
             }
 
             if (gamepad1.right_bumper) {
-                intakeClaw.setPosition(-0.2); //Close
+                intakeClaw.setPosition(0); //Close
             }
 //Close claw
 

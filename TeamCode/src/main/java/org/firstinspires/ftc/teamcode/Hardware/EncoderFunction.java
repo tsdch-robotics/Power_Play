@@ -44,11 +44,11 @@ public class EncoderFunction {
         motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        //motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-       // motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-     //   motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-      //  motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //POSIBLE SOURCE FOR ERROR
 //
         motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -93,45 +93,27 @@ public class EncoderFunction {
         linearMotor.setPower(speed);
     }
 
-    public void spinOneFourth (double speed, float numberOfRotations, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int spinningDistance ){
+    public void spinOneFourth (double speed, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int spinningDistance ){
 
-        if (numberOfRotations == 0.5){
+        motor1.setTargetPosition(spinningDistance);
+        motor2.setTargetPosition(spinningDistance);
+        motor3.setTargetPosition(spinningDistance);
+        motor4.setTargetPosition(spinningDistance);
 
-            motor1.setTargetPosition(motor1.getCurrentPosition() + spinningDistance);
-            motor2.setTargetPosition(motor2.getCurrentPosition() - spinningDistance);
-            motor3.setTargetPosition(motor3.getCurrentPosition() + spinningDistance);
-            motor4.setTargetPosition(motor4.getCurrentPosition() - spinningDistance);
+        motor1.setPower(speed);
+        motor2.setPower(speed);
+        motor3.setPower(speed);
+        motor4.setPower(speed);
 
-            motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            motor1.setPower(speed);
-            motor2.setPower(speed);
-            motor3.setPower(speed);
-            motor4.setPower(speed);
 
-        }
 
-        else if (numberOfRotations == 2){
 
-            motor1.setTargetPosition(motor1.getCurrentPosition() + (spinningDistance * 2));
-            motor2.setTargetPosition(motor2.getCurrentPosition() - (spinningDistance * 2));
-            motor3.setTargetPosition(motor3.getCurrentPosition() + (spinningDistance * 2));
-            motor4.setTargetPosition(motor4.getCurrentPosition() - (spinningDistance * 2));
 
-            motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            motor1.setPower(speed);
-            motor2.setPower(speed);
-            motor3.setPower(speed);
-            motor4.setPower(speed);
-
-        }
 
         //motor1.setTargetPosition(targetPos);
         //motor2.setTargetPosition(targetPos);
@@ -184,7 +166,7 @@ public class EncoderFunction {
     }
 
 
-    public boolean hasReachedPosition(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
+    /*public boolean hasReachedPosition(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
 
         if (motor1.getCurrentPosition() == motor1.getTargetPosition() || motor2.getCurrentPosition() == motor2.getTargetPosition()){
             return (true);
@@ -200,7 +182,7 @@ public class EncoderFunction {
 
 
 
-    }
+    }*/
 
 
 
