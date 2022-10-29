@@ -197,11 +197,11 @@ public class DpadDrive extends LinearOpMode {
             //Control Claw
 
             if (gamepad1.left_bumper) {
-                intakeClaw.setPosition(0.15); //Open
+                intakeClaw.setPosition(.46); //Open
             }
 
             if (gamepad1.right_bumper) {
-                intakeClaw.setPosition(0); //Close
+                intakeClaw.setPosition(.26); //Close
             }
 //Close claw
 
@@ -280,7 +280,7 @@ public class DpadDrive extends LinearOpMode {
                     LinearSlide.setTargetPosition(triggerTargetPosition);
                     LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                    LinearSlide.setPower(0.25);
+                    LinearSlide.setPower(0.5);
                 }
 
             }
@@ -293,7 +293,7 @@ public class DpadDrive extends LinearOpMode {
                     LinearSlide.setTargetPosition(triggerTargetPosition);
                     LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                    LinearSlide.setPower(0.25);
+                    LinearSlide.setPower(0.5);
                 }
 
             }

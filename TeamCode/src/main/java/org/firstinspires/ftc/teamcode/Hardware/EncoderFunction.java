@@ -95,10 +95,10 @@ public class EncoderFunction {
 
     public void spinOneFourth (double speed, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int spinningDistance ){
 
-        motor1.setTargetPosition(spinningDistance);
+        motor1.setTargetPosition(-spinningDistance);
         motor2.setTargetPosition(spinningDistance);
         motor3.setTargetPosition(spinningDistance);
-        motor4.setTargetPosition(spinningDistance);
+        motor4.setTargetPosition(-spinningDistance);
 
         motor1.setPower(speed);
         motor2.setPower(speed);

@@ -55,72 +55,47 @@ public class V1_Red_Autonomous_2 extends LinearOpMode {
         runtime.reset();
 
 
-        if (opModeIsActive()){
+        if (opModeIsActive()) {
 
-            intakeClaw.setPosition(0.2);
-            sleep(1000);
-            robot.EncoderDrive(0, 1,FrontHorizontal, BackHorizontal, LeftVertical, RightVertical,  0, 150);
-            LinearSlide.setTargetPosition(-2000);//need to ajust
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setPower(1);
-            sleep(1000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalEncoderMove(1,450, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            LinearSlide.setTargetPosition(-1000);//need to ajust
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setPower(1);
-            sleep(1000);
-            intakeClaw.setPosition(0.15);
-            sleep(1000);
-            robot.diagonalEncoderMove(1, -400, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            //end of working code
-            robot.spinOneFourth(1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 295);
-            sleep(1000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalEncoderMove(1, 800, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            //check
-            sleep(1000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            intakeClaw.setPosition(-0.8);
-            robot.EncoderDrive(0, 1,FrontHorizontal, BackHorizontal, LeftVertical, RightVertical,  0, 150);
-            //center
-            //check
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            sleep(1000);
-            robot.spinOneFourth(1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -295);
-            LinearSlide.setTargetPosition(-2500);//need to ajust
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setPower(1);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalEncoderMove(1, 350, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            sleep(1000);
-            LinearSlide.setTargetPosition(-2000);//need to ajust/CHECK VALUE, SERVO RELEASE TIME!
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setPower(1);
-            sleep(1000);
-//check
             intakeClaw.setPosition(0);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            sleep(1000); //to prevent sliping
-            robot.diagonalEncoderMove(1, -400, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
             sleep(1000);
+            robot.EncoderDrive(.26, 0.5, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 1010);
+            LinearSlide.setTargetPosition(-3000);//need to ajust
+            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LinearSlide.setPower(0.5);
+            sleep(2000);
             robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.EncoderDrive(0, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 2020);
-            sleep(100);
+            robot.diagonalEncoderMove(0.5, 500, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            sleep(2000);
+            LinearSlide.setTargetPosition(-2700);//need to ajust
+            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LinearSlide.setPower(0.5);
+            sleep(2000);
+            intakeClaw.setPosition(.46);
+            sleep(2000);
+            robot.diagonalEncoderMove(0.5, -400, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            sleep(2000);
             robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.EncoderDrive(1, 0, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -1010, 0);
+            robot.EncoderDrive(0, 0.5, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, -1160);
+            sleep(2000);
+            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            robot.EncoderDrive(0.5, 0, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -1250, 0);
+            intakeClaw.setPosition(.24);
+            sleep(500);
+            LinearSlide.setTargetPosition(0);//need to ajust
+            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LinearSlide.setPower(0.5);
+            sleep(2000);
+            //end of working code
+
+
+
+
 
             //__ secs of autonomous left
 
-            //current position = parking loc 2
-
-
-
+            //current position = parking loc 2*/
 
         }
     }
-
-
 }
-
