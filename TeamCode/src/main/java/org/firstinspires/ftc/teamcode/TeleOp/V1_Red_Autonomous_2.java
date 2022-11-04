@@ -85,7 +85,7 @@ public class V1_Red_Autonomous_2 extends LinearOpMode {
             LinearSlide.setTargetPosition(0);//need to ajust
             LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             LinearSlide.setPower(0.5);
-            sleep(2000);
+            sleep(3000);
             //end of working code
 
 
