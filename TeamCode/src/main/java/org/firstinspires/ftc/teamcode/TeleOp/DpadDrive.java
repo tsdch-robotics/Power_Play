@@ -55,11 +55,11 @@ public class DpadDrive extends LinearOpMode {
         LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
         intakeClaw = hardwareMap.servo.get("leftClimberServo");
 
-        FrontHorizontal.setDirection(DcMotor.Direction.FORWARD);
+        FrontHorizontal.setDirection(DcMotor.Direction.REVERSE);
         BackHorizontal.setDirection(DcMotor.Direction.REVERSE);
         LeftVertical.setDirection(DcMotor.Direction.FORWARD);
         RightVertical.setDirection(DcMotor.Direction.REVERSE);
-        LinearSlide.setDirection(DcMotorSimple.Direction.FORWARD);
+        LinearSlide.setDirection(DcMotorSimple.Direction.REVERSE);
 
         robot.encoderSetUp(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
         LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -197,11 +197,11 @@ public class DpadDrive extends LinearOpMode {
             //Control Claw
 
             if (gamepad1.left_bumper) {
-                intakeClaw.setPosition(.46); //Open
+                intakeClaw.setPosition(1); //Open
             }
 
             if (gamepad1.right_bumper) {
-                intakeClaw.setPosition(.26); //Close
+                intakeClaw.setPosition(0); //Close
             }
 //Close claw
 

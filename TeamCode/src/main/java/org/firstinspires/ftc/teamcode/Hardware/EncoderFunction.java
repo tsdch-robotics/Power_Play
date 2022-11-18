@@ -6,6 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import static java.lang.Math.*;
+
+
 //import org.firstinspires.ftc.teamcode.TestFiles.PIDController;
 //import org.firstinspires.ftc.teamcode.TestFiles.PIDControllerHor;
 
@@ -24,8 +27,6 @@ public class EncoderFunction {
     public DcMotor motor4;
 
 
-
-
     public int targetPos;
 
     //private DcMotor LeftVertical ;
@@ -33,6 +34,54 @@ public class EncoderFunction {
 
     public void init(HardwareMap ahwMap) {
 
+    }
+
+    public void prepMotors(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4) {
+        motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    public Double[] computePower(Double x, Double y) {
+        Double returnValues[] = new Double[3];
+
+        Double angle = asin(y/sqrt((x*x)+(y*y)));
+
+        Double powerX = sin(angle+(PI/4));
+        Double powerY = cos(angle+(PI/4));
+
+        returnValues[0] = powerX;
+        returnValues[1] = powerY;
+        returnValues[2] = angle;
+
+        return returnValues;
+    }
+
+    public void oneStickDrive(DcMotor motor1,
+                              DcMotor motor2,
+                              DcMotor motor3,
+                              DcMotor motor4,
+                              Double gamepadX,
+                              Double gamepadY) {
+        prepMotors(motor1, motor2, motor3, motor4);
+
+        Double powerValues[] = computePower(gamepadX, gamepadY);
+
+        Double powerX = powerValues[0];
+        Double powerY = powerValues[1];
+        Double angle = powerValues[2];
+
+        motor1.setPower(powerX);
+        motor2.setPower(powerX);
+
+        motor3.setPower(powerY);
+        motor4.setPower(powerY);
     }
 
 
