@@ -41,20 +41,41 @@ public class EncoderFunction {
         motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
+        /*
         motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+         */
     }
 
     public Double[] computePower(Double x, Double y) {
         Double returnValues[] = new Double[3];
 
-        Double angle = asin(y/sqrt((x*x)+(y*y)));
+        Double hypotenuse = sqrt(x*x + y*y);
 
-        Double powerX = sin(angle+(PI/4));
-        Double powerY = cos(angle+(PI/4));
+        Double angle = 0.0;
+
+        Double powerX = 0.0;
+        Double powerY = 0.0;
+
+        if (x > 0) {
+            angle = atan(y/x);
+        } else if (x < 0) {
+            angle = atan(y/x) + PI;
+        } else if (x == 0) {
+            if (y > 0) {
+                angle = PI/2;
+            } else if (y < 0) {
+                angle = (3*PI)/2;
+            } else if (y == 0) {
+                angle = 0.0;
+            }
+        }
+
+        powerX = sin(angle + PI/4)*hypotenuse;
+        powerY = cos(angle + PI/4)*hypotenuse;
 
         returnValues[0] = powerX;
         returnValues[1] = powerY;
@@ -63,6 +84,7 @@ public class EncoderFunction {
         return returnValues;
     }
 
+    /*
     public void oneStickDrive(DcMotor motor1,
                               DcMotor motor2,
                               DcMotor motor3,
@@ -83,7 +105,7 @@ public class EncoderFunction {
         motor3.setPower(powerY);
         motor4.setPower(powerY);
     }
-
+     */
 
     public void encoderSetUp (DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
 

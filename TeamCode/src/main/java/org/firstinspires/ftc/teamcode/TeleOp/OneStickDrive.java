@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
+import java.lang.Math.*;
 
 // define the teleop to appear on the phone
 @TeleOp(name="One Stick Drive", group="Linear Opmode")
@@ -32,8 +33,8 @@ public class OneStickDrive extends LinearOpMode {
 
 
         Quadrant1.setDirection(DcMotor.Direction.FORWARD);
-        Quadrant2.setDirection(DcMotor.Direction.REVERSE);
-        Quadrant3.setDirection(DcMotor.Direction.FORWARD);
+        Quadrant2.setDirection(DcMotor.Direction.FORWARD);
+        Quadrant3.setDirection(DcMotor.Direction.REVERSE);
         Quadrant4.setDirection(DcMotor.Direction.REVERSE);
 
         // reset runtime when user clicks play
@@ -49,8 +50,25 @@ public class OneStickDrive extends LinearOpMode {
             double Quadrant3Power = 0;
             double Quadrant4Power = 0;
 
-            // god awful code if else if else if else
-            robot.oneStickDrive(Quadrant1, Quadrant2, Quadrant3, Quadrant4, (double) gamepad1.right_stick_x, (double) gamepad1.right_stick_y);
+            Double computedPower[] = robot.computePower((double) gamepad1.right_stick_x, (double) gamepad1.right_stick_y);
+
+            telemetry.addData("Computing Powers Successful", "powerX: %f, powerY: %f", computedPower[0], computedPower[1]);
+
+            Quadrant1Power = computedPower[0];
+            Quadrant3Power = computedPower[0];
+
+            Quadrant2Power = computedPower[1];
+            Quadrant4Power = computedPower[1];
+
+            Quadrant1.setPower(Quadrant1Power);
+            Quadrant2.setPower(Quadrant2Power);
+            Quadrant3.setPower(Quadrant3Power);
+            Quadrant4.setPower(Quadrant4Power);
+
+            double requestedAngle = computedPower[2];
+
+            telemetry.addData("Driver Requested Angle", "%f", Math.toDegrees(requestedAngle));
+            telemetry.update();
         }
     }
 }
