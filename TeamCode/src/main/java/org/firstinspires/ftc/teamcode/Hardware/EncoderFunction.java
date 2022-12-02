@@ -26,7 +26,6 @@ public class EncoderFunction {
     public DcMotor motor3;
     public DcMotor motor4;
 
-
     public int targetPos;
 
     //private DcMotor LeftVertical ;
@@ -164,42 +163,40 @@ public class EncoderFunction {
         linearMotor.setPower(speed);
     }
 
-    public void spinOneFourth (double speed, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int spinningDistance ){
+    public void spinOneFourth (DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int spinningDistance ){
 
         motor1.setTargetPosition(-spinningDistance);
         motor2.setTargetPosition(spinningDistance);
         motor3.setTargetPosition(spinningDistance);
         motor4.setTargetPosition(-spinningDistance);
 
-        motor1.setPower(speed);
-        motor2.setPower(speed);
-        motor3.setPower(speed);
-        motor4.setPower(speed);
+
+        motor1.setPower(1);
+        motor2.setPower(1);
+        motor3.setPower(1);
+        motor4.setPower(1);
 
         motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+    }
 
 
+    public void spinByDegreeVal (DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int degreeVal, int fullDist){
+        if (degreeVal >= 0 && degreeVal <= 360){
 
+            int ThisOne = (degreeVal / 360) * (int)(fullDist);
+            motor1.setTargetPosition(ThisOne);
+            motor2.setTargetPosition(ThisOne);
+            motor3.setTargetPosition(ThisOne);
+            motor4.setTargetPosition(ThisOne);
+        }
 
-
-        //motor1.setTargetPosition(targetPos);
-        //motor2.setTargetPosition(targetPos);
-
-
-
-
-//3.78 inches diameter     //540 ticks for one spin  //2.2 inches per 100
-        //589 ticks per 4th turn
-
-
-        //352 to hug pole
-
-       // motor1.setPower(speed);
-        //motor2.setPower(speed);
+        else {
+            //Do nothing
+        }
 
     }
 
@@ -222,8 +219,6 @@ public class EncoderFunction {
             motor3.setPower(speed);
             motor4.setPower(speed);
         }
-
-
     }
 
     public void reset (DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
@@ -237,23 +232,77 @@ public class EncoderFunction {
     }
 
 
-    /*public boolean hasReachedPosition(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
 
-        if (motor1.getCurrentPosition() == motor1.getTargetPosition() || motor2.getCurrentPosition() == motor2.getTargetPosition()){
-            return (true);
+
+
+    public void moveTileDiagonal(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, String direction){
+
+
+
+        if (direction == "forward"){
+
+            motor1.setTargetPosition(motor1.getCurrentPosition() + 400);
+            motor2.setTargetPosition(motor2.getCurrentPosition() + 400);
+            motor3.setTargetPosition(motor3.getCurrentPosition() + 400);
+            motor4.setTargetPosition(motor4.getCurrentPosition() + 400);
+
         }
-        else if (motor3.getCurrentPosition() == motor3.getTargetPosition() || motor4.getCurrentPosition() == motor4.getTargetPosition()){
-            return (true);
+
+        else if (direction == "backward"){
+            motor1.setTargetPosition(motor1.getCurrentPosition() - 400);
+            motor2.setTargetPosition(motor2.getCurrentPosition() - 400);
+            motor3.setTargetPosition(motor3.getCurrentPosition() - 400);
+            motor4.setTargetPosition(motor4.getCurrentPosition() - 400);
+
         }
 
-        else{
-            return(false);
+        else if (direction == "left"){
+
+            motor1.setTargetPosition(motor1.getCurrentPosition() + 400);
+            motor2.setTargetPosition(motor2.getCurrentPosition() + 400);
+            motor3.setTargetPosition(motor3.getCurrentPosition() - 400);
+            motor4.setTargetPosition(motor4.getCurrentPosition() - 400);
+
+        }
+
+        else if (direction == "right"){
+
+            motor1.setTargetPosition(motor1.getCurrentPosition() - 400);
+            motor2.setTargetPosition(motor2.getCurrentPosition() - 400);
+            motor3.setTargetPosition(motor3.getCurrentPosition() + 400);
+            motor4.setTargetPosition(motor4.getCurrentPosition() + 400);
+
+        }
+
+        motor1.setPower(1);
+        motor2.setPower(1);
+        motor3.setPower(1);
+        motor4.setPower(1);
+
+        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        if (!motor1.isBusy() || !motor2.isBusy()){
+            motor1.setPower(0);
+            motor2.setPower(0);
+        }
+        if (!motor3.isBusy() || !motor4.isBusy()){
+            motor4.setPower(0);
+            motor3.setPower(0);
         }
 
 
 
+    }
 
-    }*/
+
+
+
+
+
+
 
 
 
