@@ -189,9 +189,19 @@ public class EncoderFunction {
 
             int ThisOne = (degreeVal / 360) * (int)(fullDist);
             motor1.setTargetPosition(ThisOne);
-            motor2.setTargetPosition(ThisOne);
+            motor2.setTargetPosition(-ThisOne);
             motor3.setTargetPosition(ThisOne);
-            motor4.setTargetPosition(ThisOne);
+            motor4.setTargetPosition(-ThisOne);
+
+            motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            motor1.setPower(1);
+            motor2.setPower(1);
+            motor3.setPower(1);
+            motor4.setPower(1);
         }
 
         else {
@@ -235,44 +245,97 @@ public class EncoderFunction {
 
 
 
-    public void moveTileDiagonal(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, String direction){
+    //public void moveTileDiagonal(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, String direction){
 
+    public void diagonalForward(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
 
+        motor1.setTargetPosition(1000);
+        motor2.setTargetPosition(1000);
+        motor3.setTargetPosition(1000);
+        motor4.setTargetPosition(1000);
 
-        if (direction == "forward"){
+        motor1.setPower(1);
+        motor2.setPower(1);
+        motor3.setPower(1);
+        motor4.setPower(1);
 
-            motor1.setTargetPosition(motor1.getCurrentPosition() + 400);
-            motor2.setTargetPosition(motor2.getCurrentPosition() + 400);
-            motor3.setTargetPosition(motor3.getCurrentPosition() + 400);
-            motor4.setTargetPosition(motor4.getCurrentPosition() + 400);
+        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+        if (!motor1.isBusy() || !motor2.isBusy()){
+            motor1.setPower(0);
+            motor2.setPower(0);
+        }
+        if (!motor3.isBusy() || !motor4.isBusy()){
+            motor4.setPower(0);
+            motor3.setPower(0);
+        }
+    }
+
+    public void diagonalBackward(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4) {
+
+        motor1.setTargetPosition(-1000);
+        motor2.setTargetPosition(-1000);
+        motor3.setTargetPosition(-1000);
+        motor4.setTargetPosition(-1000);
+
+        motor1.setPower(1);
+        motor2.setPower(1);
+        motor3.setPower(1);
+        motor4.setPower(1);
+
+        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        if (!motor1.isBusy() || !motor2.isBusy()) {
+            motor1.setPower(0);
+            motor2.setPower(0);
+        }
+        if (!motor3.isBusy() || !motor4.isBusy()) {
+            motor4.setPower(0);
+            motor3.setPower(0);
         }
 
-        else if (direction == "backward"){
-            motor1.setTargetPosition(motor1.getCurrentPosition() - 400);
-            motor2.setTargetPosition(motor2.getCurrentPosition() - 400);
-            motor3.setTargetPosition(motor3.getCurrentPosition() - 400);
-            motor4.setTargetPosition(motor4.getCurrentPosition() - 400);
+    }
 
+    public void diagonalLeft(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4) {
+
+        motor1.setTargetPosition(1000);
+        motor2.setTargetPosition(1000);
+        motor3.setTargetPosition(-1000);
+        motor4.setTargetPosition(-1000);
+
+        motor1.setPower(1);
+        motor2.setPower(1);
+        motor3.setPower(1);
+        motor4.setPower(1);
+
+        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        if (!motor1.isBusy() || !motor2.isBusy()) {
+            motor1.setPower(0);
+            motor2.setPower(0);
+        }
+        if (!motor3.isBusy() || !motor4.isBusy()) {
+            motor4.setPower(0);
+            motor3.setPower(0);
         }
 
-        else if (direction == "left"){
+    }
 
-            motor1.setTargetPosition(motor1.getCurrentPosition() + 400);
-            motor2.setTargetPosition(motor2.getCurrentPosition() + 400);
-            motor3.setTargetPosition(motor3.getCurrentPosition() - 400);
-            motor4.setTargetPosition(motor4.getCurrentPosition() - 400);
+    public void diagonalRight(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
 
-        }
-
-        else if (direction == "right"){
-
-            motor1.setTargetPosition(motor1.getCurrentPosition() - 400);
-            motor2.setTargetPosition(motor2.getCurrentPosition() - 400);
-            motor3.setTargetPosition(motor3.getCurrentPosition() + 400);
-            motor4.setTargetPosition(motor4.getCurrentPosition() + 400);
-
-        }
+        motor1.setTargetPosition(-1000);
+        motor2.setTargetPosition(-1000);
+        motor3.setTargetPosition(1000);
+        motor4.setTargetPosition(1000);
 
         motor1.setPower(1);
         motor2.setPower(1);
@@ -296,15 +359,4 @@ public class EncoderFunction {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
 }

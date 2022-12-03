@@ -65,20 +65,32 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
 
 
            //moveForwards
-            robot.moveTileDiagonal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, "forwards");
-            sleep(1000);
-            robot.moveTileDiagonal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, "forwards");
+            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            sleep(10000);
+            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 45, -20000);
+
+            sleep(10000);
+            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            robot.diagonalEncoderMove(1, 2000, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            sleep(2000);
+
+
+            /*robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
             sleep(1000);
 
             //Spin to score and move diagonally
             robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 45, 2000);
-            robot.diagonalEncoderMove(1, 350, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            sleep(1000);
+            robot.diagonalEncoderMove(1, 1000, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
             sleep(1000);
             //score
 
             //move back
-            robot.diagonalEncoderMove(1, -350, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-
+            robot.diagonalEncoderMove(1, -1000, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            sleep(1000);
 
             robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 315, 2000);
             sleep(1000);
@@ -86,23 +98,31 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
             //currently at (5,2)
             //target: at (6,3)
 
-            robot.moveTileDiagonal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, "forwards");
+            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
             //currently at (5,3)
 
+            sleep(7000);
             for (int i = 0; i < 4; i++) {
-                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 90, 2000);
+                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 90, 3000);
                 //in position to intake wall cones
-                robot.moveTileDiagonal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, "forwards");
+                sleep(1000);
+                robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
                 //move farther forwards, curently in (6,3)
                 //intake
-                robot.moveTileDiagonal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, "backwards");
+                sleep(1000);
+                robot.diagonalBackward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
                 //(5,3)
-                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 135, 2000);
-                robot.diagonalEncoderMove(1, 350, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                sleep(1000);
+                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 135, 3000);
+                sleep(1000);
+                robot.diagonalEncoderMove(1, 1000, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
                 //score
-                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 315, 2000);
+                sleep(1000);
+                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 315, 3000);
             }
-//park
+
+            sleep(2000);
+//park*/
         }
     }
 }
