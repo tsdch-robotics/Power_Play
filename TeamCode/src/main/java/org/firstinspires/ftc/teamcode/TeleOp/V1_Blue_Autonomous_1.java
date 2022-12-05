@@ -43,32 +43,7 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
         LeftVertical = hardwareMap.get(DcMotor.class, "LeftVertical");
         RightVertical = hardwareMap.get(DcMotor.class, "RightVertical");
 
-
-
-        FrontHorizontal.setDirection(DcMotor.Direction.FORWARD);
-        BackHorizontal.setDirection(DcMotor.Direction.REVERSE);
-        LeftVertical.setDirection(DcMotor.Direction.FORWARD);
-        RightVertical.setDirection(DcMotor.Direction.REVERSE);
-
-
-        FrontHorizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BackHorizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        LeftVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        RightVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        // motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //    motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        // motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        // motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //POSIBLE SOURCE FOR ERROR
-//
-        FrontHorizontal.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        BackHorizontal.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-
-        LeftVertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RightVertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.encoderSetUp(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
 
         waitForStart();
         runtime.reset();
