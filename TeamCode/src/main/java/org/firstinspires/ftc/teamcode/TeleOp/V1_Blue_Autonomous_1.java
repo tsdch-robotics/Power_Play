@@ -42,17 +42,33 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
         BackHorizontal = hardwareMap.get(DcMotor.class, "BackHorizontal");
         LeftVertical = hardwareMap.get(DcMotor.class, "LeftVertical");
         RightVertical = hardwareMap.get(DcMotor.class, "RightVertical");
-        LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
-        intakeClaw = hardwareMap.servo.get("leftClimberServo");
+
 
 
         FrontHorizontal.setDirection(DcMotor.Direction.FORWARD);
         BackHorizontal.setDirection(DcMotor.Direction.REVERSE);
         LeftVertical.setDirection(DcMotor.Direction.FORWARD);
         RightVertical.setDirection(DcMotor.Direction.REVERSE);
-        LinearSlide.setDirection(DcMotor.Direction.FORWARD);
 
-        robot.encoderSetUp(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+
+        FrontHorizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        BackHorizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        LeftVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        RightVertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        // motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //    motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        // motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        // motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //POSIBLE SOURCE FOR ERROR
+//
+        FrontHorizontal.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        BackHorizontal.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+        LeftVertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RightVertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
         runtime.reset();
@@ -62,67 +78,65 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
 
 
 
-
-
-           //moveForwards
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            sleep(10000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 45, -20000);
-
-            sleep(10000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalEncoderMove(1, 2000, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 1000);
             sleep(2000);
+            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
 
-
-            /*robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            sleep(1000);
 
             //Spin to score and move diagonally
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 45, 2000);
-            sleep(1000);
-            robot.diagonalEncoderMove(1, 1000, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            sleep(1000);
+            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 45, -350);
+            sleep(2000);
+            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 500);
+            sleep(2000);
             //score
+            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
 
             //move back
-            robot.diagonalEncoderMove(1, -1000, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            robot.diagonalBackward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 500);
+            sleep(2000);
+            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 315, 350);
             sleep(1000);
-
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 315, 2000);
-            sleep(1000);
-
+            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
             //currently at (5,2)
             //target: at (6,3)
 
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 600);
             //currently at (5,3)
 
             sleep(7000);
+            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
             for (int i = 0; i < 4; i++) {
-                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 90, 3000);
+                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 90, 350);
                 //in position to intake wall cones
                 sleep(1000);
-                robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 1000);
                 //move farther forwards, curently in (6,3)
                 //intake
                 sleep(1000);
-                robot.diagonalBackward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                robot.diagonalBackward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 1000);
                 //(5,3)
                 sleep(1000);
-                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 135, 3000);
+                robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 135, -700);
                 sleep(1000);
-                robot.diagonalEncoderMove(1, 1000, 1, FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 1000);
                 //score
                 sleep(1000);
-                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 315, 3000);
+                robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -1000);
+                sleep(1000);
+                robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 135, 350);
+                sleep(1000);
             }
 
             sleep(2000);
-//park*/
+//park
         }
     }
 }
