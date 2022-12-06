@@ -5,9 +5,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import static java.lang.Math.*;
-
+import static java.lang.Thread.sleep;
 
 //import org.firstinspires.ftc.teamcode.TestFiles.PIDController;
 //import org.firstinspires.ftc.teamcode.TestFiles.PIDControllerHor;
@@ -185,9 +186,10 @@ public class EncoderFunction {
 
 
     public void spinByDegreeVal (DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int degreeVal, int fullDist){
-        if (degreeVal >= 0 && degreeVal <= 360){
 
-            int ThisOne = fullDist;//(degreeVal / 360) * (int)(fullDist);
+        if (degreeVal >= -360 && degreeVal <= 360){
+
+            int ThisOne = (int)((degreeVal / 360) * (int)(fullDist));
             motor1.setTargetPosition(ThisOne);
             motor2.setTargetPosition(-ThisOne);
             motor3.setTargetPosition(ThisOne);
@@ -242,10 +244,6 @@ public class EncoderFunction {
 
 
     }
-
-
-
-
 
     //public void moveTileDiagonal(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, String direction){
 
@@ -359,7 +357,116 @@ public class EncoderFunction {
             motor3.setPower(0);
         }
 
+    }
+
+    public void autoMoveSlide(DcMotor slider, int height){
+        if (height < 4000 && height > 2700){
+            slider.setTargetPosition(3500);
+            slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            slider.setPower(1);
+            //score
+
+        }
+
+        else if (height <= 2700 && height > 1000){
+            //then do this
+            slider.setTargetPosition(2500);
+            slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            slider.setPower(1);
+        }
+
+        else if (height < 1000 && height > 50){
+            //then do this
+            slider.setTargetPosition(800);
+            slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            slider.setPower(1);
+        }
+
+        else if (height < 50 && height > -10){
+            //then do this
+            slider.setTargetPosition(20);
+            slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            slider.setPower(1);
+        }
+    }
+
+    public void drop(Servo intakeClaw, double openPos){
+        intakeClaw.setPosition(openPos);
+    }
+
+    public void scoreThisCorner(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int Corner, int height, DcMotor slider, Servo intakeClaw){
+
+        if (Corner == 0){
+            reset(motor1, motor2, motor3, motor4);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, 45, 2000);
+            //for i in 10000
+            reset(motor1, motor2, motor3, motor4);
+            autoMoveSlide(slider, height);
+            diagonalForward(motor1, motor2, motor3, motor4, 500);
+            drop(intakeClaw, 1);
+            //sleep(1000);
+            reset(motor1, motor2, motor3, motor4);
+            diagonalBackward(motor1, motor2, motor3, motor4, 500);
+            reset(motor1, motor2, motor3, motor4);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, -45, 2000);
+            autoMoveSlide(slider, 60);
+        }
+
+        else if (Corner == 1){
+            reset(motor1, motor2, motor3, motor4);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, 135, 2000);
+            //for i in 10000
+            reset(motor1, motor2, motor3, motor4);
+            autoMoveSlide(slider, height);
+            diagonalForward(motor1, motor2, motor3, motor4, 500);
+            drop(intakeClaw, 1);
+            //sleep(1000);
+            reset(motor1, motor2, motor3, motor4);
+            diagonalBackward(motor1, motor2, motor3, motor4, 500);
+            reset(motor1, motor2, motor3, motor4);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, -135, 2000);
+            autoMoveSlide(slider, 60);
+        }
+
+        else if (Corner == 2){
+            reset(motor1, motor2, motor3, motor4);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, -45, 2000);
+            //for i in 10000
+            reset(motor1, motor2, motor3, motor4);
+            autoMoveSlide(slider, height);
+            diagonalForward(motor1, motor2, motor3, motor4, 500);
+            drop(intakeClaw, 1);
+            //sleep(1000);
+            reset(motor1, motor2, motor3, motor4);
+            diagonalBackward(motor1, motor2, motor3, motor4, 500);
+            reset(motor1, motor2, motor3, motor4);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, 45, 2000);
+            autoMoveSlide(slider, 60);
+        }
+
+        else if (Corner == 3){
+            reset(motor1, motor2, motor3, motor4);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, 90, 2000);
+            //for i in 10000
+            reset(motor1, motor2, motor3, motor4);
+            autoMoveSlide(slider, height);
+            diagonalForward(motor1, motor2, motor3, motor4, 500);
+            drop(intakeClaw, 1);
+            //sleep(1000);
+            reset(motor1, motor2, motor3, motor4);
+            diagonalBackward(motor1, motor2, motor3, motor4, 500);
+            reset(motor1, motor2, motor3, motor4);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, -90, 2000);
+            autoMoveSlide(slider, 60);
+        }
+
+        else{
+
+        }
 
 
     }
+
+
+
 }

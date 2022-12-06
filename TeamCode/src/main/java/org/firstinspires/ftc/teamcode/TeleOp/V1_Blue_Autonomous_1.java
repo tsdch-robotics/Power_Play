@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 //import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 //import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -42,6 +43,15 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
         BackHorizontal = hardwareMap.get(DcMotor.class, "BackHorizontal");
         LeftVertical = hardwareMap.get(DcMotor.class, "LeftVertical");
         RightVertical = hardwareMap.get(DcMotor.class, "RightVertical");
+        LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
+        intakeClaw = hardwareMap.servo.get("leftClimberServo");
+
+        FrontHorizontal.setDirection(DcMotor.Direction.REVERSE);
+        BackHorizontal.setDirection(DcMotor.Direction.FORWARD);
+        LeftVertical.setDirection(DcMotor.Direction.FORWARD);
+        RightVertical.setDirection(DcMotor.Direction.REVERSE);
+        LinearSlide.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         robot.encoderSetUp(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
 
@@ -56,27 +66,10 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
             robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 1000);
             sleep(2000);
             robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-
-
-            //Spin to score and move diagonally
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 45, -350);
+            robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 1500, LinearSlide, intakeClaw);
             sleep(2000);
             robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 500);
-            sleep(2000);
-            //score
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-
-            //move back
-            robot.diagonalBackward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 500);
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 315, 350);
-            sleep(1000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            //currently at (5,2)
-            //target: at (6,3)
-
+           // robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -90, 350);
             robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 600);
             //currently at (5,3)
 
@@ -96,19 +89,18 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
                 //(5,3)
                 sleep(1000);
                 robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 135, -700);
+                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -90, 350);
                 sleep(1000);
                 robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-                robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 1000);
-                //score
+                robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 2999, LinearSlide, intakeClaw);
                 sleep(1000);
                 robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-                robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -1000);
-                sleep(1000);
-                robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 135, 350);
-                sleep(1000);
             }
+
+
+
+
+            //robot.move(5,3);
 
             sleep(2000);
 //park
