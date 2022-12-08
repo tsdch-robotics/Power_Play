@@ -185,15 +185,14 @@ public class EncoderFunction {
     }
 
 
-    public void spinByDegreeVal (DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int degreeVal, int fullDist){
+    public void spinByDegreeVal (DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int degreeVal, int distance){
 
-        if (degreeVal >= -360 && degreeVal <= 360){
 
-            int ThisOne = (int)((degreeVal / 360) * (int)(fullDist));
-            motor1.setTargetPosition(ThisOne);
-            motor2.setTargetPosition(-ThisOne);
-            motor3.setTargetPosition(ThisOne);
-            motor4.setTargetPosition(-ThisOne);
+
+            motor1.setTargetPosition(-distance);
+            motor2.setTargetPosition(distance);
+            motor3.setTargetPosition(distance);
+            motor4.setTargetPosition(-distance);
 
             motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -204,11 +203,9 @@ public class EncoderFunction {
             motor2.setPower(0.25);
             motor3.setPower(0.25);
             motor4.setPower(0.25);
-        }
 
-        else {
-            //Do nothing
-        }
+
+
 
     }
 
@@ -394,21 +391,51 @@ public class EncoderFunction {
         intakeClaw.setPosition(openPos);
     }
 
+    public boolean hasReachePosition(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
+
+        if (motor1.getCurrentPosition() == motor1.getTargetPosition()){
+            return true;
+        }
+
+
+        else if (motor2.getCurrentPosition() == motor2.getTargetPosition()){
+            return true;
+        }
+
+
+        else if (motor3.getCurrentPosition() == motor3.getTargetPosition()){
+            return true;
+        }
+
+
+        else if (motor4.getCurrentPosition() == motor4.getTargetPosition()){
+            return true;
+        }
+
+
+        else{
+            return false;
+        }
+    }
+
     public void scoreThisCorner(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int Corner, int height, DcMotor slider, Servo intakeClaw){
 
         if (Corner == 0){
             reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, 45, 2000);
-            //for i in 10000
+            spinByDegreeVal(motor1, motor2, motor3, motor4, 45, 310);
+
             reset(motor1, motor2, motor3, motor4);
             autoMoveSlide(slider, height);
             diagonalForward(motor1, motor2, motor3, motor4, 500);
             drop(intakeClaw, 1);
-            //sleep(1000);
+
+            while (hasReachePosition(motor1, motor2, motor3, motor4) == false){
+
+            }
             reset(motor1, motor2, motor3, motor4);
             diagonalBackward(motor1, motor2, motor3, motor4, 500);
             reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, -45, 2000);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, -45, -350);
             autoMoveSlide(slider, 60);
         }
 
@@ -420,43 +447,49 @@ public class EncoderFunction {
             autoMoveSlide(slider, height);
             diagonalForward(motor1, motor2, motor3, motor4, 500);
             drop(intakeClaw, 1);
-            //sleep(1000);
+            while (hasReachePosition(motor1, motor2, motor3, motor4) == false){
+
+            }
             reset(motor1, motor2, motor3, motor4);
             diagonalBackward(motor1, motor2, motor3, motor4, 500);
             reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, -135, 2000);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, -135, -2000);
             autoMoveSlide(slider, 60);
         }
 
         else if (Corner == 2){
             reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, -45, 2000);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, -45, -350);
             //for i in 10000
             reset(motor1, motor2, motor3, motor4);
             autoMoveSlide(slider, height);
             diagonalForward(motor1, motor2, motor3, motor4, 500);
             drop(intakeClaw, 1);
-            //sleep(1000);
+            while (hasReachePosition(motor1, motor2, motor3, motor4) == false){
+
+            }
             reset(motor1, motor2, motor3, motor4);
             diagonalBackward(motor1, motor2, motor3, motor4, 500);
             reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, 45, 2000);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, 45, 350);
             autoMoveSlide(slider, 60);
         }
 
         else if (Corner == 3){
             reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, 90, 2000);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, 90, 700);
             //for i in 10000
             reset(motor1, motor2, motor3, motor4);
             autoMoveSlide(slider, height);
             diagonalForward(motor1, motor2, motor3, motor4, 500);
             drop(intakeClaw, 1);
-            //sleep(1000);
+            while (hasReachePosition(motor1, motor2, motor3, motor4) == false){
+
+            }
             reset(motor1, motor2, motor3, motor4);
             diagonalBackward(motor1, motor2, motor3, motor4, 500);
             reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, -90, 2000);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, -90, -700);
             autoMoveSlide(slider, 60);
         }
 

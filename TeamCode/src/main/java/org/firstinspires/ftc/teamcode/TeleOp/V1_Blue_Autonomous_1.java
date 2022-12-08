@@ -50,7 +50,7 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
         BackHorizontal.setDirection(DcMotor.Direction.FORWARD);
         LeftVertical.setDirection(DcMotor.Direction.FORWARD);
         RightVertical.setDirection(DcMotor.Direction.REVERSE);
-        LinearSlide.setDirection(DcMotorSimple.Direction.REVERSE);
+        LinearSlide.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
         robot.encoderSetUp(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
@@ -63,22 +63,22 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
 
 
 
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 1000);
+            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 8000);
             sleep(2000);
             robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 1500, LinearSlide, intakeClaw);
-            sleep(2000);
+            robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 4000, LinearSlide, intakeClaw);
+            sleep(10000);
             robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
            // robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -90, 350);
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 600);
+            //robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 600);
             //currently at (5,3)
 
-            sleep(7000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            for (int i = 0; i < 4; i++) {
-                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 90, 350);
+            //sleep(7000);
+            //robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+           /* for (int i = 0; i < 4; i++) {
+                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 90, 700);
                 //in position to intake wall cones
-                sleep(1000);
+               // Thread.sleep(1000);
                 robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
                 robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 1000);
                 //move farther forwards, curently in (6,3)
@@ -89,10 +89,10 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
                 //(5,3)
                 sleep(1000);
                 robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -90, 350);
+                robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -90, -700);
                 sleep(1000);
                 robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-                robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 2999, LinearSlide, intakeClaw);
+                robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 4040, LinearSlide, intakeClaw);
                 sleep(1000);
                 robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
             }
@@ -103,7 +103,7 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
             //robot.move(5,3);
 
             sleep(2000);
-//park
+//park*/
         }
     }
 }
