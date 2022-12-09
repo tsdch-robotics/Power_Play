@@ -432,78 +432,82 @@ public class EncoderFunction {
     public void scoreThisCorner(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int Corner, int height, DcMotor slider, Servo intakeClaw){
 
         if (Corner == 0){
-            reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, 45, 310);
 
+            spinByDegreeVal(motor1, motor2, motor3, motor4, 45, 310);
             reset(motor1, motor2, motor3, motor4);
             autoMoveSlide(slider, height);
+            sleepThread(1000L);
             diagonalForward(motor1, motor2, motor3, motor4, 500);
-            drop(intakeClaw, 1);
-
-
-
             sleepThread(2000L);
-
+            drop(intakeClaw, 1);
+            sleepThread(500L);
             reset(motor1, motor2, motor3, motor4);
+            sleepThread(500L);
             diagonalBackward(motor1, motor2, motor3, motor4, 1000);
-
+            sleepThread(2000L);
             reset(motor1, motor2, motor3, motor4);
             spinByDegreeVal(motor1, motor2, motor3, motor4, -45, -350);
             autoMoveSlide(slider, 60);
         }
 
 
+
+
+
+
+
+
         else if (Corner == 1){
-            reset(motor1, motor2, motor3, motor4);
             spinByDegreeVal(motor1, motor2, motor3, motor4, 135, 2000);
-            //for i in 10000
             reset(motor1, motor2, motor3, motor4);
             autoMoveSlide(slider, height);
+            sleepThread(1000L);
             diagonalForward(motor1, motor2, motor3, motor4, 500);
+            sleepThread(2000L);
             drop(intakeClaw, 1);
-            while (hasReachePosition(motor1, motor2, motor3, motor4) == false){
-
-            }
+            sleepThread(500L);
             reset(motor1, motor2, motor3, motor4);
-            diagonalBackward(motor1, motor2, motor3, motor4, 500);
+            sleepThread(500L);
+            diagonalBackward(motor1, motor2, motor3, motor4, 1000);
+            sleepThread(2000L);
             reset(motor1, motor2, motor3, motor4);
             spinByDegreeVal(motor1, motor2, motor3, motor4, -135, -2000);
             autoMoveSlide(slider, 60);
         }
 
         else if (Corner == 2){
-            reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, -45, -350);
-            //for i in 10000
+            spinByDegreeVal(motor1, motor2, motor3, motor4, -45, -310);
             reset(motor1, motor2, motor3, motor4);
             autoMoveSlide(slider, height);
+            sleepThread(1000L);
             diagonalForward(motor1, motor2, motor3, motor4, 500);
+            sleepThread(2000L);
             drop(intakeClaw, 1);
-            while (hasReachePosition(motor1, motor2, motor3, motor4) == false){
-
-            }
+            sleepThread(500L);
             reset(motor1, motor2, motor3, motor4);
-            diagonalBackward(motor1, motor2, motor3, motor4, 500);
+            sleepThread(500L);
+            diagonalBackward(motor1, motor2, motor3, motor4, 1000);
+            sleepThread(2000L);
             reset(motor1, motor2, motor3, motor4);
             spinByDegreeVal(motor1, motor2, motor3, motor4, 45, 350);
             autoMoveSlide(slider, 60);
         }
 
         else if (Corner == 3){
-            reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, 90, 700);
-            //for i in 10000
+            spinByDegreeVal(motor1, motor2, motor3, motor4, -90, 700);
             reset(motor1, motor2, motor3, motor4);
             autoMoveSlide(slider, height);
+            sleepThread(1000L);
             diagonalForward(motor1, motor2, motor3, motor4, 500);
+            sleepThread(2000L);
             drop(intakeClaw, 1);
-            while (hasReachePosition(motor1, motor2, motor3, motor4) == false){
-
-            }
+            sleepThread(500L);
             reset(motor1, motor2, motor3, motor4);
-            diagonalBackward(motor1, motor2, motor3, motor4, 500);
+            sleepThread(500L);
+            diagonalBackward(motor1, motor2, motor3, motor4, 1000);
+            sleepThread(2000L);
             reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, -90, -700);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, 90, -350);
             autoMoveSlide(slider, 60);
         }
 
