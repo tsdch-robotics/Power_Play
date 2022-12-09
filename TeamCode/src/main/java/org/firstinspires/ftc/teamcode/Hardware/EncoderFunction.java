@@ -421,7 +421,7 @@ public class EncoderFunction {
     }
 
 
-    public void sleepThread(Long millis) {
+    public void sleepThread(Long millis) {    //sleep function
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
@@ -440,14 +440,7 @@ public class EncoderFunction {
             diagonalForward(motor1, motor2, motor3, motor4, 500);
             drop(intakeClaw, 1);
 
-            while (!hasReachePosition(motor1, motor2, motor3, motor4)){
 
-            }
-
-
-           // for (int i = 0; i < 10000000; i++) {
-
-           // }
 
             sleepThread(2000L);
 
@@ -459,7 +452,7 @@ public class EncoderFunction {
             autoMoveSlide(slider, 60);
         }
 
-        /*
+
         else if (Corner == 1){
             reset(motor1, motor2, motor3, motor4);
             spinByDegreeVal(motor1, motor2, motor3, motor4, 135, 2000);
@@ -514,7 +507,7 @@ public class EncoderFunction {
             autoMoveSlide(slider, 60);
         }
 
-         */
+
 
 
     }
