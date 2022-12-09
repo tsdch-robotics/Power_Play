@@ -41,7 +41,7 @@ public class TFObjectDetection extends LinearOpMode {
      * and paste it in to your code on the next line, between the double quotes.
      */
     private static final String VUFORIA_KEY =
-            " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
+            "AfXWnAP/////AAABmRGLqpSMs0UGmBhO3puOnZJjJxKAazXAGTwUD3HjUeeFmVldRXNMso/FaP02oTvs7aHiLeBHLFmgi1H1da4r+GWlEez3bZeeCF9PdchONtz8pNgBo3L2JWAhn3PdIp5UPBwkW6B8VurcO4MPvn7qrRkWkBzIgZI+jUJcQxKWE1t6VV2fG8IG3Hkjx95td3GkHoJfWF/yaZ1ev2C/ixI5UDj6C4tqokFSSK4ObEbpYF4VtfXhf7NK6As76/n/wkMagdiiKWv5KXWkCTRX3wodC44dwCI2yq7ikNrgX8hy+euhFWZg0XsHs7NMGQi6RsBdcwKiUMfqDSG+lhD69LCgE/Re/DVUm2pm4H7cHKvPQjmB";
 
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia

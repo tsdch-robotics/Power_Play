@@ -63,7 +63,7 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
 
 
 
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 8000);
+            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 800);
             sleep(2000);
             robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
             robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 4000, LinearSlide, intakeClaw);

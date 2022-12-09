@@ -8,7 +8,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import static java.lang.Math.*;
+import java.lang.Thread.*;
 import static java.lang.Thread.sleep;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 //import org.firstinspires.ftc.teamcode.TestFiles.PIDController;
 //import org.firstinspires.ftc.teamcode.TestFiles.PIDControllerHor;
@@ -418,6 +420,15 @@ public class EncoderFunction {
         }
     }
 
+
+    public void sleepThread(Long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void scoreThisCorner(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int Corner, int height, DcMotor slider, Servo intakeClaw){
 
         if (Corner == 0){
@@ -429,16 +440,26 @@ public class EncoderFunction {
             diagonalForward(motor1, motor2, motor3, motor4, 500);
             drop(intakeClaw, 1);
 
-            while (hasReachePosition(motor1, motor2, motor3, motor4) == false){
+            while (!hasReachePosition(motor1, motor2, motor3, motor4)){
 
             }
+
+
+           // for (int i = 0; i < 10000000; i++) {
+
+           // }
+
+            sleepThread(2000L);
+
             reset(motor1, motor2, motor3, motor4);
-            diagonalBackward(motor1, motor2, motor3, motor4, 500);
+            diagonalBackward(motor1, motor2, motor3, motor4, 1000);
+
             reset(motor1, motor2, motor3, motor4);
             spinByDegreeVal(motor1, motor2, motor3, motor4, -45, -350);
             autoMoveSlide(slider, 60);
         }
 
+        /*
         else if (Corner == 1){
             reset(motor1, motor2, motor3, motor4);
             spinByDegreeVal(motor1, motor2, motor3, motor4, 135, 2000);
@@ -493,9 +514,7 @@ public class EncoderFunction {
             autoMoveSlide(slider, 60);
         }
 
-        else{
-
-        }
+         */
 
 
     }
