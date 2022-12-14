@@ -433,21 +433,23 @@ public class EncoderFunction {
 
         if (Corner == 0){
 
-            spinByDegreeVal(motor1, motor2, motor3, motor4, 45, 310);
-            reset(motor1, motor2, motor3, motor4);
-            autoMoveSlide(slider, height);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, 45, -280);
             sleepThread(1000L);
+            reset(motor1, motor2, motor3, motor4);
+            autoMoveSlide(slider, 2000);
             diagonalForward(motor1, motor2, motor3, motor4, 500);
             sleepThread(2000L);
             drop(intakeClaw, 1);
-            sleepThread(500L);
+            sleepThread(5000L);
             reset(motor1, motor2, motor3, motor4);
-            sleepThread(500L);
-            diagonalBackward(motor1, motor2, motor3, motor4, 1000);
+            diagonalBackward(motor1, motor2, motor3, motor4, 500);
             sleepThread(2000L);
             reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, -45, -350);
-            autoMoveSlide(slider, 60);
+            spinByDegreeVal(motor1, motor2, motor3, motor4, -45, 280);
+            sleepThread(2000L);
+            autoMoveSlide(slider, 100);
+            sleepThread(2000L);
+            //autoMoveSlide(slider, 60);
         }
 
 
@@ -455,61 +457,6 @@ public class EncoderFunction {
 
 
 
-
-
-        else if (Corner == 1){
-            spinByDegreeVal(motor1, motor2, motor3, motor4, 135, 2000);
-            reset(motor1, motor2, motor3, motor4);
-            autoMoveSlide(slider, height);
-            sleepThread(1000L);
-            diagonalForward(motor1, motor2, motor3, motor4, 500);
-            sleepThread(2000L);
-            drop(intakeClaw, 1);
-            sleepThread(500L);
-            reset(motor1, motor2, motor3, motor4);
-            sleepThread(500L);
-            diagonalBackward(motor1, motor2, motor3, motor4, 1000);
-            sleepThread(2000L);
-            reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, -135, -2000);
-            autoMoveSlide(slider, 60);
-        }
-
-        else if (Corner == 2){
-            spinByDegreeVal(motor1, motor2, motor3, motor4, -45, -310);
-            reset(motor1, motor2, motor3, motor4);
-            autoMoveSlide(slider, height);
-            sleepThread(1000L);
-            diagonalForward(motor1, motor2, motor3, motor4, 500);
-            sleepThread(2000L);
-            drop(intakeClaw, 1);
-            sleepThread(500L);
-            reset(motor1, motor2, motor3, motor4);
-            sleepThread(500L);
-            diagonalBackward(motor1, motor2, motor3, motor4, 1000);
-            sleepThread(2000L);
-            reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, 45, 350);
-            autoMoveSlide(slider, 60);
-        }
-
-        else if (Corner == 3){
-            spinByDegreeVal(motor1, motor2, motor3, motor4, -90, 700);
-            reset(motor1, motor2, motor3, motor4);
-            autoMoveSlide(slider, height);
-            sleepThread(1000L);
-            diagonalForward(motor1, motor2, motor3, motor4, 500);
-            sleepThread(2000L);
-            drop(intakeClaw, 1);
-            sleepThread(500L);
-            reset(motor1, motor2, motor3, motor4);
-            sleepThread(500L);
-            diagonalBackward(motor1, motor2, motor3, motor4, 1000);
-            sleepThread(2000L);
-            reset(motor1, motor2, motor3, motor4);
-            spinByDegreeVal(motor1, motor2, motor3, motor4, 90, -350);
-            autoMoveSlide(slider, 60);
-        }
 
 
 
