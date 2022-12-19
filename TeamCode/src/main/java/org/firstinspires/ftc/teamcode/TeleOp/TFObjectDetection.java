@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.SwitchableCamera;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
@@ -48,6 +50,9 @@ public class TFObjectDetection extends LinearOpMode {
      * localization engine.
      */
     private VuforiaLocalizer vuforia;
+
+    private WebcamName webcam1;
+    private SwitchableCamera switchableCamera;
 
     /**
      * {@link #tfod} is the variable we will use to store our instance of the TensorFlow Object
@@ -120,11 +125,14 @@ public class TFObjectDetection extends LinearOpMode {
              */
             VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
+            parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
+
             parameters.vuforiaLicenseKey = VUFORIA_KEY;
             parameters.cameraDirection = CameraDirection.BACK;
 
             //  Instantiate the Vuforia engine
             vuforia = ClassFactory.getInstance().createVuforia(parameters);
+
         }
 
         /**
@@ -141,7 +149,7 @@ public class TFObjectDetection extends LinearOpMode {
 
             // Use loadModelFromAsset() if the TF Model is built in as an asset by Android Studio
             // Use loadModelFromFile() if you have downloaded a custom team model to the Robot Controller's FLASH.
-            tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
+            //tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
             // tfod.loadModelFromFile(TFOD_MODEL_FILE, LABELS);
         }
     }

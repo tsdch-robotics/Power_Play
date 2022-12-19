@@ -24,6 +24,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  */
 public class EncoderFunction {
 
+
     public DcMotor motor1;
     public DcMotor motor2;
     public DcMotor motor3;
@@ -117,11 +118,11 @@ public class EncoderFunction {
         motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-       // motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    //    motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-       // motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-       // motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //POSIBLE SOURCE FOR ERROR
+        motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //POSIBLE SOURCE FOR ERROR
 //
         motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -359,7 +360,12 @@ public class EncoderFunction {
     }
 
     public void autoMoveSlide(DcMotor slider, int height){
-        if (height < 4000 && height > 2700){
+
+        slider.setTargetPosition(height);
+        slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slider.setPower(1);
+
+        /*if (height < 4000 && height > 2700){
             slider.setTargetPosition(3500);
             slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             slider.setPower(1);
@@ -386,7 +392,7 @@ public class EncoderFunction {
             slider.setTargetPosition(20);
             slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             slider.setPower(1);
-        }
+        }*/
     }
 
     public void drop(Servo intakeClaw, double openPos){
@@ -436,7 +442,7 @@ public class EncoderFunction {
             spinByDegreeVal(motor1, motor2, motor3, motor4, 45, -280);
             sleepThread(1000L);
             reset(motor1, motor2, motor3, motor4);
-            autoMoveSlide(slider, 2000);
+            autoMoveSlide(slider, 1000);
             diagonalForward(motor1, motor2, motor3, motor4, 500);
             sleepThread(2000L);
             drop(intakeClaw, 1);
@@ -447,22 +453,32 @@ public class EncoderFunction {
             reset(motor1, motor2, motor3, motor4);
             spinByDegreeVal(motor1, motor2, motor3, motor4, -45, 280);
             sleepThread(2000L);
-            autoMoveSlide(slider, 100);
+            autoMoveSlide(slider, 0);
             sleepThread(2000L);
             //autoMoveSlide(slider, 60);
         }
 
-
-
-
-
-
-
-
-
-
     }
 
 
+
+    public void moveEachMotor(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int one, int two, int three, int four){
+
+        motor1.setTargetPosition(one);
+        motor2.setTargetPosition(two);
+        motor3.setTargetPosition(three);
+        motor4.setTargetPosition(four);
+
+        motor1.setPower(.25);
+        motor2.setPower(.25);
+        motor3.setPower(.25);
+        motor4.setPower(.25);
+
+        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+    }
 
 }
