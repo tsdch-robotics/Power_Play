@@ -43,7 +43,10 @@ public class OneStickDrive extends LinearOpMode {
         Quadrant3.setDirection(DcMotor.Direction.REVERSE);
         Quadrant4.setDirection(DcMotor.Direction.REVERSE);
         LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
-        LinearSlide.setDirection(DcMotorSimple.Direction.FORWARD);
+        LinearSlide.setDirection(DcMotor.Direction.FORWARD);
+
+
+        LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // reset runtime when user clicks play
         waitForStart();
@@ -80,8 +83,24 @@ public class OneStickDrive extends LinearOpMode {
             telemetry.update();
 
 
-            if (gamepad1.left_trigger >= -0.1){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {
+            if (gamepad1.left_trigger >= -0.1 && !gamepad1.a){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {
 
+
+
+                int triggerTargetPosition = ((int) (gamepad1.left_trigger *    3800));//3119
+                //LinearSlide.setTargetPosition(triggerTargetPosition);
+
+                LinearSlide.setTargetPosition(triggerTargetPosition);
+                LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                LinearSlide.setPower(.6);
+
+
+
+
+            }
+
+         /*   if (gamepad1.left_trigger >= -0.1) { //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {
 
 
                 int triggerTargetPosition = ((int) (gamepad1.left_trigger * -3000));//3119
@@ -90,21 +109,17 @@ public class OneStickDrive extends LinearOpMode {
                 LinearSlide.setTargetPosition(triggerTargetPosition);
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                LinearSlide.setPower(0.25);
+                LinearSlide.setPower(.6);
 
-
-
-
-            }
-
-            while (gamepad1.dpad_left){
+            }*/
+            while (gamepad1.dpad_right){
                 Quadrant1.setPower(0.5);
                 Quadrant2.setPower(0.5);
                 Quadrant3.setPower(-0.5);
                 Quadrant4.setPower(-0.5);
             }
 
-            while (gamepad1.dpad_right){
+            while (gamepad1.dpad_left){
                 Quadrant1.setPower(-0.5);
                 Quadrant2.setPower(-0.5);
                 Quadrant3.setPower(0.5);
@@ -114,11 +129,11 @@ public class OneStickDrive extends LinearOpMode {
 
 
             if (gamepad1.left_bumper) {
-                intakeClaw.setPosition(1); //Open
+                intakeClaw.setPosition(.48);//close
             }
 
             if (gamepad1.right_bumper) {
-                intakeClaw.setPosition(0); //Close
+                intakeClaw.setPosition(.3); //open
             }
 
 
