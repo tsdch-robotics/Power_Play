@@ -60,27 +60,4 @@ public class EncoderTesting extends LinearOpMode {
 }
 
 
-//A VERY SIMMPLE SOLUTION
-/*
 
-if (gamepad1.dpad_right){
-    x = 1;
-}
-
-if (x == 1) {
-    robot.moveByTileUnit(1, FrontHorizontal, BackHorizontal, 5000);
-    x = 0;
-}
-
-
-
-efficient Running????? Would this work
-
-
-if .......{
-    while robot.moveByTileUnit(1, FrontHorizontal, BackHorizontal, 5000);
-        (test for data inputs) -- does it stay stuck on one block at a time until that block
-         is excecuted or does it continue to loop through?
-
-}
- */

@@ -29,8 +29,12 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
     private DcMotor LeftVertical = null;
     private DcMotor RightVertical = null;
     private DcMotor LinearSlide = null;
-
     private Servo intakeClaw;
+
+    private DcMotor verticaOdometry = null; //new Odometry pods, use in the spot of motor ports
+    private DcMotor horizontalOdometry = null;
+
+
 
 
 
@@ -44,7 +48,10 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
         LeftVertical = hardwareMap.get(DcMotor.class, "LeftVertical");
         RightVertical = hardwareMap.get(DcMotor.class, "RightVertical");
         LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
-        intakeClaw = hardwareMap.servo.get("leftClimberServo");
+        intakeClaw = hardwareMap.servo.get("intakeClaw");
+
+        verticaOdometry = hardwareMap.get(DcMotor.class, "verticalOdometry");
+        horizontalOdometry = hardwareMap.get(DcMotor.class, "horizontalOdometry");
 
         FrontHorizontal.setDirection(DcMotor.Direction.REVERSE);
         BackHorizontal.setDirection(DcMotor.Direction.FORWARD);
@@ -53,11 +60,21 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
         LinearSlide.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
-        robot.encoderSetUp(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+        verticaOdometry.setDirection(DcMotor.Direction.FORWARD);
+        horizontalOdometry.setDirection(DcMotor.Direction.REVERSE);
 
-        LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        verticaOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);//data only, do not set power!
+        horizontalOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);//data only, do not set power!
+
+
+
+        //robot.encoderSetUp(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+
+       // LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+      //  LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
 
@@ -67,114 +84,9 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
 
         if (opModeIsActive()) {
 
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 850);
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 4000, LinearSlide, intakeClaw);
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-           // robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -90, 350);
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 900);
-            //currently at (5,3)
-            //\
-            //
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
+      //     robot.moveForwardUntilPos(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, )
 
 
-
-
-
-
-
-
-
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 90, 510);
-                //in position to intake wall cones
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 900);
-                //move farther forwards, curently in (6,3)
-                //intake
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalBackward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 900);
-                //(5,3)
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -90, -510);
-            sleep(1000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 4040, LinearSlide, intakeClaw);
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            sleep(1000);
-
-
-
-
-
-
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 90, 510);
-            //in position to intake wall cones
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 900);
-            //move farther forwards, curently in (6,3)
-            //intake
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalBackward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 900);
-            //(5,3)
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -90, -510);
-            sleep(1000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 4040, LinearSlide, intakeClaw);
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            sleep(1000);
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 90, 510);
-            //in position to intake wall cones
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 900);
-            //move farther forwards, curently in (6,3)
-            //intake
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalBackward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 900);
-            //(5,3)
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -90, -510);
-            sleep(1000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 4040, LinearSlide, intakeClaw);
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            sleep(1000);
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 90, 510);
-            //in position to intake wall cones
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalForward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 900);
-            //move farther forwards, curently in (6,3)
-            //intake
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.diagonalBackward(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 900);
-            //(5,3)
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.spinByDegreeVal(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, -90, -510);
-            sleep(1000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            robot.scoreThisCorner(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, 0, 4040, LinearSlide, intakeClaw);
-            sleep(2000);
-            robot.reset(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
-            sleep(1000);
         }
     }
 }

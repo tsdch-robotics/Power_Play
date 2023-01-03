@@ -50,6 +50,7 @@ public class OneStickDrive extends LinearOpMode {
         // only start running after user confirmation
         while (opModeIsActive()) {
 
+
             // initializing all the wheel power values
             double Quadrant1Power = 0;
             double Quadrant2Power = 0;
@@ -77,9 +78,39 @@ public class OneStickDrive extends LinearOpMode {
             telemetry.update();
 
 
+            if (gamepad1.left_trigger > 0.1){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {
 
+                int highestSlider = LinearSlide.getCurrentPosition();
 
+                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -3000));//3119
+                //LinearSlide.setTargetPosition(triggerTargetPosition);
 
+                if (triggerTargetPosition >= highestSlider){
+
+                    LinearSlide.setTargetPosition(triggerTargetPosition);
+                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                    LinearSlide.setPower(0.25);
+                }
+
+                //linearSlidePreviousPos = LinearSlide.getCurrentPosition();
+
+            }
+
+            while (gamepad1.dpad_left){
+                Quadrant1.setPower(0.5);
+                Quadrant2.setPower(0.5);
+                Quadrant3.setPower(0.5);
+                Quadrant4.setPower(0.5);
+            }
+
+            while (gamepad1.dpad_right){
+                Quadrant1.setPower(-0.5);
+                Quadrant2.setPower(-0.5);
+                Quadrant3.setPower(-0.5);
+                Quadrant4.setPower(-0.5);
+            }
+/*
             if (gamepad1.left_trigger > 0.1 && LinearSlide.getCurrentPosition() < -3000){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {
 
                 int highestSlider = LinearSlide.getCurrentPosition();
@@ -113,7 +144,7 @@ public class OneStickDrive extends LinearOpMode {
                 }
             }
 
-
+*/
 
 
 
