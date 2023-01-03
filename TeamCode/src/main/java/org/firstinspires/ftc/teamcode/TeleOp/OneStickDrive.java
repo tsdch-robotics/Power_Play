@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -23,6 +24,7 @@ public class OneStickDrive extends LinearOpMode {
     private DcMotor Quadrant3 = null;
     private DcMotor Quadrant4 = null;
     private DcMotor LinearSlide = null;
+    private Servo intakeClaw;
 
     @Override
     public void runOpMode() {
@@ -34,7 +36,7 @@ public class OneStickDrive extends LinearOpMode {
         Quadrant2 = hardwareMap.get(DcMotor.class, "LeftVertical");
         Quadrant3 = hardwareMap.get(DcMotor.class, "BackHorizontal");
         Quadrant4 = hardwareMap.get(DcMotor.class, "RightVertical");
-
+        intakeClaw = hardwareMap.servo.get("intakeClaw");
 
         Quadrant1.setDirection(DcMotor.Direction.FORWARD);
         Quadrant2.setDirection(DcMotor.Direction.FORWARD);
@@ -96,22 +98,28 @@ public class OneStickDrive extends LinearOpMode {
             }
 
             while (gamepad1.dpad_left){
-                Quadrant1.setPower(-0.5);
+                Quadrant1.setPower(0.5);
                 Quadrant2.setPower(0.5);
-                Quadrant3.setPower(0.5);
+                Quadrant3.setPower(-0.5);
                 Quadrant4.setPower(-0.5);
             }
 
             while (gamepad1.dpad_right){
-                Quadrant1.setPower(0.5);
+                Quadrant1.setPower(-0.5);
                 Quadrant2.setPower(-0.5);
-                Quadrant3.setPower(-0.5);
+                Quadrant3.setPower(0.5);
                 Quadrant4.setPower(0.5);
             }
 
 
 
+            if (gamepad1.left_bumper) {
+                intakeClaw.setPosition(1); //Open
+            }
 
+            if (gamepad1.right_bumper) {
+                intakeClaw.setPosition(0); //Close
+            }
 
 
 /*
