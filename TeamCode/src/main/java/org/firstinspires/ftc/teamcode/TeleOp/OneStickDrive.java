@@ -167,52 +167,6 @@ public class OneStickDrive extends LinearOpMode {
                 //gamepad1.rumble(1000);
                 already_closed = false;
             }
-
-
-/*
-
-            if (gamepad1.left_trigger > 0.1 && LinearSlide.getCurrentPosition() < -3000){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {
-
-                int highestSlider = LinearSlide.getCurrentPosition();
-
-                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -3000));//3119
-                //LinearSlide.setTargetPosition(triggerTargetPosition);
-
-                if (triggerTargetPosition >= highestSlider){
-
-                    LinearSlide.setTargetPosition(triggerTargetPosition);
-                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                    LinearSlide.setPower(0.25);
-                }
-
-                //linearSlidePreviousPos = LinearSlide.getCurrentPosition();
-
-            }
-            int highestSlider = LinearSlide.getCurrentPosition();
-            if (gamepad1.right_trigger > 0.1 && LinearSlide.getCurrentPosition() > 0) {
-                highestSlider = LinearSlide.getCurrentPosition();
-                int triggerTargetPosition = ((int)(-3000 - gamepad1.right_trigger * -3000));
-
-                if (triggerTargetPosition <= highestSlider){
-
-                    LinearSlide.setTargetPosition(triggerTargetPosition);
-                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                    LinearSlide.setPower(0.25);
-
-                }
-            }
-
-*/
-
-
-
-
-
-
-
         }
     }
 }
-
