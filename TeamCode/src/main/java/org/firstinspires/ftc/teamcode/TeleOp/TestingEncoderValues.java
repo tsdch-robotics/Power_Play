@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -15,7 +16,7 @@ import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
 
 import static java.lang.Thread.sleep;
 
-@TeleOp(name="Encoder Testing", group="LinearOpmode")
+@TeleOp(name="The Friendly, Useful OpMode!", group="LinearOpmode")
 public class TestingEncoderValues extends LinearOpMode {
 
 
@@ -27,6 +28,7 @@ public class TestingEncoderValues extends LinearOpMode {
     private DcMotor LeftVertical = null;
     private DcMotor RightVertical = null;
     private DcMotor LinearSlide = null;
+    private Servo intakeClaw;
 
     private DcMotor verticaOdometry = null; //new Odometry pods, use in the spot of motor ports
     private DcMotor horizontalOdometry = null;
@@ -53,6 +55,7 @@ public class TestingEncoderValues extends LinearOpMode {
         LeftVertical = hardwareMap.get(DcMotor.class, "LeftVertical");
         RightVertical = hardwareMap.get(DcMotor.class, "RightVertical");
         LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
+        intakeClaw = hardwareMap.get(Servo.class, "intakeCLaw");
 
         verticaOdometry = hardwareMap.get(DcMotor.class, "verticalOdometry");
         horizontalOdometry = hardwareMap.get(DcMotor.class, "horizontalOdometry");
@@ -65,11 +68,6 @@ public class TestingEncoderValues extends LinearOpMode {
 
         verticaOdometry.setDirection(DcMotor.Direction.FORWARD);
         horizontalOdometry.setDirection(DcMotor.Direction.REVERSE);
-
-
-
-
-
 
         verticaOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);//data only, do not set power!
         horizontalOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);//data only, do not set power!
@@ -90,11 +88,6 @@ public class TestingEncoderValues extends LinearOpMode {
 
         LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-
-
-
-
-
         waitForStart();
         runtime.reset();
 
@@ -110,6 +103,7 @@ public class TestingEncoderValues extends LinearOpMode {
             telemetry.addData("Encoder Value of LinearSlide:", "%d", LinearSlide.getCurrentPosition());
             telemetry.addData("Encoder Value of verticalOdometry:", "%d", verticaOdometry.getCurrentPosition());
             telemetry.addData("Encoder Value of horizontalOdometry:", "%d", horizontalOdometry.getCurrentPosition());
+            telemetry.addData("Value of intakeServo:", "%d", intakeClaw.getPosition());
 
             telemetry.update();
 

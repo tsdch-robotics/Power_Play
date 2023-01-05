@@ -298,85 +298,9 @@ public class DpadDrive extends LinearOpMode {
 
             }
 
-
-
-
-           /* highestSlider = LinearSlide.getCurrentPosition();
-
-            if (gamepad1.left_trigger > 0.1 && LinearSlide.getCurrentPosition() < -3000){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {
-
-
-                triggerTargetPosition = ((int) (gamepad1.left_trigger * -3000));//3119
-                //LinearSlide.setTargetPosition(triggerTargetPosition);
-
-                if (triggerTargetPosition >= highestSlider){
-
-                    LinearSlide.setTargetPosition(triggerTargetPosition);
-                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                    LinearSlide.setPower(0.25);
-                }
-
-                //linearSlidePreviousPos = LinearSlide.getCurrentPosition();
-
-            }
-
-            if (gamepad1.right_trigger > 0.1 && LinearSlide.getCurrentPosition() > 0) {
-
-                triggerTargetPosition = ((int)(-3000 - gamepad1.right_trigger * -3000));
-
-                if (triggerTargetPosition <= highestSlider){
-
-                    LinearSlide.setTargetPosition(triggerTargetPosition);
-                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                    LinearSlide.setPower(0.25);
-
-                }
-
-            }*/
-
-
-
-
-            //Insert Auto Score Code HEre:
-/*
-            if (gamepad1.a){
-                int corner = 1;
-                boolean stillHasToMove = true;
-            }
-
-            if (gamepad1.b){
-                int corner = 2;
-                boolean stillHasToMove = true;
-            }
-
-            if (gamepad1.x){
-                int corner = 3;
-                boolean stillHasToMove = true;
-            }
-
-            if (gamepad1.y){
-                int corner = 4;
-                boolean stillHasToMove = true;
-            }
-
-            if (!gamepad1.a && !gamepad1.b && !gamepad1.y && !gamepad1.x){
-                if (LinearSlide.getCurrentPosition() >= 2000){
-                     int height = 3;
-                }
-                else if (LinearSlide.getCurrentPosition() <2000 && LinearSlide.getCurrentPosition() > 800){
-                    int height = 2;
-                }
-                else if (LinearSlide.getCurrentPosition() <= 800){
-                    int height = 1;
-                }
-            }*/
-
-
         }
 
-    }//-3119
+    }
 
 }
 
