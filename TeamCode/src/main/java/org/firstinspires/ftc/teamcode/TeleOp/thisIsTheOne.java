@@ -207,7 +207,7 @@ public class thisIsTheOne extends LinearOpMode {
 
 
         if (gamepad1.b){
-
+            robot.autoMoveSlide(LinearSlide, 1000);
         }
 
         if (gamepad1.x){
