@@ -110,7 +110,7 @@ public class thisIsTheOne extends LinearOpMode {
 
             if (gamepad1.left_trigger > 0.1 && gamepad1.right_trigger <= 0){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {//change 0.1 to 0!
 
-                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -3800));//3119
+                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -4000));//3119
                 //LinearSlide.setTargetPosition(triggerTargetPosition);
 
                 if (triggerTargetPosition < highest){
@@ -131,7 +131,7 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.b){
-                LinearSlide.setTargetPosition(-1300);
+                LinearSlide.setTargetPosition(-1500);
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.6);
@@ -139,7 +139,7 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.y){
-                LinearSlide.setTargetPosition(-200);
+                LinearSlide.setTargetPosition(-550);
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.6);
@@ -147,16 +147,12 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.x){
-                LinearSlide.setTargetPosition(-2700);
+                LinearSlide.setTargetPosition(-3000);
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.6);
                 highest = LinearSlide.getCurrentPosition();
             }
-
-
-
-
 
 
           /*  if (gamepad1.left_trigger >= 0 && gamepad1.right_trigger <= 0){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {
@@ -254,29 +250,6 @@ public class thisIsTheOne extends LinearOpMode {
         //CREATE LINEAR SLIDE HEIGHT PRESETS
 
 
-        if (gamepad1.b){
-            LinearSlide.setTargetPosition(-1000);
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            LinearSlide.setPower(.6);
-            highest = LinearSlide.getCurrentPosition();
-        }
-
-        if (gamepad1.y){
-            LinearSlide.setTargetPosition(-100);
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            LinearSlide.setPower(.6);
-            highest = LinearSlide.getCurrentPosition();
-        }
-
-        if (gamepad1.x){
-            LinearSlide.setTargetPosition(-2700);
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            LinearSlide.setPower(.6);
-            highest = LinearSlide.getCurrentPosition();
-        }
 
 
     }
