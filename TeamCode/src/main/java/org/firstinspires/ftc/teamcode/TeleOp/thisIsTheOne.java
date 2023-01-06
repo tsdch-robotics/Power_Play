@@ -131,7 +131,7 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.b){
-                LinearSlide.setTargetPosition(-1500);
+                LinearSlide.setTargetPosition(-1900);
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.6);
@@ -196,7 +196,7 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.left_bumper) {
-                intakeClaw.setPosition(.48);//close
+                intakeClaw.setPosition(.5);//close
 
             }
 
