@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -10,7 +11,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
 
 // define the teleop to appear on the phone
-@TeleOp(name="One Stick Drive", group="Linear Opmode")
+@TeleOp(name="thisIsTheOne", group="Linear Opmode")
 public class thisIsTheOne extends LinearOpMode {
 
     EncoderFunction robot = new EncoderFunction();
@@ -39,16 +40,10 @@ public class thisIsTheOne extends LinearOpMode {
         Quadrant3 = hardwareMap.get(DcMotor.class, "BackHorizontal");
         Quadrant4 = hardwareMap.get(DcMotor.class, "RightVertical");
         intakeClaw = hardwareMap.servo.get("intakeClaw");
-
-        Quadrant1.setDirection(DcMotor.Direction.FORWARD);
-        Quadrant2.setDirection(DcMotor.Direction.FORWARD);
-        Quadrant3.setDirection(DcMotor.Direction.REVERSE);
-        Quadrant4.setDirection(DcMotor.Direction.REVERSE);
         LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
-        LinearSlide.setDirection(DcMotor.Direction.FORWARD);
-
 
         LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // reset runtime when user clicks play
         waitForStart();
@@ -58,11 +53,17 @@ public class thisIsTheOne extends LinearOpMode {
         while (opModeIsActive()) {
 
 
+
             // initializing all the wheel power values
             double Quadrant1Power = 0;
             double Quadrant2Power = 0;
             double Quadrant3Power = 0;
             double Quadrant4Power = 0;
+
+            Quadrant1.setDirection(DcMotor.Direction.FORWARD);
+            Quadrant2.setDirection(DcMotor.Direction.FORWARD);
+            Quadrant3.setDirection(DcMotor.Direction.REVERSE);
+            Quadrant4.setDirection(DcMotor.Direction.REVERSE);
 
            /* while (Math.abs(gamepad1.left_stick_x) < 0.5 || Math.abs(gamepad1.left_stick_y) < 0.5){
                 Double computedPower[] = robot.computePower((double) gamepad1.right_stick_x, (double) gamepad1.right_stick_y);
@@ -77,11 +78,26 @@ public class thisIsTheOne extends LinearOpMode {
             Quadrant2Power = computedPower[1];
             Quadrant4Power = computedPower[1];
 
-            while (!gamepad1.dpad_left && !gamepad1.dpad_right ){
+          //  while (!gamepad1.dpad_left && !gamepad1.dpad_right ){
+
+
+            if (gamepad1.dpad_up && !gamepad1.a){
+                Quadrant1.setPower(0.5 * Quadrant1Power);
+                Quadrant2.setPower(0.5 * Quadrant2Power);
+                Quadrant3.setPower(0.5 * Quadrant3Power);
+                Quadrant4.setPower(0.5 *Quadrant4Power);
+            }
+            else if (gamepad1.dpad_down && !gamepad1.a){
+                Quadrant1.setPower(0.25 * Quadrant1Power);
+                Quadrant2.setPower(0.25 * Quadrant2Power);
+                Quadrant3.setPower(0.25 * Quadrant3Power);
+                Quadrant4.setPower(0.25 *Quadrant4Power);
+            }
+            else{
                 Quadrant1.setPower(multiplier * Quadrant1Power);
                 Quadrant2.setPower(multiplier * Quadrant2Power);
                 Quadrant3.setPower(multiplier * Quadrant3Power);
-                Quadrant4.setPower(multiplier *Quadrant4Power);
+                Quadrant4.setPower(multiplier *Quadrant4Power);;
             }
 
             double requestedAngle = computedPower[2];
@@ -91,9 +107,61 @@ public class thisIsTheOne extends LinearOpMode {
 
         //These two large "if" blocks allow Daniel to use triggers to go up and down without getting unwanted feedback from a trigger being realeased
 
-            if (gamepad1.left_trigger >= 0 && gamepad1.right_trigger <= 0){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {
 
-                int triggerTargetPosition = ((int) (gamepad1.left_trigger *    3800));//3119
+            if (gamepad1.left_trigger > 0.1 && gamepad1.right_trigger <= 0){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {//change 0.1 to 0!
+
+                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -3800));//3119
+                //LinearSlide.setTargetPosition(triggerTargetPosition);
+
+                if (triggerTargetPosition < highest){
+                    LinearSlide.setTargetPosition(triggerTargetPosition);
+                    LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                    LinearSlide.setPower(.6);
+                    highest = LinearSlide.getCurrentPosition();
+                }
+            }
+
+            if (gamepad1.a){
+                LinearSlide.setTargetPosition(0);
+                LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                LinearSlide.setPower(.6);
+                highest = LinearSlide.getCurrentPosition();
+            }
+
+            if (gamepad1.b){
+                LinearSlide.setTargetPosition(-1300);
+                LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                LinearSlide.setPower(.6);
+                highest = LinearSlide.getCurrentPosition();
+            }
+
+            if (gamepad1.y){
+                LinearSlide.setTargetPosition(-200);
+                LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                LinearSlide.setPower(.6);
+                highest = LinearSlide.getCurrentPosition();
+            }
+
+            if (gamepad1.x){
+                LinearSlide.setTargetPosition(-2700);
+                LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                LinearSlide.setPower(.6);
+                highest = LinearSlide.getCurrentPosition();
+            }
+
+
+
+
+
+
+          /*  if (gamepad1.left_trigger >= 0 && gamepad1.right_trigger <= 0){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {
+
+                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -3800));//3119
                 //LinearSlide.setTargetPosition(triggerTargetPosition);
 
                 if (triggerTargetPosition > highest){
@@ -115,7 +183,7 @@ public class thisIsTheOne extends LinearOpMode {
                     LinearSlide.setPower(.6);
                     highest = LinearSlide.getCurrentPosition();
                 }
-            }
+            }*/
 
             while (gamepad1.dpad_right){
                 Quadrant1.setPower(0.5);
@@ -141,7 +209,7 @@ public class thisIsTheOne extends LinearOpMode {
 
             }
 
-            if (!already_closed && intakeClaw.getPosition() == .48) {
+           if (!already_closed && intakeClaw.getPosition() == .48) {
                 robot.sleepThread(1000L);
                 gamepad1.rumble(1000);
                 already_closed = true;
@@ -156,7 +224,7 @@ public class thisIsTheOne extends LinearOpMode {
 
             //Note: Add in Emergency Callabration Mode, hold "A" and left stick at the same time to adjust
         }
-
+/*
         if (gamepad1.dpad_up && gamepad1.a){    //Emergency callabration, linear slide GOES UP
             LinearSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             hasChangedHeight = true;
@@ -181,39 +249,34 @@ public class thisIsTheOne extends LinearOpMode {
             LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             hasChangedHeight = false;
         }
-
-
-        if (gamepad1.dpad_up){
-            multiplier = 0.5;
-        }
-        else if (gamepad1.dpad_down){
-            multiplier = 0.25;
-        }
-        else{
-            multiplier = 1.0;
-        }
-
-
-
-
-
-
-
-
-
-
+*/
 
         //CREATE LINEAR SLIDE HEIGHT PRESETS
 
 
         if (gamepad1.b){
-            robot.autoMoveSlide(LinearSlide, 1000);
+            LinearSlide.setTargetPosition(-1000);
+            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            LinearSlide.setPower(.6);
+            highest = LinearSlide.getCurrentPosition();
+        }
+
+        if (gamepad1.y){
+            LinearSlide.setTargetPosition(-100);
+            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            LinearSlide.setPower(.6);
+            highest = LinearSlide.getCurrentPosition();
         }
 
         if (gamepad1.x){
-
+            LinearSlide.setTargetPosition(-2700);
+            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            LinearSlide.setPower(.6);
+            highest = LinearSlide.getCurrentPosition();
         }
-
 
 
     }

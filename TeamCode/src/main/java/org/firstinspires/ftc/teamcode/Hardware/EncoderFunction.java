@@ -481,4 +481,19 @@ public class EncoderFunction {
 
     }
 
+
+
+    public void moveForwardUntilPos(DcMotor firstMotor1, DcMotor firstMotor2, DcMotor secondMotor1, DcMotor secondMotor2, DcMotor odometry1, DcMotor odometry2, int inches){
+        if (Math.abs((odometry1.getCurrentPosition() / 1304)  - inches) >= 1){
+            firstMotor1.setPower(0.75); //8192 Counts per Revolution, 2 inch diameter wheels = circumference of 6.28318531 inches          8192/6.28318531 = 1304 for 1 inch
+            firstMotor2.setPower(0.75);
+        }
+        else{
+            firstMotor1.setPower(0);
+            firstMotor2.setPower(0);
+
+      //      firstMotor1.setMode(DcMotor..);
+        }
+    }
+
 }

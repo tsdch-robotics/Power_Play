@@ -103,7 +103,7 @@ public class TestingEncoderValues extends LinearOpMode {
             telemetry.addData("Encoder Value of LinearSlide:", "%d", LinearSlide.getCurrentPosition());
             telemetry.addData("Encoder Value of verticalOdometry:", "%d", verticaOdometry.getCurrentPosition());
             telemetry.addData("Encoder Value of horizontalOdometry:", "%d", horizontalOdometry.getCurrentPosition());
-            telemetry.addData("Value of intakeServo:", "%d", intakeClaw.getPosition());
+    //        telemetry.addData("Value of intakeServo:", "%d", intakeClaw.getPosition());
 
             telemetry.update();
 
