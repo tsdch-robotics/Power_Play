@@ -292,6 +292,8 @@ public class EncoderFunction {
         motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+        //staying up late working on aUtOmOuS lol  X(
+
         if (!motor1.isBusy() || !motor2.isBusy()) {
             motor1.setPower(0);
             motor2.setPower(0);
@@ -405,7 +407,7 @@ public class EncoderFunction {
             return true;
         }
 
-
+//note to self: don't adopt an FTC accen
         else if (motor2.getCurrentPosition() == motor2.getTargetPosition()){
             return true;
         }
@@ -426,7 +428,7 @@ public class EncoderFunction {
         }
     }
 
-
+//when the blasted code DOESN'T WORK
     public void sleepThread(Long millis) {    //sleep function
         try {
             Thread.sleep(millis);
@@ -481,19 +483,148 @@ public class EncoderFunction {
 
     }
 
+    public void moveForwardUntilPos(DcMotor firstMotor1, DcMotor firstMotor2, DcMotor secondMotor1, DcMotor secondMotor2, DcMotor odometry1, DcMotor odometry2, int inches1, int inches2){
 
+        //i.e vertical
 
-    public void moveForwardUntilPos(DcMotor firstMotor1, DcMotor firstMotor2, DcMotor secondMotor1, DcMotor secondMotor2, DcMotor odometry1, DcMotor odometry2, int inches){
-        if (Math.abs((odometry1.getCurrentPosition() / 1304)  - inches) >= 1){
-            firstMotor1.setPower(0.75); //8192 Counts per Revolution, 2 inch diameter wheels = circumference of 6.28318531 inches          8192/6.28318531 = 1304 for 1 inch
-            firstMotor2.setPower(0.75);
+        if (Math.abs((odometry1.getCurrentPosition() / 1304)  - inches1) >= 1){  //the "1" distance value needs to be lower for greater accuracy!
+            if ((Math.abs((odometry1.getCurrentPosition() / 1304)) < inches1)){    //was Math.abs(inches1) - inches1 == 0
+                forward(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
+            }
+            else if ((Math.abs((odometry1.getCurrentPosition() / 1304)) > inches1)){
+                backward(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
+            }
         }
         else{
-            firstMotor1.setPower(0);
-            firstMotor2.setPower(0);
-
-      //      firstMotor1.setMode(DcMotor..);
+            stop(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
         }
+
+        //second method below: first was better if it works. DONE!
+        if (Math.abs((odometry2.getCurrentPosition() / 1304)  - inches2) >= 1){
+            if ((Math.abs((odometry2.getCurrentPosition() / 1304)) < inches2)){
+                right(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
+            }
+            else if ((Math.abs((odometry2.getCurrentPosition() / 1304)) > inches2)){
+                left(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
+            }
+        }
+        else{
+            stop(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
+        }
+
+
+
+
+        //and horizontal:
+
     }
+
+
+
+    public void forward(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
+
+
+        motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        motor1.setPower(1);
+        motor2.setPower(1);
+        motor3.setPower(1);
+        motor4.setPower(1);
+
+        //note the directions of the used motors*****
+
+    }
+
+    public void backward(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
+
+
+        motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        motor1.setPower(-1);
+        motor2.setPower(-1);
+        motor3.setPower(-1);
+        motor4.setPower(-1);
+
+        //note the directions of the used motors*****
+
+    }
+
+    public void left(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
+
+        motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        motor1.setPower(1);
+        motor2.setPower(-1);
+        motor3.setPower(1);
+        motor4.setPower(-1);
+
+        //note the directions of the used motors*****
+
+    }
+
+    public void right(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
+
+        motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        motor1.setPower(-1);
+        motor2.setPower(1);
+        motor3.setPower(-1);
+        motor4.setPower(1);
+
+        //note the directions of the used motors*****
+
+    }
+
+    public void stop(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
+
+        motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor3.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor4.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
+        motor1.setPower(0);
+        motor2.setPower(0);
+        motor3.setPower(0);
+        motor4.setPower(0);
+
+        //note the directions of the used motors*****
+
+    }
+
+
+
+
+
+
+
+    /* Quadrant1.setDirection(DcMotor.Direction.FORWARD);    //forward, forward, reverse, reverse:: .. Front, Back, Left, Right, but rotate 90 degrees on wires
+            Quadrant2.setDirection(DcMotor.Direction.FORWARD);
+            Quadrant3.setDirection(DcMotor.Direction.REVERSE);
+            Quadrant4.setDirection(DcMotor.Direction.REVERSE);*/
+
 
 }

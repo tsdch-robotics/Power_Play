@@ -72,9 +72,8 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
 
         //robot.encoderSetUp(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical);
 
-       // LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-      //  LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
 
@@ -84,7 +83,66 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
 
         if (opModeIsActive()) {
 
+            intakeClaw.setPosition(.5);
+
+            sleep(2000);
+
+            LinearSlide.setTargetPosition(-1900); //low
+            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            LinearSlide.setPower(.6);
+
+            robot.moveForwardUntilPos(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, verticaOdometry, horizontalOdometry, 10, 5);  //will need to change
+            sleep(1000);
+            robot.moveForwardUntilPos(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, verticaOdometry, horizontalOdometry, 10, 10);
+            sleep(800);
+
+            intakeClaw.setPosition(.3);
+
+            sleep(1000);
+            robot.moveForwardUntilPos(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, verticaOdometry, horizontalOdometry, 10, 5);
+            sleep(1000);
+
+            LinearSlide.setTargetPosition(-1900); //low
+            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            LinearSlide.setPower(.6);
+
+            sleep(1000);
+            robot.moveForwardUntilPos(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, verticaOdometry, horizontalOdometry, 0, 5);
+            sleep(2000);
+            robot.moveForwardUntilPos(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, verticaOdometry, horizontalOdometry, 0, 20);
+            sleep(3000);
+
+
+
+
+
+            //then move right 1.5 and go forward 1, - OR - try to get another cone and score on high goal = risky :{
+
+
+
       //     robot.moveForwardUntilPos(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, )
+/*
+      //     robot.moveForwardUntilPos(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, inches vertical, inches horizzontal: 40)
+
+//start facing to the right, move left 1 and a half, forward n score, left 1.5, forward 1, intake, back out 1.5, score quadrant 4, intake, back 2.5, score quad 4 high goal, park.
+
+        //while != to horz, moveForward(), while not != to vert, moveLeft/Right
+        //spinAndScore:::     vertical odometry move by x inches, sleep, move slider, sleep horz odometry forward by y inches, sleep, slider down a few, drop, slider up, sleep BRIEFLY, go back and then again move to previous positions, sleep
+            //intake::      (input number of cones left, (a number) times the number of cones left = the encoder height of slider)  ------>    slider goes up a few, lasso = open, move forward less than half a tile, sleep, drop slider, grab, wait a second, slider up a bit, move back by a little less than half.
+
+
+
+
+
+
+    THEREFORE:
+
+        - right(1)
+
+  */
+
 
 
         }
