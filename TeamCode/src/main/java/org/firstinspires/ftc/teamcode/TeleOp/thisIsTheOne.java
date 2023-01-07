@@ -99,7 +99,7 @@ public class thisIsTheOne extends LinearOpMode {
 
         //These two large "if" blocks allow Daniel to use triggers to go up and down without getting unwanted feedback from a trigger being realeased
 
-            if (gamepad1.left_trigger > 0.1 && gamepad1.right_trigger <= 0){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {//change 0.1 to 0!
+            if (gamepad1.left_trigger >= 0 && !gamepad1.a && !gamepad1.b && !gamepad1.x && !gamepad1.y){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {//change 0.1 to 0!
 
                 int triggerTargetPosition = ((int) (gamepad1.left_trigger * -4000));//3119
                 //LinearSlide.setTargetPosition(triggerTargetPosition);

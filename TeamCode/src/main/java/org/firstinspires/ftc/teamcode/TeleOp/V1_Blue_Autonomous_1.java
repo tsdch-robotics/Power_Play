@@ -103,7 +103,7 @@ public class V1_Blue_Autonomous_1 extends LinearOpMode {
             robot.moveForwardUntilPos(FrontHorizontal, BackHorizontal, LeftVertical, RightVertical, verticaOdometry, horizontalOdometry, 10, 5);
             sleep(1000);
 
-            LinearSlide.setTargetPosition(-1900); //low
+            LinearSlide.setTargetPosition(0); //low
             LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
             LinearSlide.setPower(.6);
