@@ -4,6 +4,3 @@ This repository contains the public FTC SDK for the PowerPlay (2022-2023) compet
 
 For more information about Trinity School Robotics, please visit http://www.tsdchrobotics.org/
 
-█▀▀█ █▀▀ ▄▀▀▄ ▀▀▀█ 
-──▀▄ ▀▀▄ ▄▀▀▄ ──█─ 
-█▄▄█ ▄▄▀ ▀▄▄▀ ─▐▌─
