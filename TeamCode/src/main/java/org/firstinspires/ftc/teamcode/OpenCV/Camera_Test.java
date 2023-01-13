@@ -24,7 +24,9 @@ package org.firstinspires.ftc.teamcode.OpenCV;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.apriltag.AprilTagDetection;
@@ -33,14 +35,26 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
+import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
+
 import java.util.ArrayList;
 
+
+
 @TeleOp
-public class Camera_Test extends LinearOpMode
-{
+public class Camera_Test extends LinearOpMode {
+
+    // Ensuring that the motors are initialized for later reference.
+    private DcMotor Quadrant1 = null;
+    private DcMotor Quadrant2 = null;
+    private DcMotor Quadrant3 = null;
+    private DcMotor Quadrant4 = null;
+    private DcMotor LinearSlide = null;
+
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
+    // TODO: Recalibrate
     static final double FEET_PER_METER = 3.28084;
 
     // Lens intrinsics
@@ -66,8 +80,14 @@ public class Camera_Test extends LinearOpMode
     AprilTagDetection tagOfInterest = null;
 
     @Override
-    public void runOpMode()
-    {
+    public void runOpMode() {
+
+        // Retrieve the needed information about each motor from the configuration.
+        Quadrant1 = hardwareMap.get(DcMotor.class, "Quadrant1");
+        Quadrant2 = hardwareMap.get(DcMotor.class, "Quadrant2");
+        Quadrant3 = hardwareMap.get(DcMotor.class, "quadrant3");
+        Quadrant4 = hardwareMap.get(DcMotor.class, "quadrant4");
+
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
@@ -96,6 +116,18 @@ public class Camera_Test extends LinearOpMode
          */
         while (!isStarted() && !isStopRequested()) {
             ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
+
+            // Initialize variables for storing computed powers before applying.
+            double Quadrant1Power = 0.0;
+            double Quadrant2Power = 0.0;
+            double Quadrant3Power = 0.0;
+            double Quadrant4Power = 0.0;
+
+            // Set all motor directions according to the chassis configuration.
+            Quadrant1.setDirection(DcMotor.Direction.FORWARD);
+            Quadrant2.setDirection(DcMotor.Direction.FORWARD);
+            Quadrant3.setDirection(DcMotor.Direction.REVERSE);
+            Quadrant4.setDirection(DcMotor.Direction.REVERSE);
 
             if (currentDetections.size() != 0) {
                 boolean tagFound = false;
@@ -153,8 +185,7 @@ public class Camera_Test extends LinearOpMode
          */
 
         /* Update the telemetry */
-        if(tagOfInterest != null)
-        {
+        if(tagOfInterest != null) {
             telemetry.addLine("Tag snapshot:\n");
             tagToTelemetry(tagOfInterest);
             telemetry.update();
@@ -167,10 +198,25 @@ public class Camera_Test extends LinearOpMode
 
         // BEGIN PROGRAMMING TAG-DEPENDENT INSTRUCTIONS
         if (tagOfInterest == null || tagOfInterest.id == Right) {
+            /* what i will write:
+            calibrate and find area of bounding box at a known distance
+            get x-axis location of tag from camera view
+            get area of bounding box around tag
+            run motors until tag is centered in frame (y axis aligned) (strafing motion, no rotation)
+            run motors until bounding box area meets calibration data (x axis aligned)
+
+            initialize encoders (encoder values 0, 0)
+            begin moving precalculated distance to parking zones from reference point
+             */
+
 
         } else if(tagOfInterest.id == Middle) {
 
+
+
         } else if(tagOfInterest.id == Left) {
+
+
 
         }
 
