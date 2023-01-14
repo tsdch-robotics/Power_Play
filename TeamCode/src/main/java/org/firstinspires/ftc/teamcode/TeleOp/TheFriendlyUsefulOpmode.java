@@ -23,8 +23,8 @@ public class TheFriendlyUsefulOpmode extends LinearOpMode {
     private DcMotor LeftVertical = null;
     private DcMotor RightVertical = null;
     private DcMotor LinearSlide = null;
-    private Servo IntakeLeft = null;
-    private Servo IntakeRight = null;
+    private Servo IntakeLeft;
+    private Servo IntakeRight;
 
     private DcMotor verticaOdometry = null; //new Odometry pods, use in the spot of motor ports
     private DcMotor horizontalOdometry = null;
@@ -51,8 +51,8 @@ public class TheFriendlyUsefulOpmode extends LinearOpMode {
         LeftVertical = hardwareMap.get(DcMotor.class, "LeftVertical");
         RightVertical = hardwareMap.get(DcMotor.class, "RightVertical");
         LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
-        IntakeLeft = hardwareMap.get(Servo.class, "IntakeLeft");
-        IntakeRight = hardwareMap.get(Servo.class, "IntakeRight");
+        IntakeLeft = hardwareMap.servo.get("IntakeLeft");
+        IntakeRight = hardwareMap.servo.get("IntakeRight");
 
         verticaOdometry = hardwareMap.get(DcMotor.class, "verticalOdometry");
         horizontalOdometry = hardwareMap.get(DcMotor.class, "horizontalOdometry");
