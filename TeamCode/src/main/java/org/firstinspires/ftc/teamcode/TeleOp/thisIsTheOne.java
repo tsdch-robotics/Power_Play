@@ -23,7 +23,9 @@ public class thisIsTheOne extends LinearOpMode {
     private DcMotor Quadrant3 = null;
     private DcMotor Quadrant4 = null;
     private DcMotor LinearSlide = null;
-    private Servo intakeClaw;
+    private Servo IntakeLeft;
+    private Servo IntakeRight;
+
     private boolean already_closed = false;
     private int highest = 0;
     private double multiplier = 1.0;
@@ -39,7 +41,8 @@ public class thisIsTheOne extends LinearOpMode {
         Quadrant2 = hardwareMap.get(DcMotor.class, "LeftVertical");
         Quadrant3 = hardwareMap.get(DcMotor.class, "BackHorizontal");
         Quadrant4 = hardwareMap.get(DcMotor.class, "RightVertical");
-        intakeClaw = hardwareMap.servo.get("intakeClaw");
+        IntakeLeft = hardwareMap.servo.get("IntakeLeft");
+        IntakeRight = hardwareMap.servo.get("IntakeRight");
         LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
 
         LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -159,16 +162,20 @@ public class thisIsTheOne extends LinearOpMode {
                 Quadrant4.setPower(0.5);
             }
 
+            /*
             if (gamepad1.left_bumper) {
-                intakeClaw.setPosition(.5);//close
+                IntakeLeft.setPosition(.5);
+                IntakeRight.setPosition(-0.5);
 
             }
 
             if (gamepad1.right_bumper) {
-                intakeClaw.setPosition(.3); //open
+                IntakeLeft.setPosition(.3); //open
+                IntakeRight.setPosition(-0.3);
 
             }
-
+            */
+/*
            if (!already_closed && intakeClaw.getPosition() == .48) {
                 robot.sleepThread(1000L);
                 gamepad1.rumble(1000);
@@ -181,7 +188,7 @@ public class thisIsTheOne extends LinearOpMode {
 
 
             }
-
+*/
             //Note: Add in Emergency Callabration Mode, hold "A" and left stick at the same time to adjust
         }
 
