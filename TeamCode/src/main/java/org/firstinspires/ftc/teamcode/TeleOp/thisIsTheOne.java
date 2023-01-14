@@ -89,10 +89,10 @@ public class thisIsTheOne extends LinearOpMode {
                 Quadrant4.setPower(0.25 *Quadrant4Power);
             }
             else{
-                Quadrant1.setPower(multiplier * Quadrant1Power);
-                Quadrant2.setPower(multiplier * Quadrant2Power);
-                Quadrant3.setPower(multiplier * Quadrant3Power);
-                Quadrant4.setPower(multiplier *Quadrant4Power);;
+                Quadrant1.setPower(multiplier * Quadrant1Power + ((0.5) * (gamepad1.left_stick_x)));
+                Quadrant2.setPower(multiplier * Quadrant2Power + ((0.5) * (gamepad1.left_stick_x)));
+                Quadrant3.setPower(multiplier * Quadrant3Power - ((0.5) * (gamepad1.left_stick_x)));
+                Quadrant4.setPower(multiplier * Quadrant4Power - ((0.5) * (gamepad1.left_stick_x)));
             }
 
             double requestedAngle = computedPower[2];
@@ -104,7 +104,7 @@ public class thisIsTheOne extends LinearOpMode {
 
             if (gamepad1.left_trigger >= 0 && !gamepad1.a && !gamepad1.b && !gamepad1.x && !gamepad1.y){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {//change 0.1 to 0!
 
-                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -4000));//3119
+                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -4200));//3119
                 //LinearSlide.setTargetPosition(triggerTargetPosition);
 
                 if (triggerTargetPosition < highest){
@@ -125,7 +125,7 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.b){
-                LinearSlide.setTargetPosition(-1900);  //low
+                LinearSlide.setTargetPosition(-1734);  //low
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.6);
@@ -133,7 +133,7 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.y){
-                LinearSlide.setTargetPosition(-550); //ground and intake
+                LinearSlide.setTargetPosition(-461); //ground and intake
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.6);
@@ -141,12 +141,13 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.x){
-                LinearSlide.setTargetPosition(-3000); //medium
+                LinearSlide.setTargetPosition(-2998); //medium
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.6);
                 highest = LinearSlide.getCurrentPosition();
             }
+
 
             while (gamepad1.dpad_right){
                 Quadrant1.setPower(0.5);
@@ -162,19 +163,19 @@ public class thisIsTheOne extends LinearOpMode {
                 Quadrant4.setPower(0.5);
             }
 
-            /*
+
+            if (gamepad1.right_bumper) {   //Open
+                IntakeLeft.setPosition(.10);
+                IntakeRight.setPosition(0.00);
+
+            }
+
             if (gamepad1.left_bumper) {
-                IntakeLeft.setPosition(.5);
-                IntakeRight.setPosition(-0.5);
+                IntakeLeft.setPosition(.2); //Close
+                IntakeRight.setPosition(.6);
 
             }
 
-            if (gamepad1.right_bumper) {
-                IntakeLeft.setPosition(.3); //open
-                IntakeRight.setPosition(-0.3);
-
-            }
-            */
 /*
            if (!already_closed && intakeClaw.getPosition() == .48) {
                 robot.sleepThread(1000L);

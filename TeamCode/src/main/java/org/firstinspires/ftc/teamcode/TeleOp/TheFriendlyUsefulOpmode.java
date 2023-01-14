@@ -103,8 +103,6 @@ public class TheFriendlyUsefulOpmode extends LinearOpMode {
     //        telemetry.addData("Value of intakeServo:", "%d", intakeClaw.getPosition());
             telemetry.addData("Left Servo Position:", IntakeLeft.getPosition());
             telemetry.addData("Right Servo Position", IntakeRight.getPosition());
-
-
             telemetry.update();
 
         }
