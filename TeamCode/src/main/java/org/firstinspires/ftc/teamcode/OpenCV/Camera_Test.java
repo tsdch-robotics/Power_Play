@@ -83,8 +83,8 @@ public class Camera_Test extends LinearOpMode {
     public void runOpMode() {
 
         // Retrieve the needed information about each motor from the configuration.
-        Quadrant1 = hardwareMap.get(DcMotor.class, "Quadrant1");
-        Quadrant2 = hardwareMap.get(DcMotor.class, "Quadrant2");
+        Quadrant1 = hardwareMap.get(DcMotor.class, "quadrant1");
+        Quadrant2 = hardwareMap.get(DcMotor.class, "quadrant2");
         Quadrant3 = hardwareMap.get(DcMotor.class, "quadrant3");
         Quadrant4 = hardwareMap.get(DcMotor.class, "quadrant4");
 

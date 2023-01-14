@@ -23,7 +23,8 @@ public class TheFriendlyUsefulOpmode extends LinearOpMode {
     private DcMotor LeftVertical = null;
     private DcMotor RightVertical = null;
     private DcMotor LinearSlide = null;
-    private Servo intakeClaw;
+    private Servo IntakeLeft = null;
+    private Servo IntakeRight = null;
 
     private DcMotor verticaOdometry = null; //new Odometry pods, use in the spot of motor ports
     private DcMotor horizontalOdometry = null;
@@ -50,7 +51,8 @@ public class TheFriendlyUsefulOpmode extends LinearOpMode {
         LeftVertical = hardwareMap.get(DcMotor.class, "LeftVertical");
         RightVertical = hardwareMap.get(DcMotor.class, "RightVertical");
         LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
-        intakeClaw = hardwareMap.get(Servo.class, "intakeCLaw");
+        IntakeLeft = hardwareMap.get(Servo.class, "IntakeLeft");
+        IntakeRight = hardwareMap.get(Servo.class, "IntakeRight");
 
         verticaOdometry = hardwareMap.get(DcMotor.class, "verticalOdometry");
         horizontalOdometry = hardwareMap.get(DcMotor.class, "horizontalOdometry");
@@ -99,6 +101,9 @@ public class TheFriendlyUsefulOpmode extends LinearOpMode {
             telemetry.addData("Encoder Value of verticalOdometry:", "%d", verticaOdometry.getCurrentPosition());
             telemetry.addData("Encoder Value of horizontalOdometry:", "%d", horizontalOdometry.getCurrentPosition());
     //        telemetry.addData("Value of intakeServo:", "%d", intakeClaw.getPosition());
+            telemetry.addData("Left Servo Position:", IntakeLeft.getPosition());
+            telemetry.addData("Right Servo Position", IntakeRight.getPosition());
+
 
             telemetry.update();
 
