@@ -104,7 +104,7 @@ public class thisIsTheOne extends LinearOpMode {
 
             if (gamepad1.left_trigger >= 0 && !gamepad1.a && !gamepad1.b && !gamepad1.x && !gamepad1.y){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {//change 0.1 to 0!
 
-                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -4200));//3119
+                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -1090));//3119
                 //LinearSlide.setTargetPosition(triggerTargetPosition);
 
                 if (triggerTargetPosition < highest){
@@ -125,7 +125,7 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.b){
-                LinearSlide.setTargetPosition(-1734);  //low
+                LinearSlide.setTargetPosition(-455);  //low
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.6);
@@ -133,18 +133,18 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.y){
-                LinearSlide.setTargetPosition(-461); //ground and intake
+                LinearSlide.setTargetPosition(-130); //ground and intake
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                LinearSlide.setPower(.6);
+                LinearSlide.setPower(.5);
                 highest = LinearSlide.getCurrentPosition();
             }
 
             if (gamepad1.x){
-                LinearSlide.setTargetPosition(-2998); //medium
+                LinearSlide.setTargetPosition(-767); //medium
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                LinearSlide.setPower(.6);
+                LinearSlide.setPower(.5);
                 highest = LinearSlide.getCurrentPosition();
             }
 
@@ -165,14 +165,14 @@ public class thisIsTheOne extends LinearOpMode {
 
 
             if (gamepad1.right_bumper) {   //Open
-                IntakeLeft.setPosition(.10);
+                IntakeLeft.setPosition(0.00);
                 IntakeRight.setPosition(0.00);
 
             }
 
             if (gamepad1.left_bumper) {
-                IntakeLeft.setPosition(.2); //Close
-                IntakeRight.setPosition(.6);
+                IntakeLeft.setPosition(1); //Close
+                IntakeRight.setPosition(1);
 
             }
 
