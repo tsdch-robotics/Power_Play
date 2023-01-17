@@ -6,9 +6,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 // define the teleop to appear on the phone
 @TeleOp(name="thisIsTheOne", group="Linear Opmode")
@@ -25,6 +29,7 @@ public class thisIsTheOne extends LinearOpMode {
     private DcMotor LinearSlide = null;
     private Servo IntakeLeft;
     private Servo IntakeRight;
+    private DistanceSensor sensorRange;
 
     private boolean already_closed = false;
     private int highest = 0;
@@ -44,6 +49,8 @@ public class thisIsTheOne extends LinearOpMode {
         IntakeLeft = hardwareMap.servo.get("IntakeLeft");
         IntakeRight = hardwareMap.servo.get("IntakeRight");
         LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
+        sensorRange = hardwareMap.get(DistanceSensor.class, "sensor_range");
+        Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor)sensorRange;
 
         LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -54,6 +61,20 @@ public class thisIsTheOne extends LinearOpMode {
 
         // only start running after user confirmation
         while (opModeIsActive()) {
+
+            telemetry.addData("range", String.format("%.01f mm", sensorRange.getDistance(DistanceUnit.MM)));
+
+            if ((sensorRange.getDistance(DistanceUnit.MM)) >= 30 && (sensorRange.getDistance(DistanceUnit.MM)) <= 58 && LinearSlide.getCurrentPosition() >= -140 && LinearSlide.getCurrentPosition() <= -120){
+                LinearSlide.setTargetPosition(0); //level at 0, grabbing
+                LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                LinearSlide.setPower(.5);
+                highest = LinearSlide.getCurrentPosition();
+
+                IntakeLeft.setPosition(1); //Close
+                IntakeRight.setPosition(1);
+            }
+
 
             // initializing all the wheel power values
             double Quadrant1Power = 0;
