@@ -75,7 +75,6 @@ public class thisIsTheOne extends LinearOpMode {
                 IntakeRight.setPosition(1);
             }
 
-
             // initializing all the wheel power values
             double Quadrant1Power = 0;
             double Quadrant2Power = 0;

@@ -1,47 +1,21 @@
-/*
- * Copyright (c) 2021 OpenFTC Team
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 package org.firstinspires.ftc.teamcode.OpenCV;
-
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
-
 import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
-
 import java.util.ArrayList;
 
-
-
-@TeleOp
+@Autonomous
 public class Camera_Test extends LinearOpMode {
 
     // Ensuring that the motors are initialized for later reference.
@@ -50,6 +24,7 @@ public class Camera_Test extends LinearOpMode {
     private DcMotor Quadrant3 = null;
     private DcMotor Quadrant4 = null;
     private DcMotor LinearSlide = null;
+    private int zone = 3;
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -69,13 +44,10 @@ public class Camera_Test extends LinearOpMode {
     // UNITS ARE METERS
     double tagsize = 0.166;
 
-//Tag IDs
-
-
+    //Tag IDs
     int Left = 5;
     int Middle = 8;
     int Right = 11;
-
 
     AprilTagDetection tagOfInterest = null;
 
@@ -93,17 +65,14 @@ public class Camera_Test extends LinearOpMode {
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
 
         camera.setPipeline(aprilTagDetectionPipeline);
-        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
-            public void onOpened()
-            {
-                camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
+            public void onOpened() {
+                camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
-            public void onError(int errorCode)
-            {
+            public void onError(int errorCode) {
 
             }
         });
@@ -111,11 +80,11 @@ public class Camera_Test extends LinearOpMode {
         telemetry.setMsTransmissionInterval(50);
 
         /*
-         * The INIT-loop:
-         * This REPLACES waitForStart!
+         * The INIT-loop: - FALSE
+         * This REPLACES waitForStart!  - FALSE
          */
-        while (!isStarted() && !isStopRequested()) {
-            ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
+        waitForStart();
+        while (opModeIsActive()) {
 
             // Initialize variables for storing computed powers before applying.
             double Quadrant1Power = 0.0;
@@ -129,109 +98,58 @@ public class Camera_Test extends LinearOpMode {
             Quadrant3.setDirection(DcMotor.Direction.REVERSE);
             Quadrant4.setDirection(DcMotor.Direction.REVERSE);
 
-            if (currentDetections.size() != 0) {
-                boolean tagFound = false;
 
-                for (AprilTagDetection tag : currentDetections) {
-                    if (tag.id == Left || tag.id == Middle || tag.id == Right) {
-                        tagOfInterest = tag;
-                        tagFound = true;
-                        break;
+            sleep(1000);
+            if (true){
+
+                ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
+
+                if (currentDetections.size() != 0) {
+                    boolean tagFound = false;
+
+                    for (AprilTagDetection tag : currentDetections) {
+                        if (tag.id == Left || tag.id == Middle || tag.id == Right) {
+                            tagOfInterest = tag;
+                            tagFound = true;
+                            break;
+                        }
                     }
+
                 }
 
-                if (tagFound) {
-                    telemetry.addLine("Tag of interest is in sight!\n\nLocation data:");
-                    tagToTelemetry(tagOfInterest);
-                }
-                else {
-                    telemetry.addLine("Don't see tag of interest :(");
 
-                    if(tagOfInterest == null)
-                    {
-                        telemetry.addLine("(The tag has never been seen)");
-                    }
-                    else
-                    {
-                        telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
-                        tagToTelemetry(tagOfInterest);
-                    }
+                // BEGIN PROGRAMMING TAG-DEPENDENT INSTRUCTIONS
+                if (tagOfInterest == null || tagOfInterest.id == Right) {
+
+                    int zone = 3;
+            /* what i will write:    NO NO NO NO DON"T DO THIS PLEASE
+            calibrate and find area of bounding box at a known distance NO NO NO NO DON"T DO THIS PLEASE
+            get x-axis location of tag from camera viewNO NO NO NO DON"T DO THIS PLEASE
+            get area of bounding box around tagNO NO NO NO DON"T DO THIS PLEASE
+            run motors until tag is centered in frame (y axis aligned) (strafing motion, no rotation)NO NO NO NO DON"T DO THIS PLEASE
+            run motors until bounding box area meets calibration data (x axis aligned)NO NO NO NO DON"T DO THIS PLEASE
+
+            initialize encoders (encoder values 0, 0)NO NO NO NO DON"T DO THIS PLEASE
+            begin moving precalculated distance to parking zones from reference point -- YES!
+             */ } else if (tagOfInterest.id == Middle) {
+                    final int zone = 2;
+
+                }else if (tagOfInterest.id == Left) {
+                    final int zone = 1;
+
                 }
+
+                //put all the camera code in here
 
             }
-            else
-            {
-                telemetry.addLine("Don't see tag of interest :(");
 
-                if(tagOfInterest == null)
-                {
-                    telemetry.addLine("(The tag has never been seen)");
-                }
-                else
-                {
-                    telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
-                    tagToTelemetry(tagOfInterest);
-                }
-
+            if (zone == 3){
+                //park in 3
+            }else if (zone == 2){
+//park in 2
+            }else if (zone == 1){
+//park in 1
             }
-
-            telemetry.update();
-            sleep(20);
         }
-
-        /*
-         * The START command just came in: now work off the latest snapshot acquired
-         * during the init loop.
-         */
-
-        /* Update the telemetry */
-        if(tagOfInterest != null) {
-            telemetry.addLine("Tag snapshot:\n");
-            tagToTelemetry(tagOfInterest);
-            telemetry.update();
-        }
-        else
-        {
-            telemetry.addLine("No tag snapshot available, it was never sighted during the init loop :(");
-            telemetry.update();
-        }
-
-        // BEGIN PROGRAMMING TAG-DEPENDENT INSTRUCTIONS
-        if (tagOfInterest == null || tagOfInterest.id == Right) {
-            /* what i will write:
-            calibrate and find area of bounding box at a known distance
-            get x-axis location of tag from camera view
-            get area of bounding box around tag
-            run motors until tag is centered in frame (y axis aligned) (strafing motion, no rotation)
-            run motors until bounding box area meets calibration data (x axis aligned)
-
-            initialize encoders (encoder values 0, 0)
-            begin moving precalculated distance to parking zones from reference point
-             */
-
-
-        } else if(tagOfInterest.id == Middle) {
-
-
-
-        } else if(tagOfInterest.id == Left) {
-
-
-
-        }
-
-        /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
-        while (opModeIsActive()) {sleep(20);}
-    }
-
-    void tagToTelemetry(AprilTagDetection detection)
-    {
-        telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
-        telemetry.addLine(String.format("Translation X: %.2f feet", detection.pose.x*FEET_PER_METER));
-        telemetry.addLine(String.format("Translation Y: %.2f feet", detection.pose.y*FEET_PER_METER));
-        telemetry.addLine(String.format("Translation Z: %.2f feet", detection.pose.z*FEET_PER_METER));
-        telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", Math.toDegrees(detection.pose.yaw)));
-        telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
-        telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
 }
