@@ -529,10 +529,10 @@ public class EncoderFunction {
         motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        motor1.setPower(1);
-        motor2.setPower(1);
-        motor3.setPower(1);
-        motor4.setPower(1);
+        motor1.setPower(-.25);
+        motor2.setPower(-.25);
+        motor3.setPower(-.25);
+        motor4.setPower(-.25);
 
         //note the directions of the used motors*****
 
@@ -546,10 +546,10 @@ public class EncoderFunction {
         motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        motor1.setPower(-1);
-        motor2.setPower(-1);
-        motor3.setPower(-1);
-        motor4.setPower(-1);
+        motor1.setPower(-.25);
+        motor2.setPower(-.25);
+        motor3.setPower(-.25);
+        motor4.setPower(-.25);
 
         //note the directions of the used motors*****
 
@@ -562,10 +562,10 @@ public class EncoderFunction {
         motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        motor1.setPower(1);
-        motor2.setPower(-1);
-        motor3.setPower(1);
-        motor4.setPower(-1);
+        motor1.setPower(.25);
+        motor2.setPower(.25);
+        motor3.setPower(-.25);
+        motor4.setPower(-.25);
 
         //note the directions of the used motors*****
 
@@ -578,10 +578,10 @@ public class EncoderFunction {
         motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        motor1.setPower(-1);
-        motor2.setPower(1);
-        motor3.setPower(-1);
-        motor4.setPower(1);
+        motor1.setPower(-.25);
+        motor2.setPower(-.25);
+        motor3.setPower(.25);
+        motor4.setPower(.25);
 
         //note the directions of the used motors*****
 
