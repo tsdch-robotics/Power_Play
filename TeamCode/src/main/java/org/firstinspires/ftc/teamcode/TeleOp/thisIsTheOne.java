@@ -66,7 +66,7 @@ public class thisIsTheOne extends LinearOpMode {
 
             telemetry.addData("range", String.format("%.01f mm", sensorRange2.getDistance(DistanceUnit.MM)));
 
-            if (IntakeLeft.getPosition() != 1 && (sensorRange2.getDistance(DistanceUnit.MM)) >= 23 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 45 && LinearSlide.getCurrentPosition() <= -200 && LinearSlide.getCurrentPosition() >= -230){
+            if (IntakeLeft.getPosition() != 1 && (sensorRange2.getDistance(DistanceUnit.MM)) >= 23 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 45  && LinearSlide.getCurrentPosition() <= -200 && LinearSlide.getCurrentPosition() >= -230){
                 LinearSlide.setTargetPosition(0); //level at 0, grabbing b
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -77,11 +77,11 @@ public class thisIsTheOne extends LinearOpMode {
                     IntakeRight.setPosition(1);
                 }
             }
-
+/*
             if (IntakeLeft.getPosition() == 1 && (sensorRange2.getDistance(DistanceUnit.MM)) >= 25 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 44 && (LinearSlide.getCurrentPosition() == -520 || LinearSlide.getCurrentPosition() == -835 || LinearSlide.getCurrentPosition() == -1115)){
-                IntakeLeft.setPosition(0); //Close
+                IntakeLeft.setPosition(0); //Open
                 IntakeRight.setPosition(0);
-            }
+            }*/
 
             // initializing all the wheel power values
             double Quadrant1Power = 0;
@@ -132,9 +132,58 @@ public class thisIsTheOne extends LinearOpMode {
 
         //These two large "if" blocks allow Daniel to use triggers to go up and down without getting unwanted feedback from a trigger being realeased
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             if (gamepad1.left_trigger >= 0 && !gamepad1.a && !gamepad1.b && !gamepad1.x && !gamepad1.y && gamepad1.right_trigger < .1){ //&& LinearSlide.getTargetPosition() > linearSlidePreviousPos) {//change 0.1 to 0!
 
-                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -1115));//Top pole
+                int triggerTargetPosition = ((int) (gamepad1.left_trigger * -1084));//Top pole
                 //LinearSlide.setTargetPosition(triggerTargetPosition);
 
                 if (triggerTargetPosition < highest){
@@ -158,10 +207,6 @@ public class thisIsTheOne extends LinearOpMode {
                 }
             }*/
 
-
-
-
-
             if (gamepad1.a){
                 LinearSlide.setTargetPosition(0); //level at 0, grabbing
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -171,7 +216,7 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.b){
-                LinearSlide.setTargetPosition(-520);  //low
+                LinearSlide.setTargetPosition(-462);  //low
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.6);
@@ -179,7 +224,7 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.y){
-                LinearSlide.setTargetPosition(-215); //ground and intake
+                LinearSlide.setTargetPosition(-155); //ground and intake
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.5);
@@ -187,12 +232,64 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
             if (gamepad1.x){
-                LinearSlide.setTargetPosition(-835); //medium
+                LinearSlide.setTargetPosition(-773); //medium
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.5);
                 highest = LinearSlide.getCurrentPosition();
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             while (gamepad1.dpad_right){
@@ -210,6 +307,52 @@ public class thisIsTheOne extends LinearOpMode {
             }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             if (gamepad1.right_bumper) {   //Open
                 IntakeLeft.setPosition(0.00);
                 IntakeRight.setPosition(0.00);
@@ -221,6 +364,35 @@ public class thisIsTheOne extends LinearOpMode {
                 IntakeRight.setPosition(1);
 
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
            if (!already_closed && intakeClaw.getPosition() == .48) {
