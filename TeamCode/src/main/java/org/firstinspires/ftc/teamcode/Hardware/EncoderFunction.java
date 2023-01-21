@@ -529,14 +529,14 @@ public class EncoderFunction {
         motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        while (OD.getCurrentPosition() > targ && Math.abs(targ) != targ) {
+        while (OD.getCurrentPosition() > targ && Math.abs(targ) != targ) {// negative
             motor1.setPower(-.25);
             motor2.setPower(-.25);
             motor3.setPower(-.25);
             motor4.setPower(-.25);
         }
 
-        while (OD.getCurrentPosition() < targ && Math.abs(targ) == targ) {
+        while (OD.getCurrentPosition() < targ && Math.abs(targ) == targ) {//pos
             motor1.setPower(-.25);
             motor2.setPower(-.25);
             motor3.setPower(-.25);

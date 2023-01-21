@@ -130,52 +130,7 @@ public class thisIsTheOne extends LinearOpMode {
             telemetry.addData("Driver Requested Angle", "%f", Math.toDegrees(requestedAngle));
             telemetry.update();
 
-        //These two large "if" blocks allow Daniel to use triggers to go up and down without getting unwanted feedback from a trigger being realeased
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //These two large "if" blocks allow Daniel to use triggers to go up and down without getting unwanted feedback from a trigger being realease
 
 
 
