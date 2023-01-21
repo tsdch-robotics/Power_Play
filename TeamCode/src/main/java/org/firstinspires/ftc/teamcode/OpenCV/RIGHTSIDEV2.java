@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.OpenCV;
 
+import android.icu.lang.UCharacter;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -18,16 +20,16 @@ public class RIGHTSIDEV2 extends LinearOpMode {
 
     EncoderFunction robot = new EncoderFunction();
     // Ensuring that the motors are initialized for later reference.
-    private DcMotor Quadrant1 = null;
-    private DcMotor Quadrant2 = null;
-    private DcMotor Quadrant3 = null;
-    private DcMotor Quadrant4 = null;
-    private DcMotor LinearSlide = null;
-    private Servo IntakeLeft;
-    private Servo IntakeRight;
+    private DcMotor Q1 = null;
+    private DcMotor Q2 = null;
+    private DcMotor Q3 = null;
+    private DcMotor Q4 = null;
+    private DcMotor LS = null;
+    private Servo IL;
+    private Servo IR;
 
-    private DcMotor VertOdo = null;
-    private DcMotor HorizOdo = null;
+    private DcMotor VRT = null;
+    private DcMotor HRZ = null;
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -59,29 +61,29 @@ public class RIGHTSIDEV2 extends LinearOpMode {
     @Override
     public void runOpMode() {
         // Retrieve the needed information about each motor from the configuration.
-        Quadrant1 = hardwareMap.get(DcMotor.class, "FrontHorizontal");
-        Quadrant2 = hardwareMap.get(DcMotor.class, "LeftVertical");
-        Quadrant3 = hardwareMap.get(DcMotor.class, "BackHorizontal");
-        Quadrant4 = hardwareMap.get(DcMotor.class, "RightVertical");
-        LinearSlide = hardwareMap.get(DcMotor.class, "LinearSlide");
-        IntakeLeft = hardwareMap.servo.get("IntakeLeft");
-        IntakeRight = hardwareMap.servo.get("IntakeRight");
-        LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        Quadrant1.setDirection(DcMotor.Direction.FORWARD);
-        Quadrant2.setDirection(DcMotor.Direction.FORWARD);
-        Quadrant3.setDirection(DcMotor.Direction.REVERSE);
-        Quadrant4.setDirection(DcMotor.Direction.REVERSE);
+        Q1 = hardwareMap.get(DcMotor.class, "FrontHorizontal");
+        Q2 = hardwareMap.get(DcMotor.class, "LeftVertical");
+        Q3 = hardwareMap.get(DcMotor.class, "BackHorizontal");
+        Q4 = hardwareMap.get(DcMotor.class, "RightVertical");
+        LS = hardwareMap.get(DcMotor.class, "LinearSlide");
+        IL = hardwareMap.servo.get("IntakeLeft");
+        IR = hardwareMap.servo.get("IntakeRight");
+        LS.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LS.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Q1.setDirection(DcMotor.Direction.FORWARD);
+        Q2.setDirection(DcMotor.Direction.FORWARD);
+        Q3.setDirection(DcMotor.Direction.REVERSE);
+        Q4.setDirection(DcMotor.Direction.REVERSE);
 
 
-        VertOdo = hardwareMap.get(DcMotor.class, "verticalOdometry");
-        HorizOdo = hardwareMap.get(DcMotor.class, "horizontalOdometry");
+        VRT = hardwareMap.get(DcMotor.class, "verticalOdometry");
+        HRZ = hardwareMap.get(DcMotor.class, "horizontalOdometry");
 
-        VertOdo.setDirection(DcMotor.Direction.FORWARD);
-        HorizOdo.setDirection(DcMotor.Direction.REVERSE);
+        VRT.setDirection(DcMotor.Direction.FORWARD);
+        HRZ.setDirection(DcMotor.Direction.REVERSE);
 
-        VertOdo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        HorizOdo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        VRT.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        HRZ.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
 
@@ -158,88 +160,60 @@ public class RIGHTSIDEV2 extends LinearOpMode {
 
 
 
-            IntakeLeft.setPosition(0);
-            IntakeRight.setPosition(0);
+            robot.snatch(IL);
             sleep(1000);
-
-            LinearSlide.setTargetPosition(-300); //level at 0, grabbing
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            LinearSlide.setPower(.6);
-
-            robot.forward(Quadrant1, Quadrant3, Quadrant2, Quadrant4, HorizOdo, 71703);  //1
+            robot.autoMoveSlide(LS, -300);
+            robot.forward(Q1, Q2, Q3, Q4, HRZ, 71703);  //1
             sleep(4000);
-
-            robot.right(Quadrant1, Quadrant3, Quadrant2, Quadrant4, VertOdo, -44804);  //2
+            //spin counter clockwise
+            robot.spinUntil1(Q1, Q2, Q3, Q4, VRT, 71703);//might be spin2
+//go to the cones
+            robot.right(Q1, Q2, Q3, Q4, VRT, -44804);  //2
             sleep(3000);
-
-            LinearSlide.setTargetPosition(-168); //level at 0, grabbing
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            LinearSlide.setPower(.6);
+            robot.autoMoveSlide(LS, -168);
             sleep(1000);
-            IntakeLeft.setPosition(1);
-            IntakeRight.setPosition(1);
+            robot.snatch(IL);
             sleep(2000);
-            LinearSlide.setTargetPosition(-300); //level at 0, grabbing
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            LinearSlide.setPower(.6);
+            robot.autoMoveSlide(LS, -300);
+            sleep(1000);
+            robot.left(Q1, Q2, Q3, Q4, VRT, 22885);  //3
+            sleep(1000);
+            robot.autoMoveSlide(LS, -1084);
+            robot.forward(Q1, Q2, Q3, Q4, HRZ, 76834);  //4
+            sleep(1000);
+            robot.right(Q1, Q2, Q3, Q4, VRT, 18307);  //5
             sleep(1000);
 
-            robot.left(Quadrant1, Quadrant3, Quadrant2, Quadrant4, VertOdo, 22885);  //3
-            sleep(1000);
-
-            LinearSlide.setTargetPosition(-1084); //level at 0, grabbing
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            LinearSlide.setPower(.6);
-
-            robot.forward(Quadrant1, Quadrant3, Quadrant2, Quadrant4, HorizOdo, 76834);  //4
-            sleep(1000);
-
-            robot.right(Quadrant1, Quadrant3, Quadrant2, Quadrant4, VertOdo, 18307);  //5
-            sleep(1000);
-
-            IntakeLeft.setPosition(1);
-            IntakeRight.setPosition(1);
+            robot.snatch(IL);
             sleep(2500);
-
-            robot.left(Quadrant1, Quadrant3, Quadrant2, Quadrant4, VertOdo, 23476);  //6
+            robot.left(Q1, Q2, Q3, Q4, VRT, 23476);  //6
+            sleep(1000);
+            robot.backward(Q1, Q2, Q3, Q4, HRZ, 60811);  //7
             sleep(1000);
 
-            robot.backward(Quadrant1, Quadrant3, Quadrant2, Quadrant4, HorizOdo, 60811);  //7
+            robot.autoMoveSlide(LS, 0);
+            robot.right(Q1, Q2, Q3, Q4, VRT, -41841);  //8
             sleep(1000);
-
-            LinearSlide.setTargetPosition(-1084); //level at 0, grabbing
-            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            LinearSlide.setPower(.6);
-
-            robot.right(Quadrant1, Quadrant3, Quadrant2, Quadrant4, VertOdo, -41841);  //8
-            sleep(1000);
-
-
 
 
 
 
 
             if(PARK == 1){
-                robot.left(Quadrant1, Quadrant3, Quadrant2, Quadrant4, HorizOdo, 62199);  //1
+                robot.left(Q1, Q2, Q3, Q4, HRZ, 62199);  //1
                 sleep(1000);
             }
 
             if(PARK == 2){
                 //robot.forward(Quadrant1, Quadrant3, Quadrant2, Quadrant4);
-                robot.left(Quadrant1, Quadrant3, Quadrant2, Quadrant4, HorizOdo, 62847);
+                robot.left(Q1, Q2, Q3, Q4, HRZ, 62847);
                 sleep(10000);
 
 
             }
             if(PARK == 3){
                // robot.forward(Quadrant1, Quadrant3, Quadrant2, Quadrant4);
-                robot.left(Quadrant1, Quadrant3, Quadrant2, Quadrant4, HorizOdo, 63696);  //1
+                robot.left(Q1, Q2, Q3, Q4, HorizOdo, 63696);  //1
                 sleep(1000);
             }
             if(PARK == 4){

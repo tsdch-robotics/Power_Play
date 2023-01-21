@@ -24,12 +24,14 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  */
 public class EncoderFunction {
 
-
+    public double slidePower = 0.6;
+    public double openPos = 0;
+    public double closePos = 1;
     public DcMotor motor1;
     public DcMotor motor2;
     public DcMotor motor3;
     public DcMotor motor4;
-
+    public double allTimeSpeed = .25;
     public int targetPos;
 
     //private DcMotor LeftVertical ;
@@ -245,111 +247,7 @@ public class EncoderFunction {
 
     }
 
-    //public void moveTileDiagonal(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, String direction){
-
-    public void diagonalForward(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int targetPosition){
-
-        motor1.setTargetPosition(targetPosition);
-        motor2.setTargetPosition(targetPosition);
-        motor3.setTargetPosition(targetPosition);
-        motor4.setTargetPosition(targetPosition);
-
-
-        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        motor1.setPower(0.25);
-        motor2.setPower(0.25);
-        motor3.setPower(0.25);
-        motor4.setPower(0.25);
-
-        /*if (!motor1.isBusy() || !motor2.isBusy()){
-            motor1.setPower(0);
-            motor2.setPower(0);
-        }
-        if (!motor3.isBusy() || !motor4.isBusy()){
-            motor4.setPower(0);
-            motor3.setPower(0);
-        }*/
-    }
-
-    public void diagonalBackward(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int targetPosition) {
-
-        motor1.setTargetPosition(-targetPosition);
-        motor2.setTargetPosition(-targetPosition);
-        motor3.setTargetPosition(-targetPosition);
-        motor4.setTargetPosition(-targetPosition);
-
-        motor1.setPower(0.25);
-        motor2.setPower(0.25);
-        motor3.setPower(0.25);
-        motor4.setPower(0.25);
-
-        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        //staying up late working on aUtOmOuS lol  X(
-
-        if (!motor1.isBusy() || !motor2.isBusy()) {
-            motor1.setPower(0);
-            motor2.setPower(0);
-        }
-        if (!motor3.isBusy() || !motor4.isBusy()) {
-            motor4.setPower(0);
-            motor3.setPower(0);
-        }
-
-    }
-
-    public void diagonalLeft(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4) {
-
-        motor1.setTargetPosition(1000);
-        motor2.setTargetPosition(1000);
-        motor3.setTargetPosition(-1000);
-        motor4.setTargetPosition(-1000);
-
-        motor1.setPower(1);
-        motor2.setPower(1);
-        motor3.setPower(1);
-        motor4.setPower(1);
-
-        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        if (!motor1.isBusy() || !motor2.isBusy()) {
-            motor1.setPower(0);
-            motor2.setPower(0);
-        }
-        if (!motor3.isBusy() || !motor4.isBusy()) {
-            motor4.setPower(0);
-            motor3.setPower(0);
-        }
-
-    }
-
-    public void diagonalRight(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
-
-        motor1.setTargetPosition(-1000);
-        motor2.setTargetPosition(-1000);
-        motor3.setTargetPosition(1000);
-        motor4.setTargetPosition(1000);
-
-        motor1.setPower(1);
-        motor2.setPower(1);
-        motor3.setPower(1);
-        motor4.setPower(1);
-
-        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
+/*
         if (!motor1.isBusy() || !motor2.isBusy()){
             motor1.setPower(0);
             motor2.setPower(0);
@@ -357,76 +255,26 @@ public class EncoderFunction {
         if (!motor3.isBusy() || !motor4.isBusy()){
             motor4.setPower(0);
             motor3.setPower(0);
-        }
+        }*/
 
-    }
+
 
     public void autoMoveSlide(DcMotor slider, int height){
-
         slider.setTargetPosition(height);
         slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        slider.setPower(1);
-
-        /*if (height < 4000 && height > 2700){
-            slider.setTargetPosition(3500);
-            slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            slider.setPower(1);
-            //score
-
-        }
-
-        else if (height <= 2700 && height > 1000){
-            //then do this
-            slider.setTargetPosition(2500);
-            slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            slider.setPower(1);
-        }
-
-        else if (height < 1000 && height > 50){
-            //then do this
-            slider.setTargetPosition(800);
-            slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            slider.setPower(1);
-        }
-
-        else if (height < 50 && height > -10){
-            //then do this
-            slider.setTargetPosition(20);
-            slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            slider.setPower(1);
-        }*/
+        slider.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        slider.setPower(slidePower);
     }
 
-    public void drop(Servo intakeClaw, double openPos){
+    public void drop(Servo intakeClaw){
         intakeClaw.setPosition(openPos);
     }
-
-    public boolean hasReachePosition(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4){
-
-        if (motor1.getCurrentPosition() == motor1.getTargetPosition()){
-            return true;
-        }
-
-//note to self: don't adopt an FTC accen
-        else if (motor2.getCurrentPosition() == motor2.getTargetPosition()){
-            return true;
-        }
-
-
-        else if (motor3.getCurrentPosition() == motor3.getTargetPosition()){
-            return true;
-        }
-
-
-        else if (motor4.getCurrentPosition() == motor4.getTargetPosition()){
-            return true;
-        }
-
-
-        else{
-            return false;
-        }
+    public void snatch(Servo intakeClaw){
+        intakeClaw.setPosition(closePos);
     }
+
+
+
 
 //when the blasted code DOESN'T WORK
     public void sleepThread(Long millis) {    //sleep function
@@ -445,12 +293,12 @@ public class EncoderFunction {
             sleepThread(1000L);
             reset(motor1, motor2, motor3, motor4);
             autoMoveSlide(slider, 1000);
-            diagonalForward(motor1, motor2, motor3, motor4, 500);
+          //  diagonalForward(motor1, motor2, motor3, motor4, 500);
             sleepThread(2000L);
-            drop(intakeClaw, 1);
+            drop(intakeClaw);
             sleepThread(5000L);
             reset(motor1, motor2, motor3, motor4);
-            diagonalBackward(motor1, motor2, motor3, motor4, 500);
+         //   diagonalBackward(motor1, motor2, motor3, motor4, 500);
             sleepThread(2000L);
             reset(motor1, motor2, motor3, motor4);
             spinByDegreeVal(motor1, motor2, motor3, motor4, -45, 280);
@@ -462,65 +310,6 @@ public class EncoderFunction {
 
     }
 
-
-
-    public void moveEachMotor(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, int one, int two, int three, int four){
-
-        motor1.setTargetPosition(one);
-        motor2.setTargetPosition(two);
-        motor3.setTargetPosition(three);
-        motor4.setTargetPosition(four);
-
-        motor1.setPower(.25);
-        motor2.setPower(.25);
-        motor3.setPower(.25);
-        motor4.setPower(.25);
-
-        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-    }
-
-    public void moveForwardUntilPos(DcMotor firstMotor1, DcMotor firstMotor2, DcMotor secondMotor1, DcMotor secondMotor2, DcMotor odometry1, DcMotor odometry2, int inches1, int inches2){
-
-        //i.e vertical
-
-        if (Math.abs((odometry1.getCurrentPosition() / 1304)  - inches1) >= 1){  //the "1" distance value needs to be lower for greater accuracy!
-            if ((Math.abs((odometry1.getCurrentPosition() / 1304)) < inches1)){    //was Math.abs(inches1) - inches1 == 0
-                //forward(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
-            }
-            else if ((Math.abs((odometry1.getCurrentPosition() / 1304)) > inches1)){
-          //      backward(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
-            }
-        }
-        else{
-          //  stop(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
-        }
-
-        //second method below: first was better if it works. DONE!
-        if (Math.abs((odometry2.getCurrentPosition() / 1304)  - inches2) >= 1){
-            if ((Math.abs((odometry2.getCurrentPosition() / 1304)) < inches2)){
-            //    right(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
-            }
-            else if ((Math.abs((odometry2.getCurrentPosition() / 1304)) > inches2)){
-              //  left(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
-            }
-        }
-        else{
-            //stop(firstMotor1, firstMotor2, secondMotor1, secondMotor2);
-        }
-
-
-
-
-        //and horizontal:
-
-    }
-
-
-
     public void forward(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ){
 
 
@@ -530,17 +319,17 @@ public class EncoderFunction {
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         while (OD.getCurrentPosition() > targ && Math.abs(targ) != targ) {// negative
-            motor1.setPower(-.25);
-            motor2.setPower(-.25);
-            motor3.setPower(-.25);
-            motor4.setPower(-.25);
+            motor1.setPower(-allTimeSpeed);
+            motor2.setPower(-allTimeSpeed);
+            motor3.setPower(-allTimeSpeed);
+            motor4.setPower(-allTimeSpeed);
         }
 
         while (OD.getCurrentPosition() < targ && Math.abs(targ) == targ) {//pos
-            motor1.setPower(-.25);
-            motor2.setPower(-.25);
-            motor3.setPower(-.25);
-            motor4.setPower(-.25);
+            motor1.setPower(-allTimeSpeed);
+            motor2.setPower(-allTimeSpeed);
+            motor3.setPower(-allTimeSpeed);
+            motor4.setPower(-allTimeSpeed);
         }
 
         while (Math.abs(OD.getCurrentPosition()) > targ && Math.abs(targ) == targ) {
@@ -572,17 +361,17 @@ public class EncoderFunction {
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         while (OD.getCurrentPosition() > targ && Math.abs(targ) != targ) {
-            motor1.setPower(.25);
-            motor2.setPower(.25);
-            motor3.setPower(.25);
-            motor4.setPower(.25);
+            motor1.setPower(allTimeSpeed);
+            motor2.setPower(allTimeSpeed);
+            motor3.setPower(allTimeSpeed);
+            motor4.setPower(allTimeSpeed);
         }
 
         while (OD.getCurrentPosition() < targ && Math.abs(targ) == targ) {
-            motor1.setPower(.25);
-            motor2.setPower(.25);
-            motor3.setPower(.25);
-            motor4.setPower(.25);
+            motor1.setPower(allTimeSpeed);
+            motor2.setPower(allTimeSpeed);
+            motor3.setPower(allTimeSpeed);
+            motor4.setPower(allTimeSpeed);
         }
 
         while (Math.abs(OD.getCurrentPosition()) > targ && Math.abs(targ) == targ) {
@@ -610,17 +399,17 @@ public class EncoderFunction {
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             while (OD.getCurrentPosition() > targ && Math.abs(targ) != targ) {
-                motor1.setPower(.25);
-                motor2.setPower(.25);
-                motor3.setPower(-.25);
-                motor4.setPower(-.25);
+                motor1.setPower(allTimeSpeed);
+                motor2.setPower(allTimeSpeed);
+                motor3.setPower(-allTimeSpeed);
+                motor4.setPower(-allTimeSpeed);
             }
 
             while (OD.getCurrentPosition() < targ && Math.abs(targ) == targ) {
-                motor1.setPower(.25);
-                motor2.setPower(.25);
-                motor3.setPower(-.25);
-                motor4.setPower(-.25);
+                motor1.setPower(allTimeSpeed);
+                motor2.setPower(allTimeSpeed);
+                motor3.setPower(-allTimeSpeed);
+                motor4.setPower(-allTimeSpeed);
             }
 
             while (Math.abs(OD.getCurrentPosition()) > targ && Math.abs(targ) == targ) {
@@ -652,17 +441,100 @@ public class EncoderFunction {
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         while (OD.getCurrentPosition() > targ && Math.abs(targ) != targ) {
-            motor1.setPower(-.25);
-            motor2.setPower(-.25);
-            motor3.setPower(.25);
-            motor4.setPower(.25);
+            motor1.setPower(-allTimeSpeed);
+            motor2.setPower(-allTimeSpeed);
+            motor3.setPower(allTimeSpeed);
+            motor4.setPower(allTimeSpeed);
         }
 
         while (OD.getCurrentPosition() < targ && Math.abs(targ) == targ) {
-            motor1.setPower(-.25);
-            motor2.setPower(-.25);
-            motor3.setPower(.25);
-            motor4.setPower(.25);
+            motor1.setPower(-allTimeSpeed);
+            motor2.setPower(-allTimeSpeed);
+            motor3.setPower(allTimeSpeed);
+            motor4.setPower(allTimeSpeed);
+        }
+
+        while (Math.abs(OD.getCurrentPosition()) > targ && Math.abs(targ) == targ) {
+            motor1.setPower(0);
+            motor2.setPower(0);
+            motor3.setPower(0);
+            motor4.setPower(0);
+            break;
+        }
+
+        while (Math.abs(OD.getCurrentPosition()) < targ && Math.abs(targ) != targ) {
+            motor1.setPower(0);
+            motor2.setPower(0);
+            motor3.setPower(0);
+            motor4.setPower(0);
+            break;
+        }
+
+    }
+
+
+
+    public void spinUntil1(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ){
+
+        motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        //spin to angle
+        while (OD.getCurrentPosition() > targ && Math.abs(targ) != targ) {
+            motor1.setPower(-allTimeSpeed);
+            motor2.setPower(allTimeSpeed);
+            motor3.setPower(-allTimeSpeed);
+            motor4.setPower(allTimeSpeed);
+        }
+
+        while (OD.getCurrentPosition() < targ && Math.abs(targ) == targ) {
+            motor1.setPower(-allTimeSpeed);
+            motor2.setPower(allTimeSpeed);
+            motor3.setPower(-allTimeSpeed);
+            motor4.setPower(allTimeSpeed);
+        }
+
+        while (Math.abs(OD.getCurrentPosition()) > targ && Math.abs(targ) == targ) {
+            motor1.setPower(0);
+            motor2.setPower(0);
+            motor3.setPower(0);
+            motor4.setPower(0);
+            break;
+        }
+
+        while (Math.abs(OD.getCurrentPosition()) < targ && Math.abs(targ) != targ) {
+            motor1.setPower(0);
+            motor2.setPower(0);
+            motor3.setPower(0);
+            motor4.setPower(0);
+            break;
+        }
+
+    }
+
+
+    public void spinUntil2(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ){
+
+        motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        //spin to angle
+        while (OD.getCurrentPosition() > targ && Math.abs(targ) != targ) {
+            motor1.setPower(allTimeSpeed);
+            motor2.setPower(-allTimeSpeed);
+            motor3.setPower(allTimeSpeed);
+            motor4.setPower(-allTimeSpeed);
+        }
+
+        while (OD.getCurrentPosition() < targ && Math.abs(targ) == targ) {
+            motor1.setPower(allTimeSpeed);
+            motor2.setPower(-allTimeSpeed);
+            motor3.setPower(allTimeSpeed);
+            motor4.setPower(-allTimeSpeed);
         }
 
         while (Math.abs(OD.getCurrentPosition()) > targ && Math.abs(targ) == targ) {
