@@ -15,8 +15,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
 
-@Autonomous(name="RIGHTSIDE2", group="Autonomous")
-public class RIGHTSIDEV2 extends LinearOpMode {
+@Autonomous(name="LEFTSIDE", group="Autonomous")
+public class LEFTSIDE extends LinearOpMode {
 
     EncoderFunction robot = new EncoderFunction();
     // Ensuring that the motors are initialized for later reference.
@@ -46,7 +46,7 @@ public class RIGHTSIDEV2 extends LinearOpMode {
     double cy = 221.506;
     // UNITS ARE METERS
     double tagsize = 0.166;
-//Tag IDs
+    //Tag IDs
     int Left = 5;
     int Middle = 8;
     int Right = 11;
@@ -149,75 +149,56 @@ public class RIGHTSIDEV2 extends LinearOpMode {
 
 
             }
-/*
+
             telemetry.addData("", PARK);
             telemetry.update();
+            robot.forward(Q1, Q3, Q2, Q4, HRZ, 34000);//adjust
             sleep(1000);
-            robot.snatch(IL);
-            sleep(1000);
-            robot.autoMoveSlide(LS, -300);
-            robot.forward(Q1, Q2, Q3, Q4, HRZ, 71703);  //1
-            sleep(4000);
-            //spin counter clockwise
-            robot.spinUntil2(Q1, Q2, Q3, Q4, VRT, 72633);//might be spin2  ///neeed to change // +930
-            sleep(3000);
-//go to the cones
-            robot.right(Q1, Q2, Q3, Q4, VRT, -42000);  //2
-            sleep(3000);
-            /*robot.autoMoveSlide(LS, -168);
-            sleep(1000);
-            robot.snatch(IL);
+         /*   robot.snatch(IR);
             sleep(2000);
+            robot.autoMoveSlide(LS, -462);
+            robot.forward(Q1, Q3, Q2, Q4, HRZ, 24513);//adjust
+         //   robot.forward(Q1, Q3, Q2, Q4, HRZ, 18043);//adjust
+            sleep(3000);
+            robot.right(Q1, Q3, Q2, Q4, VRT, -10);  //1
+            sleep(500);
+            robot.zero(Q1, Q3, Q2, Q4, VRT, -10);
+            robot.drop(IR);
+            sleep(4000);
+            robot.left(Q1, Q3, Q2, Q4, VRT, 1);  //1
+            sleep(1000);
+            robot.forward(Q1, Q3, Q2, Q4, HRZ, 35000);//adjust
+            sleep(2000);
+           /* robot.left(Q1, Q2, Q3, Q4, VRT,0);//*****switched order, Q23, spin, change
+            sleep(1000);
+            robot.forward(Q1, Q3, Q2, Q4, HRZ,68806);//change
+            sleep(2000);
+
+            robot.left(Q1, Q2, Q3, Q4, VRT,0);//*****switched order, Q23, spin, change
+            sleep(1000);
             robot.autoMoveSlide(LS, -300);
-            sleep(1000);
-            robot.left(Q1, Q2, Q3, Q4, VRT, 22885);  //3
-            sleep(1000);
-            robot.autoMoveSlide(LS, -1084);
-            robot.forward(Q1, Q2, Q3, Q4, HRZ, 76834);  //4
-            sleep(1000);
-            robot.right(Q1, Q2, Q3, Q4, VRT, 18307);  //5
-            sleep(1000);
 
-            robot.drop(IL);
-            sleep(2500);
-            robot.left(Q1, Q2, Q3, Q4, VRT, 23476);  //6
-            sleep(1000);
-            robot.backward(Q1, Q2, Q3, Q4, HRZ, 60811);  //7
-            sleep(1000);
-
-            robot.autoMoveSlide(LS, -300);
-            robot.right(Q1, Q2, Q3, Q4, VRT, -41841);  //8
-            sleep(1000);
+            robot.right(Q1, Q3, Q2, Q4, VRT, -12004);//change
+            sleep(1000);*/
+           /* robot.autoMoveSlide(LS, 0);
+            sleep(1000);*/
 
 
-
-
-
-            if(PARK == 1){
-                robot.left(Q1, Q2, Q3, Q4, HRZ, 62199);  //1
-                sleep(1000);
+            if(PARK == 3){
+                //robot.forward(Q1, Q3, Q2, Q4, HRZ, 75172);//adjust
+                robot.left(Q1, Q3, Q2, Q4, VRT, 34086);  //1
+                sleep(3000);
             }
 
             if(PARK == 2){
-                //robot.forward(Quadrant1, Quadrant3, Quadrant2, Quadrant4);
-                robot.left(Q1, Q2, Q3, Q4, HRZ, 62847);
-                sleep(10000);
+                sleep(3000);
 
 
             }
-            if(PARK == 3){
-               // robot.forward(Quadrant1, Quadrant3, Quadrant2, Quadrant4);
-                robot.left(Q1, Q2, Q3, Q4, HRZ, 63696);  //1
-                sleep(1000);
+            if(PARK == 1){
+                robot.right(Q1, Q3, Q2, Q4, VRT, -33086);  //1
+                sleep(2300);
             }
-            if(PARK == 4){
-               // robot.forward(Quadrant1, Quadrant3, Quadrant2, Quadrant4);
-                robot.left(Q1, Q2, Q3, Q4, HRZ, 63696);  //1
-                sleep(1000);
-            }
-            sleep(100000);
-
-*/
 
         }
     }

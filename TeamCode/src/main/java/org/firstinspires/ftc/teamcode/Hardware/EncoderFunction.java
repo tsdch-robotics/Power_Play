@@ -82,6 +82,9 @@ public class EncoderFunction {
         powerX = sin(angle + PI/4)*hypotenuse;
         powerY = cos(angle + PI/4)*hypotenuse;
 
+        powerX = 1.4 * powerX;
+        powerY = 1.4 * powerY;
+
         returnValues[0] = powerX;
         returnValues[1] = powerY;
         returnValues[2] = angle;
@@ -267,10 +270,10 @@ public class EncoderFunction {
     }
 
     public void drop(Servo intakeClaw){
-        intakeClaw.setPosition(openPos);
+        intakeClaw.setPosition(0);
     }
     public void snatch(Servo intakeClaw){
-        intakeClaw.setPosition(closePos);
+        intakeClaw.setPosition(1);
     }
 
 
@@ -430,7 +433,6 @@ public class EncoderFunction {
 
 
         //note the directions of the used motors*****
-
     }
 
     public void right(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ) {
@@ -440,7 +442,13 @@ public class EncoderFunction {
         motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        while (OD.getCurrentPosition() > targ && Math.abs(targ) != targ) {
+
+        motor1.setPower(-allTimeSpeed);
+        motor2.setPower(-allTimeSpeed);
+        motor3.setPower(allTimeSpeed);
+        motor4.setPower(allTimeSpeed);
+
+       /* while (OD.getCurrentPosition() > targ && Math.abs(targ) != targ) { //negative
             motor1.setPower(-allTimeSpeed);
             motor2.setPower(-allTimeSpeed);
             motor3.setPower(allTimeSpeed);
@@ -454,7 +462,7 @@ public class EncoderFunction {
             motor4.setPower(allTimeSpeed);
         }
 
-        while (Math.abs(OD.getCurrentPosition()) > targ && Math.abs(targ) == targ) {
+        while (Math.abs(OD.getCurrentPosition()) > targ && Math.abs(targ) == targ) { // pos
             motor1.setPower(0);
             motor2.setPower(0);
             motor3.setPower(0);
@@ -462,13 +470,13 @@ public class EncoderFunction {
             break;
         }
 
-        while (Math.abs(OD.getCurrentPosition()) < targ && Math.abs(targ) != targ) {
+        while (Math.abs(OD.getCurrentPosition()) < targ && Math.abs(targ) != targ) { //negative
             motor1.setPower(0);
             motor2.setPower(0);
             motor3.setPower(0);
             motor4.setPower(0);
             break;
-        }
+        }*/
 
     }
 
@@ -553,8 +561,16 @@ public class EncoderFunction {
             break;
         }
 
+
+
     }
 
+    public void zero(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ){
+        motor1.setPower(0);
+        motor2.setPower(0);
+        motor3.setPower(0);
+        motor4.setPower(0);
+    }
 
 
     /* Quadrant1.setDirection(DcMotor.Direction.FORWARD);    //forward, forward, reverse, reverse:: .. Front, Back, Left, Right, but rotate 90 degrees on wires
