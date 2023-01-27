@@ -166,47 +166,38 @@ public class WeirdGoofyAhhhh extends LinearOpMode {
             telemetry.addData("", PARK);
             telemetry.update();
 
+
+
             //need to create a time out function
 
             robot.justGetUsTherePls(Q1, Q3, Q2, Q4, HRZ, 67000, .4, LS, IR);
             sleep(1000);
 
-
             robot.scorAFrickingConeRi(Q1, Q3, Q2, Q4, HRZ, VRT, .4, .4, sensorRange2, LS, IR);
             sleep(1000);
-            robot.rightIandB(Q1, Q3, Q2, Q4, VRT, -20000, sensorRange2);
-            sleep(1000);
-
+            robot.rightIandB(Q1, Q3, Q2, Q4, HRZ, VRT, LS, sensorRange2, IR, -350, -168);
+            sleep(2000);
+            robot.scorAFrickingConeRi(Q1, Q3, Q2, Q4, HRZ, VRT, .5, .4, sensorRange2, LS, IR);
+            sleep(10000);
+/*
 
             if(PARK == 1){
-                //robot.forward(Q1, Q3, Q2, Q4, HRZ, 75172);//adjust
                 robot.left(Q1, Q3, Q2, Q4, VRT, 34086);  //1
                 sleep(3000);
-                robot.autoMoveSlide(LS, 0);
-                sleep(2000);
-                robot.drop(IR);
-                sleep(2000);
             }
 
             if(PARK == 2){
                 sleep(3000);
-                robot.autoMoveSlide(LS, 0);
-                sleep(2000);
-                robot.drop(IR);
-                sleep(2000);
+
 
 
             }
             if(PARK == 3){
                 robot.right(Q1, Q3, Q2, Q4, VRT, -33086);  //1
                 sleep(2300);
-                robot.autoMoveSlide(LS, 0);
-                sleep(2000);
-                robot.drop(IR);
-                sleep(2000);
             }
 
-            sleep(10000);
+            sleep(10000);*/
 
 
 

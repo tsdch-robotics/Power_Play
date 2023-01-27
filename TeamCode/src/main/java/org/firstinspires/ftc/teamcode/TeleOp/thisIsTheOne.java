@@ -79,11 +79,11 @@ public class thisIsTheOne extends LinearOpMode {
 
             if (IntakeLeft.getPosition() != 1 && (sensorRange2.getDistance(DistanceUnit.MM)) >= 5 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 65  && LinearSlide.getCurrentPosition() <= -130 && LinearSlide.getCurrentPosition() >= -350){
 
-                Quadrant1.setPower(0);//optional
+          /*      Quadrant1.setPower(0);//optional
                 Quadrant2.setPower(0);
-                Quadrant3.setPower(0);
+                Quadrant3.setPower(0);//check with staniel depp
                 Quadrant4.setPower(0);//use a certain subtraction value for certain range: so daniel can hit Ci1-4
-
+*/
                 LinearSlide.setTargetPosition(LinearSlide.getCurrentPosition() + 155); //level at 0, grabbing b
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
