@@ -16,8 +16,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 import org.firstinspires.ftc.teamcode.Hardware.justAutoFUNctions;
 
-@Autonomous(name="LEFTSIDE", group="Autonomous")
-public class LEFTSIDE extends LinearOpMode {
+@Autonomous(name="WeirdGoofyAhhhh", group="Autonomous")
+public class WeirdGoofyAhhhh extends LinearOpMode {
 
     justAutoFUNctions robot = new justAutoFUNctions();
     // Ensuring that the motors are initialized for later reference.
@@ -150,56 +150,56 @@ public class LEFTSIDE extends LinearOpMode {
 
 
             }
-
             telemetry.addData("", PARK);
             telemetry.update();
-            robot.forward(Q1, Q3, Q2, Q4, HRZ, 34000);//adjust
-            sleep(1000);
-         /*   robot.snatch(IR);
-            sleep(2000);
-            robot.autoMoveSlide(LS, -462);
-            robot.forward(Q1, Q3, Q2, Q4, HRZ, 24513);//adjust
-         //   robot.forward(Q1, Q3, Q2, Q4, HRZ, 18043);//adjust
-            sleep(3000);
-            robot.right(Q1, Q3, Q2, Q4, VRT, -10);  //1
+
+
+
+
+
+            robot.snatch(IR);
+            sleep(1500);
+            robot.autoMoveSlide(LS, -100);
+            sleep(100);
+            robot.accF(Q1, Q3, Q2, Q4, .4);
+            robot.forward(Q1, Q3, Q2, Q4, HRZ, 67000);
             sleep(500);
-            robot.zero(Q1, Q3, Q2, Q4, VRT, -10);
-            robot.drop(IR);
-            sleep(4000);
-            robot.left(Q1, Q3, Q2, Q4, VRT, 1);  //1
-            sleep(1000);
-            robot.forward(Q1, Q3, Q2, Q4, HRZ, 35000);//adjust
-            sleep(2000);
-           /* robot.left(Q1, Q2, Q3, Q4, VRT,0);//*****switched order, Q23, spin, change
-            sleep(1000);
-            robot.forward(Q1, Q3, Q2, Q4, HRZ,68806);//change
-            sleep(2000);
-
-            robot.left(Q1, Q2, Q3, Q4, VRT,0);//*****switched order, Q23, spin, change
-            sleep(1000);
-            robot.autoMoveSlide(LS, -300);
-
-            robot.right(Q1, Q3, Q2, Q4, VRT, -12004);//change
-            sleep(1000);*/
-           /* robot.autoMoveSlide(LS, 0);
-            sleep(1000);*/
+            robot.count(Q4, Q3, Q2, Q1, VRT, 18000);
+            sleep(500);
 
 
-            if(PARK == 3){
+
+            if(PARK == 1){
                 //robot.forward(Q1, Q3, Q2, Q4, HRZ, 75172);//adjust
                 robot.left(Q1, Q3, Q2, Q4, VRT, 34086);  //1
                 sleep(3000);
+                robot.autoMoveSlide(LS, 0);
+                sleep(2000);
+                robot.drop(IR);
+                sleep(2000);
             }
 
             if(PARK == 2){
                 sleep(3000);
+                robot.autoMoveSlide(LS, 0);
+                sleep(2000);
+                robot.drop(IR);
+                sleep(2000);
 
 
             }
-            if(PARK == 1){
+            if(PARK == 3){
                 robot.right(Q1, Q3, Q2, Q4, VRT, -33086);  //1
                 sleep(2300);
+                robot.autoMoveSlide(LS, 0);
+                sleep(2000);
+                robot.drop(IR);
+                sleep(2000);
             }
+
+            sleep(10000);
+
+
 
         }
     }

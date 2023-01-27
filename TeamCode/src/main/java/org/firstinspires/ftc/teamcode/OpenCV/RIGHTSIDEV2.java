@@ -8,17 +8,18 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Hardware.justAutoFUNctions;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
-import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
+import org.firstinspires.ftc.teamcode.Hardware.justAutoFUNctions;
 
 @Autonomous(name="RIGHTSIDE2", group="Autonomous")
 public class RIGHTSIDEV2 extends LinearOpMode {
 
-    EncoderFunction robot = new EncoderFunction();
+    justAutoFUNctions robot = new justAutoFUNctions();
     // Ensuring that the motors are initialized for later reference.
     private DcMotor Q1 = null;
     private DcMotor Q2 = null;

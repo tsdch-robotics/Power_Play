@@ -10,15 +10,16 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
+import org.firstinspires.ftc.teamcode.Hardware.notFUNctions;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.Hardware.notFUNctions;
 
 // define the teleop to appear on the phone
 @TeleOp(name="thisIsTheOne", group="Linear Opmode")
 public class thisIsTheOne extends LinearOpMode {
 
-    EncoderFunction robot = new EncoderFunction();
+    notFUNctions robot = new notFUNctions();
 
     // defining all the variables
     private ElapsedTime runtime = new ElapsedTime();
@@ -69,20 +70,33 @@ public class thisIsTheOne extends LinearOpMode {
         // only start running after user confirmation
         while (opModeIsActive()) {
 
-            /* && (sensorRange2.getDistance(DistanceUnit.MM)) >= 35 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 47*/
+
+
+            //consider using dpad with Ci1-4 values, up d l r, would need to ajust sensor range function
+
 
             telemetry.addData("range", String.format("%.01f mm", sensorRange2.getDistance(DistanceUnit.MM)));
 
-            if (IntakeLeft.getPosition() != 1 && (sensorRange2.getDistance(DistanceUnit.MM)) >= 39 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 64  && LinearSlide.getCurrentPosition() <= -130 && LinearSlide.getCurrentPosition() >= -250){
-                LinearSlide.setTargetPosition(0); //level at 0, grabbing b
+            if (IntakeLeft.getPosition() != 1 && (sensorRange2.getDistance(DistanceUnit.MM)) >= 5 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 65  && LinearSlide.getCurrentPosition() <= -130 && LinearSlide.getCurrentPosition() >= -350){
+
+                Quadrant1.setPower(0);//optional
+                Quadrant2.setPower(0);
+                Quadrant3.setPower(0);
+                Quadrant4.setPower(0);//use a certain subtraction value for certain range: so daniel can hit Ci1-4
+
+                LinearSlide.setTargetPosition(LinearSlide.getCurrentPosition() + 155); //level at 0, grabbing b
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                 LinearSlide.setPower(.5);
                 highest = LinearSlide.getCurrentPosition();
-                if(LinearSlide.getCurrentPosition() == 0){
-                    IntakeLeft.setPosition(1); //Close
-                    IntakeRight.setPosition(1);
-                }
+
+            }
+
+            if(LinearSlide.getCurrentPosition() == 0){
+                IntakeLeft.setPosition(1); //Close
+                IntakeRight.setPosition(1);
+                sleep(1500);
+
             }
 /*
             if (IntakeLeft.getPosition() == 1 && (sensorRange2.getDistance(DistanceUnit.MM)) >= 25 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 44 && (LinearSlide.getCurrentPosition() == -520 || LinearSlide.getCurrentPosition() == -835 || LinearSlide.getCurrentPosition() == -1115)){
@@ -95,7 +109,7 @@ public class thisIsTheOne extends LinearOpMode {
             double Quadrant2Power = 0;
             double Quadrant3Power = 0;
             double Quadrant4Power = 0;
-
+//questionable
             Quadrant1.setDirection(DcMotor.Direction.FORWARD);    //forward, forward, reverse, reverse:: .. Front, Back, Left, Right, but rotate 90 degrees on wires
             Quadrant2.setDirection(DcMotor.Direction.FORWARD);
             Quadrant3.setDirection(DcMotor.Direction.REVERSE);

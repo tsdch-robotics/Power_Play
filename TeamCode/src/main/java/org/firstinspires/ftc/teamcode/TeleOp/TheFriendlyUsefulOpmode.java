@@ -7,7 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Hardware.EncoderFunction;
+import org.firstinspires.ftc.teamcode.Hardware.justAutoFUNctions;
+import org.firstinspires.ftc.teamcode.Hardware.justAutoFUNctions;
 
 import static java.lang.Thread.sleep;
 
@@ -15,7 +16,7 @@ import static java.lang.Thread.sleep;
 public class TheFriendlyUsefulOpmode extends LinearOpMode {
 
 
-    EncoderFunction robot = new EncoderFunction();
+    justAutoFUNctions robot = new justAutoFUNctions();
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor FrontHorizontal = null;
