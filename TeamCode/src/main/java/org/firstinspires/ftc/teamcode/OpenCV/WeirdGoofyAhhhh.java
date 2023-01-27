@@ -2,9 +2,11 @@ package org.firstinspires.ftc.teamcode.OpenCV;
 
 import android.icu.lang.UCharacter;
 
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -16,7 +18,13 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 import org.firstinspires.ftc.teamcode.Hardware.justAutoFUNctions;
 
-@Autonomous(name="WeirdGoofyAhhhh", group="Autonomous")
+
+import com.qualcomm.robotcore.hardware.DistanceSensor;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
+
+@Autonomous(name="WeirdGoofyAhhhh (R final, like actually final)", group="Autonomous")
 public class WeirdGoofyAhhhh extends LinearOpMode {
 
     justAutoFUNctions robot = new justAutoFUNctions();
@@ -28,6 +36,8 @@ public class WeirdGoofyAhhhh extends LinearOpMode {
     private DcMotor LS = null;
     private Servo IL;
     private Servo IR;
+
+    private DistanceSensor sensorRange2;
 
     private DcMotor VRT = null;
     private DcMotor HRZ = null;
@@ -76,6 +86,8 @@ public class WeirdGoofyAhhhh extends LinearOpMode {
         Q3.setDirection(DcMotor.Direction.REVERSE);
         Q4.setDirection(DcMotor.Direction.REVERSE);
 
+        sensorRange2 = hardwareMap.get(DistanceSensor.class, "sensor_range2");
+        Rev2mDistanceSensor sensorTimeOfFlight2 = (Rev2mDistanceSensor)sensorRange2;
 
         VRT = hardwareMap.get(DcMotor.class, "verticalOdometry");
         HRZ = hardwareMap.get(DcMotor.class, "horizontalOdometry");
@@ -157,15 +169,24 @@ public class WeirdGoofyAhhhh extends LinearOpMode {
 
 
 
-            robot.snatch(IR);
-            sleep(1500);
-            robot.autoMoveSlide(LS, -100);
-            sleep(100);
-            robot.accF(Q1, Q3, Q2, Q4, .4);
-            robot.forward(Q1, Q3, Q2, Q4, HRZ, 67000);
-            sleep(500);
-            robot.count(Q4, Q3, Q2, Q1, VRT, 18000);
-            sleep(500);
+
+
+
+
+
+
+
+
+
+            robot.justGetUsTherePls(Q1, Q3, Q2, Q4, HRZ, 67000, .4, LS, IR);
+            sleep(1000);
+            robot.scorAFrickingConeRi(Q1, Q3, Q2, Q4, HRZ, VRT, .4, .4, sensorRange2, LS, IR);
+            sleep(1000);
+            robot.rightIandB(Q1, Q3, Q2, Q4, VRT, -20000, sensorRange2);
+
+
+
+
 
 
 

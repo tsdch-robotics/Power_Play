@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Hardware;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -45,8 +46,6 @@ public class justAutoFUNctions {
 
     }
 
-
-
     //intaking functions
     public void autoMoveSlide(DcMotor slider, int height){
         slider.setTargetPosition(height);
@@ -65,10 +64,6 @@ public class justAutoFUNctions {
 
 //end of intaking functions
 
-
-
-
-
     public void sleepThread(Long millis) {    //sleep function
         try {
             Thread.sleep(millis);
@@ -76,11 +71,6 @@ public class justAutoFUNctions {
             e.printStackTrace();
         }
     }
-
-
-
-
-
 
     public void forward(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ){
 
@@ -159,39 +149,6 @@ public class justAutoFUNctions {
         //note the directions of the used motors*****
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void count(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ) {
 
         motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -240,6 +197,7 @@ public class justAutoFUNctions {
 
 
     }
+
     public void right(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ) {
 
 
@@ -267,9 +225,7 @@ public class justAutoFUNctions {
 
     }
 
-
-
-    public void rightI(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ, DistanceSensor sensorRange2) {
+    public void rightIandB(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ, DistanceSensor sensorRange2) {
 
 
         motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -296,34 +252,87 @@ public class justAutoFUNctions {
 
     }
 
+    public void justGetUsTherePls(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ, double getThere, DcMotor slider, Servo servo){
 
 
+        motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
+        snatch(servo);
+        sleepThread(1500L);
+        autoMoveSlide(slider, -100);
+        sleepThread(100L);
+
+        accF(motor1, motor2, motor3, motor4, getThere); //build up speed casually
+        while (OD.getCurrentPosition() < targ) {// targ - current
+            motor1.setPower(-getThere);
+            motor2.setPower(-getThere);
+            motor3.setPower(-getThere + .11);
+            motor4.setPower(-getThere + .11);//corection num, probably change, DO A PERCENTAGE INSTEAD
+        }
+
+       /* while (OD.getCurrentPosition() <  targ && (targ - OD.getCurrentPosition()) < 10000) {// targ - current
+            motor1.setPower(-getThere);
+            motor2.setPower(-getThere);
+            motor3.setPower(-getThere + .11);
+            motor4.setPower(-getThere + .11);//corection num, probably change, DO A PERCENTAGE INSTEAD
+        }*/
+
+        //  could above code use to decelarate
+
+        while (OD.getCurrentPosition() >= targ) {//normal, posi
+            motor1.setPower(0);
+            motor2.setPower(0);
+            motor3.setPower(0);
+            motor4.setPower(0);
+            break;
+        }
+
+        //note the directions of the used motors*****
+
+    }
+
+    public void scorAFrickingConeRi(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor ODhrz, DcMotor ODvrt, double accSpeedRL, double accSpeedFB, DistanceSensor sensorRange2, DcMotor slider, Servo servo){
+
+        //(scores a frickin' cone) - the title says it all
+        //assuming we are in the middle of tile, high pole, intake faces wall
+        //iT'sNoTaCoNe,It'S,aSiGnal - FTC 'Judges Choice' quote of the year, 2nd place 'particular and tidy' award
 
 
+        forward(motor1, motor2, motor3, motor4, ODhrz, 67000);
+        sleepThread(100L);                                                 //make sure we are strait
+        backward(motor1, motor2, motor3, motor4, ODhrz, 67000);
+        sleepThread(200L);
+
+        count(motor4, motor2, motor3, motor1, ODvrt, 6000);     //clear low pole distance feedback
+        countS(motor4, motor2, motor3, motor1, ODvrt, 13000, sensorRange2);
+        sleepThread(500L);
+
+        autoMoveSlide(slider, -1100);   //scoring position
+        sleepThread(500L);
+
+        right(motor1, motor2, motor3, motor4, ODvrt, 4000); //adjust valu
+        sleepThread(1000L);                     //move to score
+
+        drop(servo);
+        sleepThread(1500L); //drop the cone and pause
+
+        left(motor1, motor2, motor3, motor4, ODvrt, 13000);//technically, but need to adjust
+        sleepThread(500L);
+
+        right(motor4, motor3, motor2, motor1, ODvrt, -10000); //adjust, aswell     **SAYS RIGHTS, moves COUNTERCLOCK
+        sleepThread(500L);
 
 
+        forward(motor1, motor2, motor3, motor4, ODhrz, 67000);
+        sleepThread(100L);                                                 //make sure we are strait
+        backward(motor1, motor2, motor3, motor4, ODhrz, 67000);
+        sleepThread(1000L);
 
-
-
-//new functions
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
     public void accF(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, double speed){
 
@@ -375,7 +384,6 @@ public class justAutoFUNctions {
         */
     }
 
-
     public void accB(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, double speed){
 
         motor1.setPower(0);
@@ -426,7 +434,6 @@ public class justAutoFUNctions {
         */
     }
 
-
     public void accR(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, double speed){
 
         motor1.setPower(-0);
@@ -470,6 +477,5 @@ public class justAutoFUNctions {
         motor4.setPower(0.8 * speed);
         sleepThread(50L);
     }
-
 
 }
