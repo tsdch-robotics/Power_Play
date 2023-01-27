@@ -20,6 +20,7 @@ import org.firstinspires.ftc.teamcode.Hardware.justAutoFUNctions;
 
 
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
@@ -165,29 +166,16 @@ public class WeirdGoofyAhhhh extends LinearOpMode {
             telemetry.addData("", PARK);
             telemetry.update();
 
-
-
-
-
-
-
-
-
-
-
-
-
+            //need to create a time out function
 
             robot.justGetUsTherePls(Q1, Q3, Q2, Q4, HRZ, 67000, .4, LS, IR);
             sleep(1000);
+
+
             robot.scorAFrickingConeRi(Q1, Q3, Q2, Q4, HRZ, VRT, .4, .4, sensorRange2, LS, IR);
             sleep(1000);
             robot.rightIandB(Q1, Q3, Q2, Q4, VRT, -20000, sensorRange2);
-
-
-
-
-
+            sleep(1000);
 
 
             if(PARK == 1){
