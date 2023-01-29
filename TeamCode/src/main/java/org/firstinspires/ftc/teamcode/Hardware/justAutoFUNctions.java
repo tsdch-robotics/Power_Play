@@ -140,8 +140,8 @@ public class justAutoFUNctions {
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         while (OD.getCurrentPosition() < targ) {
-            motor1.setPower(allTimeSpeed);
-            motor2.setPower(allTimeSpeed);
+            motor1.setPower(allTimeSpeed +0.2);
+            motor2.setPower(allTimeSpeed + 0.2);
             motor3.setPower(-allTimeSpeed + 0.1);
             motor4.setPower(-allTimeSpeed + 0.1);
         }
@@ -223,10 +223,10 @@ public class justAutoFUNctions {
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         while (OD.getCurrentPosition() > targ /*&& !((sensorRange2.getDistance(DistanceUnit.MM)) >= 50 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 400)*/) {
-            motor1.setPower(-allTimeSpeed + .1);
-            motor2.setPower(-allTimeSpeed + .1);
-            motor3.setPower(allTimeSpeed - .1);
-            motor4.setPower(allTimeSpeed - .1);
+            motor1.setPower(-allTimeSpeed + .2);
+            motor2.setPower(-allTimeSpeed + .2);
+            motor3.setPower(allTimeSpeed - .2);
+            motor4.setPower(allTimeSpeed - .2);
         }
 /*
         while (Math.abs(OD.getCurrentPosition()) <= targ || ((sensorRange2.getDistance(DistanceUnit.MM)) >= 50 && (sensorRange2.getDistance(DistanceUnit.MM)) <=400)){
@@ -247,6 +247,41 @@ public class justAutoFUNctions {
 
 
     }
+
+
+    public void counterS(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ, DistanceSensor sensorRange2){
+
+        motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        while (OD.getCurrentPosition() > targ && !((sensorRange2.getDistance(DistanceUnit.MM)) >= 400 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 800)) {
+            motor1.setPower(-allTimeSpeed + .3);
+            motor2.setPower(-allTimeSpeed + .3);
+            motor3.setPower(allTimeSpeed - .3);
+            motor4.setPower(allTimeSpeed - .3);
+        }
+
+        while (Math.abs(OD.getCurrentPosition()) <= targ || ((sensorRange2.getDistance(DistanceUnit.MM)) >= 400 && (sensorRange2.getDistance(DistanceUnit.MM)) <=800)){
+            motor1.setPower(0);
+            motor2.setPower(0);
+            motor3.setPower(0);
+            motor4.setPower(0);
+            break;
+        }
+
+        while (Math.abs(OD.getCurrentPosition()) <= targ){
+            motor1.setPower(0);
+            motor2.setPower(0);
+            motor3.setPower(0);
+            motor4.setPower(0);
+            break;
+        }
+
+
+    }
+
 
 
     public void right(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, DcMotor OD, int targ) {
@@ -284,14 +319,14 @@ public class justAutoFUNctions {
         motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        while (OD.getCurrentPosition() > targ && !((sensorRange2.getDistance(DistanceUnit.MM)) >= 5 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 65)) {
+        while (OD.getCurrentPosition() > targ && !((sensorRange2.getDistance(DistanceUnit.MM)) >= 5 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 90)) {
             motor1.setPower(-allTimeSpeed );
             motor2.setPower(-allTimeSpeed );
             motor3.setPower(allTimeSpeed - .12);
             motor4.setPower(allTimeSpeed -.12); //correction term
         }
 
-        while (OD.getCurrentPosition() <= targ || (sensorRange2.getDistance(DistanceUnit.MM)) >= 5 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 65) {
+        while (OD.getCurrentPosition() <= targ || (sensorRange2.getDistance(DistanceUnit.MM)) >= 5 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 90) {
             motor1.setPower(0);
             motor2.setPower(0);
             motor3.setPower(0);
@@ -308,8 +343,8 @@ public class justAutoFUNctions {
 
         autoMoveSlide(slider, Ci);
         sleepThread(200L);
-        rightS(motor1, motor2, motor3, motor4, ODvrt, -40000, sensorRange2);
-        sleepThread(1000L);
+        rightS(motor1, motor2, motor3, motor4, ODvrt, -35000, sensorRange2);
+        sleepThread(500L);
         autoMoveSlide(slider, Cc);
         sleepThread(700L);
         snatch(servo);
@@ -317,7 +352,7 @@ public class justAutoFUNctions {
         autoMoveSlide(slider, Ci);
         sleepThread(1000L);
         left(motor1, motor2, motor3, motor4, ODvrt, -3000);
-        sleepThread(1000L);
+        sleepThread(100L);
 
     }
 
@@ -333,7 +368,7 @@ public class justAutoFUNctions {
         snatch(servo);
         sleepThread(1500L);
         autoMoveSlide(slider, -300);
-        sleepThread(100L);
+        sleepThread(200L);
 
         accF(motor1, motor2, motor3, motor4, getThere); //build up speed casually
         while (OD.getCurrentPosition() < targ && (targ - OD.getCurrentPosition()) > 10000) {// targ - current
@@ -378,36 +413,36 @@ public class justAutoFUNctions {
         left(motor1, motor2, motor3, motor4, ODvrt, 0);
         right(motor1, motor2, motor3, motor4, ODvrt, 0);
 
-        count(motor4, motor2, motor3, motor1, ODvrt, 13000);
-        countS(motor4, motor2, motor3, motor1, ODvrt, 15000, sensorRange2);
         sleepThread(500L);
 
-        autoMoveSlide(slider, -1100);   //scoring position
+        count(motor4, motor2, motor3, motor1, ODvrt, 13000);//13000
+        countS(motor4, motor2, motor3, motor1, ODvrt, 15000, sensorRange2);//15000
         sleepThread(500L);
 
-        right(motor1, motor2, motor3, motor4, ODvrt, -100); //adjust valu
+        autoMoveSlide(slider, -1130);   //scoring position
+        sleepThread(500L);
+
+        right(motor1, motor2, motor3, motor4, ODvrt, 0); //adjust valu//-100
         sleepThread(1000L);                     //move to score
 
         drop(servo);
         sleepThread(1500L); //drop the cone and pause
 
-        left(motor1, motor2, motor3, motor4, ODvrt, 7000);//technically, but need to adjust, 1000
+        left(motor1, motor2, motor3, motor4, ODvrt, 6000);//technically, but need to adjust, 1000 //7000
         sleepThread(500L);
 
 
         autoMoveSlide(slider, -300);   //scoring position
+        sleepThread(100L);
+
+
+        counter(motor4, motor2, motor3, motor1, ODvrt, 2000, sensorRange2);
+      //  counterS(motor4, motor2, motor3, motor1, ODvrt, -10000, sensorRange2); //adjust, aswell     **SAYS RIGHTS, moves COUNTERCLOCK
         sleepThread(500L);
 
-
-        counter(motor4, motor2, motor3, motor1, ODvrt, 800, sensorRange2); //adjust, aswell     **SAYS RIGHTS, moves COUNTERCLOCK
-        sleepThread(500L);
-
-/*
         forward(motor1, motor2, motor3, motor4, ODhrz, 67000);
-        sleepThread(100L);                                                 //make sure we are strait
-        backward(motor1, motor2, motor3, motor4, ODhrz, 67000);
-        sleepThread(1000L);
-*/
+        sleepThread(100L);
+
     }
 
     public void accF(DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, double speed){

@@ -77,25 +77,31 @@ public class thisIsTheOne extends LinearOpMode {
 
             telemetry.addData("range", String.format("%.01f mm", sensorRange2.getDistance(DistanceUnit.MM)));
 
-            if (IntakeLeft.getPosition() != 1 && (sensorRange2.getDistance(DistanceUnit.MM)) >= 5 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 65  && LinearSlide.getCurrentPosition() <= -130 && LinearSlide.getCurrentPosition() >= -350){
+            if (IntakeLeft.getPosition() != 1 && (sensorRange2.getDistance(DistanceUnit.MM)) >= 0 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 100  && LinearSlide.getCurrentPosition() <= -130 && LinearSlide.getCurrentPosition() >= -350 && !gamepad1.dpad_left){
 
-          /*      Quadrant1.setPower(0);//optional
-                Quadrant2.setPower(0);
-                Quadrant3.setPower(0);//check with staniel depp
-                Quadrant4.setPower(0);//use a certain subtraction value for certain range: so daniel can hit Ci1-4
-*/
                 LinearSlide.setTargetPosition(LinearSlide.getCurrentPosition() + 155); //level at 0, grabbing b
                 LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                LinearSlide.setPower(.5);
+                LinearSlide.setPower(.6);
                 highest = LinearSlide.getCurrentPosition();
 
             }
 
-            if(LinearSlide.getCurrentPosition() == 0){
+            if (IntakeLeft.getPosition() != 1 && (sensorRange2.getDistance(DistanceUnit.MM)) >= 0 && (sensorRange2.getDistance(DistanceUnit.MM)) <= 100  && LinearSlide.getCurrentPosition() <= -130 && LinearSlide.getCurrentPosition() >= -350 && gamepad1.dpad_left){
+
+                LinearSlide.setTargetPosition(-20); //level at 0, grabbing b
+                LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                LinearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                LinearSlide.setPower(.6);
+                highest = LinearSlide.getCurrentPosition();
+
+            }
+
+
+
+            if(LinearSlide.getCurrentPosition() >= -15){
                 IntakeLeft.setPosition(1); //Close
                 IntakeRight.setPosition(1);
-                sleep(1500);
 
             }
 /*

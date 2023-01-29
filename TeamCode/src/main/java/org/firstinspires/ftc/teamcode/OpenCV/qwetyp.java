@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.OpenCV;
 
-import android.icu.lang.UCharacter;
-
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -16,17 +14,10 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
-import org.firstinspires.ftc.teamcode.Hardware.justAutoFUNctions;
 
 
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-
-
-@Autonomous(name="WeirdGoofyAhhhh (R final, like actually final)", group="Autonomous")
-public class WeirdGoofyAhhhh extends LinearOpMode {
+@Autonomous(name="RUN THIS FILE, AUTO", group="Autonomous")
+public class qwetyp extends LinearOpMode {
 
     justAutoFUNctions robot = new justAutoFUNctions();
     // Ensuring that the motors are initialized for later reference.
@@ -168,20 +159,25 @@ public class WeirdGoofyAhhhh extends LinearOpMode {
 
 
 
+            //need to create a time out function
+
+            robot.snatch(IR);
+            sleep(1500);
+            robot.autoMoveSlide(LS, -100);
             robot.justGetUsTherePls(Q1, Q3, Q2, Q4, HRZ, 67000, .4, LS, IR);
             sleep(500);
 
-            robot.scorAFrickingConeRi(Q1, Q3, Q2, Q4, HRZ, VRT, .4, .4, sensorRange2, LS, IR);
+      //      robot.scorAFrickingConeRi(Q1, Q3, Q2, Q4, HRZ, VRT, .4, .4, sensorRange2, LS, IR);
             sleep(500);
-           // robot.rightIandB(Q1, Q3, Q2, Q4, HRZ, VRT, LS, sensorRange2, IR, -325, -168);
-            sleep(500);
+          //  robot.rightIandB(Q1, Q3, Q2, Q4, HRZ, VRT, LS, sensorRange2, IR, -325, -168);
+          //  sleep(500);
 
-          //  robot.scorAFrickingConeRi(Q1, Q3, Q2, Q4, HRZ, VRT, .5, .4, sensorRange2, LS, IR);
-            sleep(500);
+      //      robot.scorAFrickingConeRi(Q1, Q3, Q2, Q4, HRZ, VRT, .5, .4, sensorRange2, LS, IR);
+           // sleep(500);
 
 
             if(PARK == 1){
-                robot.left(Q1, Q3, Q2, Q4, VRT, 20000);  //1
+                robot.left(Q1, Q3, Q2, Q4, VRT, 15000);  //1
                 sleep(3000);
             }
 
@@ -192,10 +188,13 @@ public class WeirdGoofyAhhhh extends LinearOpMode {
 
             }
             if(PARK == 3){
-                robot.right(Q1, Q3, Q2, Q4, VRT, -20000);  //1
+                robot.right(Q1, Q3, Q2, Q4, VRT, -25000);  //1
                 sleep(2300);
             }
 
+            robot.autoMoveSlide(LS, 0);
+            sleep(500);
+            robot.drop(IR);
             sleep(10000);
 
 
